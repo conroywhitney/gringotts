@@ -19,10 +19,16 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency "sqlite3"
   
-  # Adding spec per
+  # Adding spec per viget tutorial
   # http://viget.com/extend/rails-engine-testing-with-rspec-capybara-and-factorygirl
   s.test_files = Dir["spec/**/*"]
   s.add_development_dependency 'rspec-rails', "~> 2.14.0"
   s.add_development_dependency "capybara", "~> 2.1.0"
   s.add_development_dependency "factory_girl_rails", "~> 4.2.1"
+
+  # Adding cucumber per crowdint tutorial
+  # http://blog.crowdint.com/2012/03/20/mountable-rails-engines.html
+  s.add_development_dependency 'cucumber-rails'
+  s.add_development_dependency 'database_cleaner'
+  
 end

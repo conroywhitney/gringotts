@@ -17,8 +17,6 @@ end
 APP_RAKEFILE = File.expand_path("../spec/dummy/Rakefile", __FILE__)
 load 'rails/tasks/engine.rake'
 
-Bundler::GemHelper.install_tasks
-
 # Add spec support per article
 # http://viget.com/extend/rails-engine-testing-with-rspec-capybara-and-factorygirl
 Dir[File.join(File.dirname(__FILE__), 'tasks/**/*.rake')].each {|f| load f }
@@ -29,5 +27,10 @@ require 'rspec/core/rake_task'
 desc "Run all specs in spec directory (excluding plugin specs)"
 RSpec::Core::RakeTask.new(:spec => 'app:db:test:prepare')
 
-task :default => :spec
+# Adding cucumber support per tutorial:
+# http://blog.crowdint.com/2012/03/20/mountable-rails-engines.html
+task :cucumber => 'app:cucumber'
 
+task :default => [:spec, :cucumber]
+
+Bundler::GemHelper.install_tasks
