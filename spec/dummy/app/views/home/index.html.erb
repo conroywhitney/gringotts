@@ -1,0 +1,7 @@
+<h1>Gringotts Dummy App</h1>
+
+<% if current_user %>
+  <h2>Logged In as [<%= current_user.email %>]</h2>
+<% else %>
+  <h2>Logged Out</h2>
+<% end %>
