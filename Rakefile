@@ -24,7 +24,19 @@ Dir[File.join(File.dirname(__FILE__), 'tasks/**/*.rake')].each {|f| load f }
 require 'rspec/core'
 require 'rspec/core/rake_task'
 
-desc "Run all specs in spec directory (excluding plugin specs)"
+# Test that our factories are valid before we try to run any of our spec tests
+# http://robots.thoughtbot.com/post/30994874643/testing-your-factories-first
+if defined?(RSpec)
+  desc 'Run factory specs.'
+  RSpec::Core::RakeTask.new(:factory_specs) do |t|
+    t.pattern = './spec/factories_spec.rb'
+  end
+end
+
+#desc "Test that our factories are valid before we try running any spec tests"
+task :spec, :factory_specs
+
+#desc "Run all specs in spec directory (excluding plugin specs)"
 RSpec::Core::RakeTask.new(:spec => 'app:db:test:prepare')
 
 # Adding cucumber support per tutorial:
