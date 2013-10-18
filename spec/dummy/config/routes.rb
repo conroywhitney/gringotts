@@ -9,6 +9,6 @@ Rails.application.routes.draw do
   devise_for :users
   
   # Mount Gringotts engine wherever the hell you want to
-  mount Gringotts::Engine => "/authentication"
+  mount Gringotts::Engine => "/authentication", :as => :gringotts_engine
   
 end

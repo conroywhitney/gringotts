@@ -1,3 +1,4 @@
 Gringotts::Engine.routes.draw do
-  get "settings", :to => "settings#index"
+  root :to => "settings#index"
+  get "settings", :to => "settings#index", :as => :settings_url
 end
