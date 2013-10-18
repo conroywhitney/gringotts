@@ -11,6 +11,7 @@ gemspec
 # your gem to rubygems.org.
 
 gem "devise"
+gem 'factory_girl_rails', :group => :test
 
 # To use debugger
 # gem 'debugger'

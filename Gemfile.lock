@@ -141,7 +141,7 @@ DEPENDENCIES
   cucumber-rails
   database_cleaner
   devise
-  factory_girl_rails (~> 4.2.1)
+  factory_girl_rails
   gringotts!
   rspec-rails (~> 2.14.0)
   sqlite3
