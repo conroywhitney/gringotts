@@ -14,7 +14,11 @@ module Gringotts
     # http://viget.com/extend/rails-engine-testing-with-rspec-capybara-and-factorygirl    
     config.generators do |g|
       g.test_framework      :rspec,        :fixture => false,   :view_specs => false
-      g.fixture_replacement :factory_girl, :dir => 'spec/factories'
+      
+      # For some reason, the :dir => 'spec/factories' wasn't loading the factories correctly
+      # Instead, specified loading from spec_helper  =(
+      g.fixture_replacement :factory_girl
+      
       g.assets false
       g.helper false
     end

@@ -13,6 +13,10 @@ Rails.backtrace_cleaner.remove_silencers!
 # Load support files
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
 
+# Load FactoryGirl factories manually
+# For some reason, specifying :dir => in engine.rb wasn't working  =(
+Dir["#{File.dirname(__FILE__)}/factories/*.rb"].each { |f| require f }
+
 RSpec.configure do |config|
   config.mock_with :rspec
   config.use_transactional_fixtures = true
