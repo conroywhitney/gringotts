@@ -15,3 +15,15 @@ Feature: Opting In
       Then I see an information message
         And phone verification should be turned off
         And my phone number should be blank
+        
+    Scenario: New user changes mind and wants to cancel setup
+      Given I am logged in
+        And I do not exist as a gringotts user
+      When I go to the gringotts settings page
+        And I check the opt-in box
+        And I enter a phone number
+        And I click Cancel
+      Then I am redirected to the root url
+        And none of my information was saved
+      
+      
