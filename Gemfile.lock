@@ -152,5 +152,6 @@ DEPENDENCIES
   devise
   factory_girl_rails
   gringotts!
+  phony_rails
   rspec-rails (~> 2.14.0)
   sqlite3

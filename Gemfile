@@ -12,6 +12,7 @@ gemspec
 
 gem "devise"
 gem 'factory_girl_rails', :group => :test
+gem 'phony_rails', :group => [:development, :test]
 
 # To use debugger
 # gem 'debugger'
