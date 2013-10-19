@@ -43,6 +43,14 @@ RSpec::Core::RakeTask.new(:spec => 'app:db:test:prepare')
 # http://blog.crowdint.com/2012/03/20/mountable-rails-engines.html
 task :cucumber => 'app:cucumber'
 
+desc 'Print out all defined routes in match order, with names. Target specific controller with CONTROLLER=x.'
+task routes: :environment do
+  all_routes = Rails.application.routes.routes
+  require 'action_dispatch/routing/inspector'
+  inspector = ActionDispatch::Routing::RoutesInspector.new(all_routes)
+  puts inspector.format(ActionDispatch::Routing::ConsoleFormatter.new, ENV['CONTROLLER'])
+end
+
 task :default => [:spec, :cucumber]
 
 Bundler::GemHelper.install_tasks
