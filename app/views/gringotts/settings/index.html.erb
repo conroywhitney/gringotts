@@ -2,7 +2,17 @@
 
 <p>Add another layer of security to your account by enabling phone verification. Every time you sign in, we'll send a text message to your mobile phone with a verification code.</p>
 
-<%= form_for @user, url: {action: "update"} do |f| %>
+<% if @user.errors.any? %>  
+<div id="errorExplanation">  
+  <ul>  
+  <% @user.errors.full_messages.each do |msg| %>  
+    <li><%= msg %></li>  
+  <% end %>  
+  </ul>  
+</div>  
+<% end %>
+
+<%= form_for @user, url: {action: "update"}, method: :post do |f| %>
 
 <%= f.check_box :active %>
 <%= f.label :active, "Turn on phone verification" %>
@@ -14,7 +24,8 @@
 
 <br/><br/>
 
-
+<%= f.submit "Save and Continue" %>
+or
 <%= link_to "Cancel Phone Verification setup", main_app.root_url %>
 
 <% end %>

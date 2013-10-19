@@ -11,6 +11,19 @@ module Gringotts
     end
     
     def update
+      @user = User.new(user_params)
+      
+      if @user.valid?
+        redirect_to challenge_url
+      else
+        render :index
+      end
+    end
+    
+private
+    
+    def user_params
+      params.require(:user).permit(:active, :phone_number)
     end
     
   end

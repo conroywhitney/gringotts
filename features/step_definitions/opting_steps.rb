@@ -27,10 +27,10 @@ When(/^I check the opt\-in box$/) do
   check("user_active")
   find_field('user[active]').should be_checked
 end                                                                                                                                                                                               
-                                                                                                                                                                                                  
-When(/^I enter a phone number$/) do                                                                                                                                                               
-  fill_in "user_phone_number", with: "406-555-1212"
-  find_field("user[phone_number]").value == "406-555-1212"
+                   
+When(/^I enter the phone number "(.*?)"$/) do |phone_number|
+  fill_in "user_phone_number", with: phone_number
+  find_field("user[phone_number]").value == phone_number
 end                                                                                                                                                                                               
                                                                                                                                                                                                   
 When(/^I click Cancel$/) do                                                                                                                                                                       
@@ -45,3 +45,11 @@ Then(/^none of my information was saved$/) do
   @user.active?.should be_false
   @user.phone_number.should be_nil
 end
+
+When(/^I click Continue$/) do                                                                                                                                                                     
+  click_button "Save and Continue"                                                                                                                               
+end                                                                                                                                                                                               
+                                                                                                                                                                                                  
+Then(/^I receive an error message "(.*?)"$/) do |error_message|                                                                                                                                            
+  page.should have_content error_message
+end          
