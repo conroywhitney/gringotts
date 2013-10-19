@@ -2,3 +2,14 @@
 
 <p>Add another layer of security to your account by enabling phone verification. Every time you sign in, we'll send a text message to your mobile phone with a verification code.</p>
 
+<%= form_for @user, url: {action: "update"} do |f| %>
+
+<%= f.check_box :active %>
+<%= f.label :active, "Turn on phone verification" %>
+
+<br/><br/>
+
+<%= f.label :phone_number, "Phone Number" %>
+<%= f.text_field :phone_number %>
+
+<% end %>
