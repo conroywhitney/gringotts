@@ -13,8 +13,7 @@ Rails.backtrace_cleaner.remove_silencers!
 # Load support files
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
 
-# Load FactoryGirl factories manually
-# For some reason, specifying :dir => in engine.rb wasn't working  =(
+# Load FactoryGirl factories manually (not sure why not working automatically)
 Dir["#{File.dirname(__FILE__)}/factories/*.rb"].each { |f| require f }
 
 RSpec.configure do |config|
