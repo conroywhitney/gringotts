@@ -16,6 +16,9 @@ Gem::Specification.new do |s|
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
 
   s.add_dependency "rails", "~> 4.0.0"
+  
+  # Phone number validator gem
+  s.add_dependency "phony_rails"
 
   s.add_development_dependency "sqlite3"
   
