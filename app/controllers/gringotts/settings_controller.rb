@@ -13,7 +13,7 @@ module Gringotts
       
       if @settings.save
         flash[:notice] = "Successfully added phone number"
-        redirect_to root_url
+        redirect_to verification_url
       else
         render :index
       end
