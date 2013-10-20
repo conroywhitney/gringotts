@@ -16,21 +16,21 @@ Then(/^I see an information message$/) do
 end                
 
 Then(/^phone verification should be turned off$/) do                                                                                                                                              
-  find_field('user[active]').should_not be_checked
+  find_field('settings[active]').should_not be_checked
 end  
                                                                                                                                                                                                   
 Then(/^my phone number should be blank$/) do                                                                                                                                                      
-  find_field("user[phone_number]").value == nil
+  find_field("settings[phone_number]").value == nil
 end    
 
 When(/^I check the opt\-in box$/) do                                                                                                                                                              
-  check("user_active")
-  find_field('user[active]').should be_checked
+  check("settings_active")
+  find_field('settings[active]').should be_checked
 end                                                                                                                                                                                               
                    
 When(/^I enter the phone number "(.*?)"$/) do |phone_number|
-  fill_in "user_phone_number", with: phone_number
-  find_field("user[phone_number]").value == phone_number
+  fill_in "settings_phone_number", with: phone_number
+  find_field("settings[phone_number]").value == phone_number
 end                                                                                                                                                                                               
                                                                                                                                                                                                   
 When(/^I click Cancel$/) do                                                                                                                                                                       
@@ -41,16 +41,16 @@ Then(/^I am redirected to the root url$/) do
   page.current_path.should == main_app.root_path
 end                                                                                                                                                                                               
                                                                                                                                                                                                   
-Then(/^none of my information was saved$/) do                                                                                                                                                     
-  @user.phone_number.should be_nil
+Then(/^none of my settings were saved$/) do                                                                                                                                                     
+  @settings.phone_number.should be_nil
 end
 
 Then(/^my phone number was saved$/) do
-  @user.phone_number.should_not be_nil
+  @settings.phone_number.should_not be_nil
 end
 
 Then(/^I am opted\-in$/) do
-  @user.active?.should be_true
+  @settings.active?.should be_true
 end
 
 When(/^I click Continue$/) do                                                                                                                                                                     

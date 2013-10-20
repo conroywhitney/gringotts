@@ -10,7 +10,7 @@ Feature: Opting In
 
     Scenario: User goes to settings page for the first time
       Given I am logged in
-        And I do not exist as a gringotts user
+        And I do not have any gringotts settings
       When I go to the gringotts settings page
       Then I see an information message
         And phone verification should be turned off
@@ -18,36 +18,36 @@ Feature: Opting In
         
     Scenario: New user changes mind and wants to cancel setup
       Given I am logged in
-        And I do not exist as a gringotts user
+        And I do not have any gringotts settings
       When I go to the gringotts settings page
         And I check the opt-in box
         And I enter the phone number "(406) 555-1212"
         And I click Cancel
       Then I am redirected to the root url
-        And none of my information was saved
+        And none of my settings were saved
         
     Scenario: New user opts-in but does not give phone number
       Given I am logged in
-        And I do not exist as a gringotts user
+        And I do not have any gringotts settings
       When I go to the gringotts settings page
         And I check the opt-in box
         And I click Continue
       Then I receive an error message "Phone number can't be blank"
-        And none of my information was saved
+        And none of my settings were saved
         
     Scenario: New user opts-in but gives an invalid phone number
       Given I am logged in
-        And I do not exist as a gringotts user
+        And I do not have any gringotts settings
       When I go to the gringotts settings page
         And I check the opt-in box
         And I enter the phone number "12345"
         And I click Continue
       Then I receive an error message "Phone number is an invalid number"
-        And none of my information was saved
+        And none of my settings were saved
 
     Scenario: New user opts-in and gives correct phone number
       Given I am logged in
-        And I do not exist as a gringotts user
+        And I do not have any gringotts settings
       When I go to the gringotts settings page
         And I check the opt-in box
         And I enter the phone number "(406) 555-1212"

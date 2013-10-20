@@ -3,15 +3,15 @@ require_dependency "gringotts/application_controller"
 module Gringotts
   class SettingsController < ApplicationController
     
-    before_filter :load_gringotts_user
+    before_filter :load_gringotts_settings
     
     def index  
     end
     
     def update
-      @user.assign_attributes(user_params)
+      @settings.assign_attributes(settings_params)
       
-      if @user.save
+      if @settings.save
         redirect_to root_url
       else
         render :index
@@ -20,13 +20,13 @@ module Gringotts
     
 private
     
-    def load_gringotts_user
-      # this is lazy-creation of Gringotts users, so we don't have to tie in with normal user creation
-      @user = Gringotts::User.find_or_initialize_by(user_id: current_user.id)
+    def load_gringotts_settings
+      # this is lazy-creation of Gringotts settings, so we don't have to tie in with user creation in regular app
+      @settings = Gringotts::Settings.find_or_initialize_by(user_id: current_user.id)
     end
     
-    def user_params
-      params.require(:user).permit(:active, :phone_number)
+    def settings_params
+      params.require(:settings).permit(:active, :phone_number)
     end
     
   end
