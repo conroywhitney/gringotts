@@ -3,8 +3,6 @@ Given(/^I am an existing user$/) do
 end                                                                                                                                                                                               
                                                                                                                                                                                                   
 Given(/^I do not exist as a gringotts user$/) do
-  # TODO
   @user = FactoryGirl.create(:gringotts_user)
-  @user.active?.should be_false
 end                                                                                                                                                                                               
                                                                                                                                                                                                   
