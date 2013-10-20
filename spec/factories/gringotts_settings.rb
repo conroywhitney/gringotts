@@ -2,11 +2,9 @@
 
 FactoryGirl.define do
 
-  factory :base_settings, aliases: [:default], class: Gringotts::Settings do
-    user_id FactoryGirl.create(:user, email: "example@gringotts2fa.org").email
-    active true
-    phone_number "(111) 111-1111"
-
+  factory :bad_base_settings, aliases: [:default], class: Gringotts::Settings do
+    user_id FactoryGirl.create(:user).id
+    
     factory :bad_phone_number_missing_settings do
       phone_number nil
     end

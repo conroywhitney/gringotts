@@ -24,7 +24,7 @@ Feature: Opting In
         And I enter the phone number "(406) 555-1212"
         And I click Cancel
       Then I am redirected to the root url
-        And none of my settings were saved
+        And no settings were created
         
     Scenario: New user opts-in but does not give phone number
       Given I am logged in
@@ -32,8 +32,8 @@ Feature: Opting In
       When I go to the gringotts settings page
         And I check the opt-in box
         And I click Continue
-      Then I receive an error message "Phone number can't be blank"
-        And none of my settings were saved
+      Then I receive a message "Phone number can't be blank"
+        And no settings were created
         
     Scenario: New user opts-in but gives an invalid phone number
       Given I am logged in
@@ -42,17 +42,18 @@ Feature: Opting In
         And I check the opt-in box
         And I enter the phone number "12345"
         And I click Continue
-      Then I receive an error message "Phone number is an invalid number"
-        And none of my settings were saved
+      Then I receive a message "Phone number is an invalid number"
+        And no settings were created
 
     Scenario: New user opts-in and gives correct phone number
       Given I am logged in
         And I do not have any gringotts settings
       When I go to the gringotts settings page
         And I check the opt-in box
-        And I enter the phone number "(406) 555-1212"
+        And I enter the phone number "(406) 444-4444"
         And I click Continue
-      Then my phone number was saved
+      Then I receive a message "Successfully added phone number"
+        And my phone number was saved
         And I am opted-in
         And I am redirected to the challenge page
       

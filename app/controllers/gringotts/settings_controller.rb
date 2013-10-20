@@ -12,6 +12,7 @@ module Gringotts
       @settings.assign_attributes(settings_params)
       
       if @settings.save
+        flash[:notice] = "Successfully added phone number"
         redirect_to root_url
       else
         render :index

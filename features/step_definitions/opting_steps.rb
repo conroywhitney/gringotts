@@ -1,3 +1,7 @@
+def settings
+  return Gringotts::Settings.find_by(user_id: @user.id)
+end
+
 When(/^I got to my account details page$/) do                                                                                                                                                     
   click_link "Edit account"
 end  
@@ -41,24 +45,24 @@ Then(/^I am redirected to the root url$/) do
   page.current_path.should == main_app.root_path
 end                                                                                                                                                                                               
                                                                                                                                                                                                   
-Then(/^none of my settings were saved$/) do                                                                                                                                                     
-  @settings.phone_number.should be_nil
+Then(/^no settings were created$/) do     
+  settings.should be_nil
 end
 
 Then(/^my phone number was saved$/) do
-  @settings.phone_number.should_not be_nil
+  settings.phone_number.should_not be_nil
 end
 
 Then(/^I am opted\-in$/) do
-  @settings.active?.should be_true
+  settings.active?.should be_true
 end
 
 When(/^I click Continue$/) do                                                                                                                                                                     
   click_button "Save and Continue"                                                                                                                               
 end                                                                                                                                                                                               
                                                                                                                                                                                                   
-Then(/^I receive an error message "(.*?)"$/) do |error_message|                                                                                                                                            
-  page.should have_content error_message
+Then(/^I receive a message "(.*?)"$/) do |message|                                                                                                                                            
+  page.should have_content message
 end
 
 Then(/^I am redirected to the challenge page$/) do

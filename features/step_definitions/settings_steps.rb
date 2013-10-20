@@ -3,8 +3,5 @@ Given(/^I have gringotts settings$/) do
 end                                                                                                                                                                                               
                                                                                                                                                                                                   
 Given(/^I do not have any gringotts settings$/) do
-  create_user
-  sign_in
-  @settings = FactoryGirl.create(:base_settings)
 end                                                                                                                                                                                               
                                                                                                                                                                                                   
