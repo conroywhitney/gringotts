@@ -44,5 +44,15 @@ Feature: Opting In
         And I click Continue
       Then I receive an error message "Phone number is an invalid number"
         And none of my information was saved
-      
+
+    Scenario: New user opts-in and gives correct phone number
+      Given I am logged in
+        And I do not exist as a gringotts user
+      When I go to the gringotts settings page
+        And I check the opt-in box
+        And I enter the phone number "(406) 555-1212"
+        And I click Continue
+      Then my phone number was saved
+        And I am opted-in
+        And I am redirected to the challenge page
       

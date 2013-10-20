@@ -42,8 +42,15 @@ Then(/^I am redirected to the root url$/) do
 end                                                                                                                                                                                               
                                                                                                                                                                                                   
 Then(/^none of my information was saved$/) do                                                                                                                                                     
-  @user.active?.should be_false
   @user.phone_number.should be_nil
+end
+
+Then(/^my phone number was saved$/) do
+  @user.phone_number.should_not be_nil
+end
+
+Then(/^I am opted\-in$/) do
+  @user.active?.should be_true
 end
 
 When(/^I click Continue$/) do                                                                                                                                                                     
@@ -52,4 +59,8 @@ end
                                                                                                                                                                                                   
 Then(/^I receive an error message "(.*?)"$/) do |error_message|                                                                                                                                            
   page.should have_content error_message
-end          
+end
+
+Then(/^I am redirected to the challenge page$/) do
+  page.current_path.should == gringotts_engine.verification_path
+end 
