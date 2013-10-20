@@ -1,4 +1,2 @@
-module Gringotts
-  class ApplicationController < ActionController::Base
-  end
+class Gringotts::ApplicationController < ApplicationController  
 end
