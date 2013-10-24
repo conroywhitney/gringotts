@@ -7,4 +7,6 @@ Gringotts::Engine.routes.draw do
   
   get "verify", :to => "verification#index", :as => :verification
   
+  get "attempt", :to => "verification#attempt", :as => :attempt
+  
 end

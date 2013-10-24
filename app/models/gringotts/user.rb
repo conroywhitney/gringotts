@@ -13,6 +13,10 @@ module Gringotts
     def settings
       return Gringotts::Settings.find_by(user_id: @user.id)
     end
+    
+    def attempts
+      return Gringotts::Attempt.find_by(user_id: @user.id)
+    end
 
     def opted_in?
       return self.settings.present?

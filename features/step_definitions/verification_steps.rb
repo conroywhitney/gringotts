@@ -40,9 +40,17 @@ Then(/^I am redirected to the settings page$/) do
 end
 
 Then(/^I see the verification form$/) do
-  pending
+  find("#new_attempt")
 end
 
 Then(/^I see the expected verification code$/) do
+  pending
+end
+
+Then(/^my blank attempt was not logged$/) do
+  pending
+end
+                                 
+Then(/^my invalid attempt was logged$/) do
   pending
 end

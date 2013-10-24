@@ -4,12 +4,14 @@
 
 Enter code:
 
-<%# form_for Attempt.new(@gringotts_user), url: {action: "create"}, method: :post do |f| %>
+<%= form_for @attempt,
+            url: attempt_url,
+            method: :post do |f| %>
 
-  <%#= f.text_field :code_received %>
+  <%= f.text_field :code_received %>
 
   <br/><br/>
 
-  <%#= f.submit "Verify" %>
+  <%= f.submit "Verify" %>
 
-<%# end %>
+<% end %>

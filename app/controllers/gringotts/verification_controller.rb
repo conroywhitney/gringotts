@@ -5,7 +5,11 @@ module Gringotts
     before_filter :require_gringotts_user
     
     def index
+      @attempt = Gringotts::Attempt.new({user_id: current_user.id})
       #@code = @gringotts_user.current_code        
+    end
+    
+    def attempt
     end
     
 private

@@ -28,6 +28,7 @@ Feature: Verifying
       When I enter a blank code
         And I press submit
       Then I receive a message "Code is required"
+        And my blank attempt was not logged
       
     Scenario: User submits an invalid code
       Given I am logged in
@@ -36,6 +37,7 @@ Feature: Verifying
       When I enter the code "asdf"
         And I press submit
       Then I receive a message "Invalid code"
+        And my invalid attempt was logged
       
     Scenario: User submits a previous code
     
