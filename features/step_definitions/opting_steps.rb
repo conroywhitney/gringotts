@@ -1,5 +1,5 @@
 def gringotts
-  return Gringotts::Facade.find(@user)
+  return Gringotts::Vault.find_by(user_id: @user.id)
 end
 
 When(/^I got to my account details page$/) do                                                                                                                                                     

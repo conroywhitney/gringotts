@@ -2,9 +2,8 @@ require_dependency "gringotts/application_controller"
 
 module Gringotts
   class SettingsController < ApplicationController
-    
     before_filter :load_gringotts_settings
-    
+       
     def index  
     end
     
@@ -23,7 +22,7 @@ private
     
     def load_gringotts_settings
       # this is lazy-creation of Gringotts settings, so we don't have to tie in with user creation in regular app
-      @settings = Gringotts::Settings.find_or_initialize_by(user_id: current_user.id)
+      @settings = @gringotts.settings || Gringotts::Settings.new({vault_id: @gringotts.id})
     end
     
     def settings_params

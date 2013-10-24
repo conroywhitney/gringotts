@@ -1,24 +1,26 @@
 require 'spec_helper'
 
 module Gringotts
-  describe Facade do
+  describe Vault do
     
     before(:each) do
       @main_app_user = FactoryGirl.create(:user)
-      @gringotts = Gringotts::Facade.new(@main_app_user)
-      @settings = FactoryGirl.create(:good_us_phone_number_settings)
+      @gringotts     = FactoryGirl.create(:good_gringotts_vault)
+      @settings      = FactoryGirl.create(:good_us_phone_number_settings)
     end
 
     it "should be possible to 'find' by a given user object" do
-      Gringotts::Facade.find(@main_app_user).email.should == @main_app_user.email
+      gringotts = Gringotts::Vault.find_by(user_id: @main_app_user.id)
+      gringotts.user.email.should == @main_app_user.email
     end
     
-    it "should not be able to be constructed without a user" do
-      expect { @gringotts = Gringotts::Facade.new }.to raise_error
+    it "should require a user_id" do
+      @gringotts = FactoryGirl.build(:bad_missing_user_gringotts_vault)
+      @gringotts.valid?.should be_false
     end
 
-    it "should be able to reference its user's properties as its own" do
-      @gringotts.email.should == @main_app_user.email
+    it "should validate when valid" do
+      @gringotts.valid?.should be_true
     end
     
     it "should have access to settings" do
@@ -31,7 +33,7 @@ module Gringotts
     end
     
     it "should not be considered 'opted-in' if not have settings" do
-      @gringotts.settings.destroy
+      @settings.destroy
       @gringotts.settings.should be_nil
       @gringotts.opted_in?.should be_false
     end

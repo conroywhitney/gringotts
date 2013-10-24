@@ -2,8 +2,8 @@
 
 FactoryGirl.define do
 
-  factory :bad_base_settings, aliases: [:default], class: Gringotts::Settings do
-    user_id FactoryGirl.create(:user).id
+  factory :base_gringotts_settings, aliases: [:default], class: Gringotts::Settings do
+    vault_id 1
     
     factory :bad_phone_number_missing_settings do
       phone_number nil

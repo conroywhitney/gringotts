@@ -11,26 +11,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131024082959) do
+ActiveRecord::Schema.define(version: 20131024192122) do
 
   create_table "gringotts_attempts", force: true do |t|
-    t.integer  "user_id",       null: false
+    t.integer  "vault_id",      null: false
     t.string   "code_received", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "gringotts_attempts", ["user_id"], name: "index_gringotts_attempts_on_user_id"
+  add_index "gringotts_attempts", ["vault_id"], name: "index_gringotts_attempts_on_vault_id"
 
   create_table "gringotts_settings", force: true do |t|
-    t.integer  "user_id",                      null: false
+    t.integer  "vault_id",                     null: false
     t.boolean  "active",       default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "phone_number"
   end
 
-  add_index "gringotts_settings", ["user_id"], name: "index_gringotts_settings_on_user_id", unique: true
+  add_index "gringotts_settings", ["vault_id"], name: "index_gringotts_settings_on_vault_id", unique: true
+
+  create_table "gringotts_vaults", force: true do |t|
+    t.integer "user_id", null: false
+  end
+
+  add_index "gringotts_vaults", ["user_id"], name: "index_gringotts_vaults_on_user_id", unique: true
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
