@@ -1,15 +1,23 @@
 module Gringotts
-  class User
+  class Facade
     
     def self.find(user = nil)
-      return Gringotts::User.new(user)
+      return Gringotts::Facade.new(user)
     end
     
     def initialize(user = nil)
       raise "User is required" if user.nil?
       @user = user
     end
+    
+    def user_id
+      return @user.id
+    end
 
+    def email
+      return @user.email
+    end
+    
     def settings
       return Gringotts::Settings.find_by(user_id: @user.id)
     end
@@ -20,16 +28,6 @@ module Gringotts
 
     def opted_in?
       return self.settings.present?
-    end
-    
-private
-    
-    def method_missing(method, *args, &block)
-      if @user.respond_to? method
-        @user.send(method, *args, &block)
-      else
-        super
-      end
     end
     
   end

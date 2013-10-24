@@ -8,11 +8,11 @@ end
 
 Given(/^I am opted\-in$/) do
   opt_in
-  gringotts_user.settings.should_not be_nil
+  gringotts.settings.should_not be_nil
 end
 
 Given(/^I am not opted\-in$/) do
-  gringotts_user.settings.should be_nil
+  gringotts.settings.should be_nil
 end
 
 Given(/^I am on the verification page$/) do

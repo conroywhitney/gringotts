@@ -1,5 +1,5 @@
-def gringotts_user
-  return Gringotts::User.find(@user)
+def gringotts
+  return Gringotts::Facade.find(@user)
 end
 
 When(/^I got to my account details page$/) do                                                                                                                                                     
@@ -46,11 +46,11 @@ Then(/^I am redirected to the root url$/) do
 end                                                                                                                                                                                               
                                                                                                                                                                                                   
 Then(/^no settings were created$/) do     
-  gringotts_user.settings.should be_nil
+  gringotts.settings.should be_nil
 end
 
 Then(/^my phone number was saved$/) do
-  gringotts_user.settings.phone_number.should_not be_nil
+  gringotts.settings.phone_number.should_not be_nil
 end
 
 When(/^I click Continue$/) do                                                                                                                                                                     
