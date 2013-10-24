@@ -1,8 +1,8 @@
 module Gringotts
   class Attempt < ActiveRecord::Base
-    
-    belongs_to  :user, :class_name => 'Gringotts::User'
-    validates   :user_id, presence: true
+
+    validates :user_id, presence: true
+    validates :code_received, presence: true
     
   end
 end

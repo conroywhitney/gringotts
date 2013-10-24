@@ -23,7 +23,7 @@ module Gringotts
     end
     
     def attempts
-      return Gringotts::Attempt.find_by(user_id: @user.id)
+      return Gringotts::Attempt.where(user_id: @user.id)
     end
 
     def opted_in?

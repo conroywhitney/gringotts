@@ -24,11 +24,11 @@ Given(/^I go to the verification page$/) do
 end
 
 When(/^I enter a blank code$/) do
-  pending
+  fill_in "attempt_code_received", with: ""
 end
 
 When(/^I press submit$/) do
-  pending
+  click_button "Verify"
 end
 
 When(/^I enter the code "(.*?)"$/) do |code|
@@ -48,7 +48,7 @@ Then(/^I see the expected verification code$/) do
 end
 
 Then(/^my blank attempt was not logged$/) do
-  pending
+  gringotts.attempts.count.should == 0
 end
                                  
 Then(/^my invalid attempt was logged$/) do

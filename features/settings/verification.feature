@@ -27,7 +27,7 @@ Feature: Verifying
         And I am on the verification page
       When I enter a blank code
         And I press submit
-      Then I receive a message "Code is required"
+      Then I receive a message "Code received can't be blank"
         And my blank attempt was not logged
       
     Scenario: User submits an invalid code

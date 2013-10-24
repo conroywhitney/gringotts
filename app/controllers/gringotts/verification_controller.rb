@@ -12,8 +12,11 @@ module Gringotts
     def attempt
       @attempt = Gringotts::Attempt.new(attempt_params)
       @attempt.user_id = @gringotts.user_id
-      @attempt.save!
-      redirect_to gringotts_engine.verification_path
+      
+      # try to save this attempt, though if it didn't validate, it won't save
+      @attempt.save
+      
+      render :index
     end
     
 private

@@ -2,6 +2,16 @@
 
 <h2>Expected Code [<%#= @code %>]</h2>
 
+<% if @attempt.errors.any? %>  
+<div id="errorExplanation">  
+  <ul>  
+  <% @attempt.errors.full_messages.each do |msg| %>  
+    <li><%= msg %></li>  
+  <% end %>  
+  </ul>  
+</div>  
+<% end %>
+
 Enter code:
 
 <%= form_for @attempt,
