@@ -1,7 +1,7 @@
 module Gringotts
   class Settings < ActiveRecord::Base
     
-    belongs_to :user
+    belongs_to :user, :class_name => 'Gringotts::User'
 
     validates_presence_of   :user_id
     validates_uniqueness_of :user_id

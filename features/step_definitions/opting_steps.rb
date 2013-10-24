@@ -1,5 +1,5 @@
-def settings
-  return Gringotts::Settings.find_by(user_id: @user.id)
+def gringotts_user
+  return Gringotts::User.find(@user)
 end
 
 When(/^I got to my account details page$/) do                                                                                                                                                     
@@ -13,7 +13,7 @@ end
 When(/^I go to the gringotts settings page$/) do                                                                                                                                                  
   click_link "Edit account"
   click_link "Add your mobile phone to this account now"  
-end                                                                                                                                                                                               
+end                                                                                                                                                                  
                                                                                                                                                                                                   
 Then(/^I see an information message$/) do                                                                                                                                                         
   page.should have_content "Phone Verification"                                                                                                                               
@@ -46,15 +46,15 @@ Then(/^I am redirected to the root url$/) do
 end                                                                                                                                                                                               
                                                                                                                                                                                                   
 Then(/^no settings were created$/) do     
-  settings.should be_nil
+  gringotts_user.settings.should be_nil
 end
 
 Then(/^my phone number was saved$/) do
-  settings.phone_number.should_not be_nil
+  gringotts_user.settings.phone_number.should_not be_nil
 end
 
 Then(/^I am opted\-in$/) do
-  settings.active?.should be_true
+  gringotts_user.settings.active?.should be_true
 end
 
 When(/^I click Continue$/) do                                                                                                                                                                     
