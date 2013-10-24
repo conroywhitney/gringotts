@@ -25,6 +25,17 @@ module Gringotts
       @user.settings.should_not be_nil
     end
     
+    it "should be considered 'opted-in' if have settings" do
+      @user.settings.should_not be_nil
+      @user.opted_in?.should be_true
+    end
+    
+    it "should not be considered 'opted-in' if not have settings" do
+      @user.settings.destroy
+      @user.settings.should be_nil
+      @user.opted_in?.should be_false
+    end
+    
     it "should always have a reference to the most-recent settings" do
       new_phone_number = "(800) 555-1212"
       @settings.update_attributes(phone_number: new_phone_number)

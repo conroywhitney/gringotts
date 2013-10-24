@@ -15,6 +15,14 @@ Given(/^I am not opted\-in$/) do
   gringotts_user.settings.should be_nil
 end
 
+Given(/^I am on the verification page$/) do
+  page.current_path.should == gringotts_engine.verification_path
+end
+
+Given(/^I go to the verification page$/) do
+  visit gringotts_engine.verification_path
+end
+
 When(/^I enter a blank code$/) do
   pending
 end
@@ -27,14 +35,8 @@ When(/^I enter the code "(.*?)"$/) do |code|
   pending
 end
 
-When(/^I am on the verification page$/) do
-  #page.current_path.should == gringotts_engine.verification_path
-  pending
-end
-
 Then(/^I am redirected to the settings page$/) do
-  #page.current_path.should == gringotts_engine.settings_path
-  pending
+  page.current_path.should == gringotts_engine.settings_path
 end
 
 Then(/^I see the verification form$/) do

@@ -13,6 +13,12 @@ module Gringotts
     def settings
       return Gringotts::Settings.find_by(user_id: @user.id)
     end
+
+    def opted_in?
+      return self.settings.present?
+    end
+    
+private
     
     def method_missing(method, *args, &block)
       if @user.respond_to? method

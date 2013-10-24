@@ -6,34 +6,34 @@ Feature: Verifying
     Scenario: User must have opted-in first
       Given I am logged in
         But I am not opted-in
-      When I am on the verification page
+      When I go to the verification page
       Then I am redirected to the settings page
     
     Scenario: User sees verification form
       Given I am logged in
         And I am opted-in
-      When I am on the verification page
+        And I am on the verification page
       Then I see the verification form
       
     Scenario: [Temporary] User sees a code to enter
       Given I am logged in
         And I am opted-in
-      When I am on the verification page
+        And I am on the verification page
       Then I see the expected verification code
       
     Scenario: User submits a blank code
       Given I am logged in
         And I am opted-in
-      When I am on the verification page
-        And I enter a blank code
+        And I am on the verification page
+      When I enter a blank code
         And I press submit
       Then I receive a message "Code is required"
       
     Scenario: User submits an invalid code
       Given I am logged in
         And I am opted-in
-      When I am on the verification page
-        And I enter the code "asdf"
+        And I am on the verification page
+      When I enter the code "asdf"
         And I press submit
       Then I receive a message "Invalid code"
       
