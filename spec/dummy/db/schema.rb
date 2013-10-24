@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131024063655) do
+ActiveRecord::Schema.define(version: 20131024082959) do
 
   create_table "gringotts_attempts", force: true do |t|
     t.integer  "user_id",       null: false
@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 20131024063655) do
     t.datetime "updated_at"
   end
 
-  add_index "gringotts_attempts", ["user_id"], name: "index_gringotts_attempts_on_user_id", unique: true
+  add_index "gringotts_attempts", ["user_id"], name: "index_gringotts_attempts_on_user_id"
 
   create_table "gringotts_settings", force: true do |t|
     t.integer  "user_id",                      null: false
