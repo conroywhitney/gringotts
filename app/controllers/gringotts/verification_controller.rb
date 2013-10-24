@@ -10,6 +10,10 @@ module Gringotts
     end
     
     def attempt
+      @attempt = Gringotts::Attempt.new(attempt_params)
+      @attempt.user_id = @gringotts_user.id
+      @attempt.save!
+      redirect_to gringotts_engine.verification_path
     end
     
 private
@@ -18,6 +22,10 @@ private
       @gringotts_user = Gringotts::User.find(current_user)
       
       redirect_to gringotts_engine.settings_path unless @gringotts_user.opted_in?
+    end
+    
+    def attempt_params
+      params.require(:attempt).permit(:code_received)
     end
     
   end
