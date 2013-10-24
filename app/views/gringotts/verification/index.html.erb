@@ -1,2 +1,15 @@
-<h1>Verification#index</h1>
-<p>Find me in app/views/gringotts/verification/index.html.erb</p>
+<h1>Verification</h1>
+
+<h2>Expected Code [<%#= @code %>]</h2>
+
+Enter code:
+
+<%# form_for Attempt.new(@gringotts_user), url: {action: "create"}, method: :post do |f| %>
+
+  <%#= f.text_field :code_received %>
+
+  <br/><br/>
+
+  <%#= f.submit "Verify" %>
+
+<%# end %>

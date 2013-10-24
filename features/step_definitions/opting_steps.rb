@@ -53,10 +53,6 @@ Then(/^my phone number was saved$/) do
   gringotts_user.settings.phone_number.should_not be_nil
 end
 
-Then(/^I am opted\-in$/) do
-  gringotts_user.settings.active?.should be_true
-end
-
 When(/^I click Continue$/) do                                                                                                                                                                     
   click_button "Save and Continue"                                                                                                                               
 end                                                                                                                                                                                               
