@@ -11,5 +11,10 @@ module Gringotts
       return self.settings.present?
     end
     
+    def recent_code
+      # TODO: do something real here
+      return "abc123"
+    end
+    
   end
 end
