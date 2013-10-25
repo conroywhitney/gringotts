@@ -52,5 +52,6 @@ Then(/^my blank attempt was not logged$/) do
 end
                                  
 Then(/^my invalid attempt was logged$/) do
-  pending
+  my_attempt = gringotts.attempts.last
+  my_attempt.successful?.should be_false
 end

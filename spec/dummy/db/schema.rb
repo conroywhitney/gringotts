@@ -11,13 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131024192122) do
+ActiveRecord::Schema.define(version: 20131025012829) do
 
   create_table "gringotts_attempts", force: true do |t|
-    t.integer  "vault_id",      null: false
-    t.string   "code_received", null: false
+    t.integer  "vault_id",                      null: false
+    t.string   "code_received",                 null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "successful",    default: false, null: false
   end
 
   add_index "gringotts_attempts", ["vault_id"], name: "index_gringotts_attempts_on_vault_id"

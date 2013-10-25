@@ -9,7 +9,9 @@ module Gringotts
       valid = (received_code == recent_code)
       
       if valid
+        attempt.successful = 1
       else
+        attempt.successful = 0
         attempt.errors[:base] << "Invalid code"
       end
       
