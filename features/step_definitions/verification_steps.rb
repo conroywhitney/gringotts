@@ -66,3 +66,15 @@ end
 Then(/^my valid attempt was logged$/) do
   gringotts.attempts.last.successful?.should be_true
 end
+
+When(/^I enter the correct code after waiting too long$/) do
+  code = gringotts.recent_code_object
+  code.update_attributes(expires_at: (Time.now - Gringotts::AttemptValidator::CODE_FRESHNESS_LIMIT))
+  fill_in "attempt_code_received", with: code.value
+end
+
+When(/^I enter the correct code but it has already been confirmed$/) do
+  code = gringotts.recent_code_object
+  Gringotts::Attempt.create!(vault_id: gringotts.id, code_received: code.value, successful: true)
+  fill_in "attempt_code_received", with: code.value
+end    

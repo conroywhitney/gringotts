@@ -42,7 +42,7 @@ module Gringotts
       
       before(:each) do
         @used_attempt = FactoryGirl.create(:used_gringotts_attempt)
-        @used_code    = FactoryGirl.build(:good_gringotts_code)
+        @used_code    = @used_attempt.vault.recent_code_object
       end
       
       it "used? should error for codes already used" do
