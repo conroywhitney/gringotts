@@ -32,7 +32,7 @@ When(/^I press submit$/) do
 end
 
 When(/^I enter the code "(.*?)"$/) do |code|
-  pending
+  fill_in "attempt_code_received", with: code
 end
 
 Then(/^I am redirected to the settings page$/) do

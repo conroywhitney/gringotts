@@ -6,15 +6,25 @@ module Gringotts
     before_filter :initialize_attempt
     
     def index
-      #@code = @gringotts_user.current_code        
+      #@code = @gringotts_user.current_code
+      @errors = []
     end
     
     def attempt
       @attempt.assign_attributes(attempt_params)
       
-      # try to save this attempt, though if it didn't validate, it won't save
-      @attempt.save
+      if @attempt.valid?
+        # if it has everything necessary ActiveRecord-wise
+        # see if it's actually matches what we we expect
+        AttemptValidator.validate(@attempt)
+      end
+    
+      # Need to .dup because .save is going to erase all errors =(
+      @errors = @attempt.errors.dup
       
+      # after all that, save a record of this attempt
+      @attempt.save  
+  
       render :index
     end
     
@@ -25,7 +35,7 @@ private
     end
     
     def initialize_attempt
-      @attempt = Gringotts::Attempt.new({vault_id: @gringotts.id})
+      @attempt ||= Gringotts::Attempt.new({vault_id: @gringotts.id})
     end
     
     def attempt_params
