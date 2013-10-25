@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :base_gringotts_attempt, :class => 'Gringotts::Attempt' do
-    vault_id 1
+    vault_id { FactoryGirl.create(:good_gringotts_vault).id }
     
     factory :bad_without_code_attempt do
       code_received nil
