@@ -28,6 +28,7 @@ module Gringotts
       if @attempt.successful?
         redirect_to success_path
       else
+        @code = @gringotts.recent_code
         render :index
       end
     end

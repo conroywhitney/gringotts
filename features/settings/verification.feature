@@ -38,6 +38,7 @@ Feature: Verifying
         And I press submit
       Then I receive a message "Invalid code"
         And my invalid attempt was logged
+        And (Temporarily) I see the expected verification code
     
     Scenario: User submits the correct code
       Given I am logged in
