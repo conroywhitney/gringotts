@@ -44,10 +44,6 @@ module Gringotts
       @gringotts.settings.phone_number.should == new_phone_number
     end
     
-    it "should have access to outgoing logs"
-    
-    it "should have access to incoming logs"
-    
     it "should be able to generate new codes" do
       @gringotts.new_code.should_not be_nil
     end

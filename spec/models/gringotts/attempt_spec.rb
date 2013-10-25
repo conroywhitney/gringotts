@@ -23,7 +23,5 @@ module Gringotts
       @attempt.valid?.should be_false
     end
     
-    it ""
-    
   end
 end
