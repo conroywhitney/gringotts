@@ -6,7 +6,7 @@ module Gringotts
     validates  :code_received, presence: true
     
     def successful?
-      return self.successful == 1
+      return self.successful
     end
 
   end

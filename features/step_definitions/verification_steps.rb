@@ -35,8 +35,16 @@ When(/^I enter the code "(.*?)"$/) do |code|
   fill_in "attempt_code_received", with: code
 end
 
+When(/^I enter the correct code$/) do
+  fill_in "attempt_code_received", with: gringotts.recent_code
+end
+
 Then(/^I am redirected to the settings page$/) do
   page.current_path.should == gringotts_engine.settings_path
+end
+
+Then(/^I am redirected to the success page$/) do
+  page.current_path.should == gringotts_engine.success_path
 end
 
 Then(/^I see the verification form$/) do
@@ -52,6 +60,9 @@ Then(/^my blank attempt was not logged$/) do
 end
                                  
 Then(/^my invalid attempt was logged$/) do
-  my_attempt = gringotts.attempts.last
-  my_attempt.successful?.should be_false
+  gringotts.attempts.last.successful?.should be_false
+end
+
+Then(/^my valid attempt was logged$/) do
+  gringotts.attempts.last.successful?.should be_true
 end

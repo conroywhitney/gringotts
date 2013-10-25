@@ -40,4 +40,12 @@ Feature: Verifying
         And my invalid attempt was logged
     
     Scenario: User submits the correct code
+      Given I am logged in
+        And I am opted-in
+        And I am on the verification page
+      When I enter the correct code
+        And I press submit
+      Then I am redirected to the success page
+        And my valid attempt was logged
+        And I receive a message "Successfully Validated!"
     

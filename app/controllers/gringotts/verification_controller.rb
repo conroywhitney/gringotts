@@ -3,7 +3,7 @@ require_dependency "gringotts/application_controller"
 module Gringotts
   class VerificationController < ApplicationController
     before_filter :require_gringotts
-    before_filter :initialize_attempt
+    before_filter :initialize_attempt, :except => [:success]
     
     def index
       @code = @gringotts.new_code
@@ -18,14 +18,21 @@ module Gringotts
         # see if it's actually matches what we we expect
         AttemptValidator.validate(@attempt)
       end
-    
+      
       # Need to .dup because .save is going to erase all errors =(
       @errors = @attempt.errors.dup
       
       # after all that, save a record of this attempt
-      @attempt.save  
-  
-      render :index
+      @attempt.save
+      
+      if @attempt.successful?
+        redirect_to success_path
+      else
+        render :index
+      end
+    end
+    
+    def success
     end
     
 private

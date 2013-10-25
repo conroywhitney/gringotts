@@ -9,4 +9,6 @@ Gringotts::Engine.routes.draw do
   
   post "attempt", :to => "verification#attempt", :as => :attempt
   
+  get "success", :to => "verification#success", :as => :success
+  
 end
