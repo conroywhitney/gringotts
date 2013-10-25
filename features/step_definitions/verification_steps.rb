@@ -43,8 +43,8 @@ Then(/^I see the verification form$/) do
   find("#new_attempt")
 end
 
-Then(/^I see the expected verification code$/) do
-  pending
+Then(/^\(Temporarily\) I see the expected verification code$/) do
+  page.should have_content "Expected Code [#{gringotts.recent_code}]"
 end
 
 Then(/^my blank attempt was not logged$/) do

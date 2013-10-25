@@ -19,7 +19,7 @@ Feature: Verifying
       Given I am logged in
         And I am opted-in
         And I am on the verification page
-      Then I see the expected verification code
+      Then (Temporarily) I see the expected verification code
       
     Scenario: User submits a blank code
       Given I am logged in
@@ -38,10 +38,6 @@ Feature: Verifying
         And I press submit
       Then I receive a message "Invalid code"
         And my invalid attempt was logged
-      
-    Scenario: User submits a previous code
-    
-    Scenario: User submits an expired code
     
     Scenario: User submits the correct code
     

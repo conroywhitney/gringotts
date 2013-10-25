@@ -48,5 +48,13 @@ module Gringotts
     
     it "should have access to incoming logs"
     
+    it "should be able to generate new codes" do
+      @gringotts.new_code.should_not be_nil
+    end
+    
+    it "the last generated code should be the recent code" do
+      @gringotts.new_code.should == @gringotts.recent_code
+    end
+    
   end
 end

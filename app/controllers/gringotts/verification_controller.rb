@@ -6,7 +6,7 @@ module Gringotts
     before_filter :initialize_attempt
     
     def index
-      #@code = @gringotts_user.current_code
+      @code = @gringotts.new_code
       @errors = []
     end
     
