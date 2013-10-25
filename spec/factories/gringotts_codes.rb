@@ -8,6 +8,10 @@ FactoryGirl.define do
       expires_at { Time.now + 30.days }
     end
     
+    factory :different_gringotts_code do
+      expires_at { Time.now + 30.days }
+    end
+    
     factory :stale_gringotts_code do
       expires_at { Time.now - Gringotts::AttemptValidator::CODE_FRESHNESS_LIMIT }
     end

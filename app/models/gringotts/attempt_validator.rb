@@ -15,12 +15,15 @@ module Gringotts
     attr_reader :attempt, :code
     
     def successful?
-      if self.stale?
-        self.mark_unsuccessful("Code expired")
-      elsif self.used?
-        self.mark_unsuccessful("Code already used")
-      elsif self.matches?
-        self.mark_successful
+      
+      if self.matches?
+        if self.stale?
+          self.mark_unsuccessful("Code expired")
+        elsif self.used?
+          self.mark_unsuccessful("Code already used")
+        else
+          self.mark_successful
+        end
       else
         self.mark_unsuccessful("Invalid code")
       end
@@ -38,11 +41,11 @@ module Gringotts
     end
         
     def stale?
-      return false
+      return @code.expires_at < (Time.now - CODE_FRESHNESS_LIMIT)
     end
     
     def used?
-      return false
+      return Gringotts::Attempt.where(vault_id: @attempt.vault_id, code_received: @attempt.code_received, successful: true).count > 0
     end
     
     def matches?
