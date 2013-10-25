@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131025014736) do
+ActiveRecord::Schema.define(version: 20131025142843) do
 
   create_table "gringotts_attempts", force: true do |t|
     t.integer  "vault_id",                      null: false
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20131025014736) do
     t.string   "value",      null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "expires_at"
   end
 
   add_index "gringotts_codes", ["vault_id"], name: "index_gringotts_codes_on_vault_id"

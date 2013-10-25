@@ -13,5 +13,17 @@ FactoryGirl.define do
       code_received nil
     end
     
+    factory :good_gringotts_attempt do
+      code_received { FactoryGirl.create(:good_gringotts_code).value }
+    end
+    
+    factory :stale_gringotts_attempt do
+      code_received { FactoryGirl.create(:stale_gringotts_code).value }
+    end
+    
+    factory :used_gringotts_attempt do
+      code_received { FactoryGirl.create(:good_gringotts_attempt).code_received }
+    end
+    
   end
 end

@@ -13,7 +13,11 @@ module Gringotts
     end
     
     def recent_code
-      return self.codes.last.value
+      return self.recent_code_object.value
+    end
+    
+    def recent_code_object
+      return self.codes.last
     end
     
     def new_code

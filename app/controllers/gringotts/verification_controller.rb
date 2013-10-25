@@ -13,11 +13,7 @@ module Gringotts
     def attempt
       @attempt.assign_attributes(attempt_params)
       
-      if @attempt.valid?
-        # if it has everything necessary ActiveRecord-wise
-        # see if it's actually matches what we we expect
-        AttemptValidator.validate(@attempt)
-      end
+      @attempt.validate(@gringotts.recent_code)
       
       # Need to .dup because .save is going to erase all errors =(
       @errors = @attempt.errors.dup

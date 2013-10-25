@@ -5,6 +5,11 @@ FactoryGirl.define do
     vault_id 1
     
     factory :good_gringotts_code do
+      expires_at { Time.now + 30.days }
+    end
+    
+    factory :stale_gringotts_code do
+      expires_at { Time.now - Gringotts::AttemptValidator::CODE_FRESHNESS_LIMIT }
     end
     
   end
