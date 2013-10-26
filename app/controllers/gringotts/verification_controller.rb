@@ -3,6 +3,7 @@ require_dependency "gringotts/application_controller"
 module Gringotts
   class VerificationController < ApplicationController
     before_filter :require_gringotts
+    before_filter :ensure_not_locked,  :except => [:locked]
     before_filter :initialize_attempt, :except => [:success]
     
     def index
@@ -22,7 +23,9 @@ module Gringotts
       @attempt.save
       
       if @attempt.successful?
-        redirect_to success_path
+        redirect_to gringotts_engine.success_path
+      elsif @gringotts.reload.locked?
+        redirect_to gringotts_engine.locked_path
       else
         @code = @gringotts.recent_code
         render :index
@@ -32,10 +35,17 @@ module Gringotts
     def success
     end
     
+    def locked
+    end
+    
 private
     
     def require_gringotts
       redirect_to gringotts_engine.settings_path unless @gringotts.opted_in?
+    end
+    
+    def ensure_not_locked
+      redirect_to gringotts_engine.locked_path if @gringotts.locked?
     end
     
     def initialize_attempt

@@ -11,4 +11,6 @@ Gringotts::Engine.routes.draw do
   
   get "success", :to => "verification#success", :as => :success
   
+  get "locked", :to => "verification#locked", :as => :locked
+  
 end

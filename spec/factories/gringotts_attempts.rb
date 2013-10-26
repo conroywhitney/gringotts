@@ -30,7 +30,7 @@ FactoryGirl.define do
       code_received { FactoryGirl.create(:successful_gringotts_attempt).code_received }
     end
     
-    factory :bad_without_user_attempt do
+    factory :bad_without_vault_attempt do
       vault_id nil
       code_received "12345"
     end

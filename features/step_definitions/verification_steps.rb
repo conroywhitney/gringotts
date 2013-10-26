@@ -47,8 +47,17 @@ Then(/^I am redirected to the success page$/) do
   page.current_path.should == gringotts_engine.success_path
 end
 
+Then(/^I am redirected to the locked page$/) do
+  page.current_path.should == gringotts_engine.locked_path
+end
+
 Then(/^I see the verification form$/) do
-  find("#new_attempt")
+  find("#new_attempt").should_not be_nil
+end
+
+Then(/^I do not see the verification form$/) do
+  page.should have_no_selector(:xpath, "//form and @name='#{name}']")
+  find("#new_attempt").should be_nil
 end
 
 Then(/^\(Temporarily\) I see the expected verification code$/) do
@@ -77,4 +86,15 @@ When(/^I enter the correct code but it has already been confirmed$/) do
   code = gringotts.recent_code_object
   Gringotts::Attempt.create!(vault_id: gringotts.id, code_received: code.value, successful: true)
   fill_in "attempt_code_received", with: code.value
-end    
+end
+
+Given(/^I enter too many invalid codes$/) do
+  Gringotts::AttemptValidator::MAX_UNSUCCESSFUL_ATTEMPTS.times do
+    submit_code "F4!L"
+  end
+end 
+
+def submit_code(code)
+  fill_in "attempt_code_received", with: code
+  click_button "Verify"
+end
