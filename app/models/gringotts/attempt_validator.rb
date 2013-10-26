@@ -2,6 +2,7 @@ module Gringotts
   class AttemptValidator
     
     CODE_FRESHNESS_LIMIT = 30.minutes
+    LOCKOUT_PERIOD = 30.minutes
    
     def self.valid?(attempt)
       return AttemptValidator.new(attempt, attempt.vault.recent_code_object).successful?

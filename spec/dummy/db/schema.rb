@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131025142843) do
+ActiveRecord::Schema.define(version: 20131026154541) do
 
   create_table "gringotts_attempts", force: true do |t|
     t.integer  "vault_id",                      null: false
@@ -44,7 +44,8 @@ ActiveRecord::Schema.define(version: 20131025142843) do
   add_index "gringotts_settings", ["vault_id"], name: "index_gringotts_settings_on_vault_id", unique: true
 
   create_table "gringotts_vaults", force: true do |t|
-    t.integer "user_id", null: false
+    t.integer  "user_id",   null: false
+    t.datetime "locked_at"
   end
 
   add_index "gringotts_vaults", ["user_id"], name: "index_gringotts_vaults_on_user_id", unique: true

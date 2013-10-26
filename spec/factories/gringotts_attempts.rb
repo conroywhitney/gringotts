@@ -17,6 +17,11 @@ FactoryGirl.define do
       successful true
     end
     
+    factory :unsuccessful_gringotts_attempt do
+      code_received "F4!L"
+      successful false
+    end
+    
     factory :stale_gringotts_attempt do
       code_received { FactoryGirl.create(:stale_gringotts_code).value }
     end

@@ -25,5 +25,17 @@ module Gringotts
       return self.recent_code
     end
     
+    def lock!
+      self.update_attributes(locked_at: Time.now)
+    end
+    
+    def locked?
+      return self.locked_at.present? && self.locked_at > Gringotts::AttemptValidator::LOCKOUT_PERIOD.ago
+    end
+    
+    def unlock!
+      self.update_attributes(locked_at: nil)
+    end
+    
   end
 end

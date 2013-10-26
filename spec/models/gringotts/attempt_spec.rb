@@ -23,5 +23,25 @@ module Gringotts
       @attempt.valid?.should be_false
     end
     
+    it "multiple unsuccessful attempts should lock vault"
+    
+    it "succesful attempt should unlock vault" do
+      @attempt = FactoryGirl.build(:successful_gringotts_attempt)
+      @gringotts = @attempt.vault
+
+      @gringotts.lock!
+      @attempt.save!
+      @gringotts.reload.locked?.should be_false
+    end
+    
+    it "unsuccesful attempt should NOT unlock vault" do
+      @attempt = FactoryGirl.build(:unsuccessful_gringotts_attempt)
+      @gringotts = @attempt.vault
+
+      @gringotts.lock!
+      @attempt.save!
+      @gringotts.reload.locked?.should be_true
+    end
+    
   end
 end

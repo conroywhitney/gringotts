@@ -51,6 +51,27 @@ module Gringotts
     it "the last generated code should be the recent code" do
       @gringotts.new_code.should == @gringotts.recent_code
     end
+
+    it "should be lockable" do
+      @gringotts.locked?.should be_false
+      @gringotts.lock!
+      @gringotts.reload.locked?.should be_true
+    end
+    
+    it "should be locked if within timeframe" do
+      FactoryGirl.create(:locked_gringotts_vault).locked?.should be_true
+    end
+
+    it "should not be locked if outside timeframe" do
+      FactoryGirl.create(:unlockable_gringotts_vault).locked?.should be_false
+    end
+    
+    it "should be unlockable" do
+      @gringotts = FactoryGirl.create(:locked_gringotts_vault)
+      @gringotts.locked?.should be_true
+      @gringotts.unlock!
+      @gringotts.reload.locked?.should be_false
+    end
     
   end
 end
