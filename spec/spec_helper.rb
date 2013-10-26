@@ -9,6 +9,9 @@ require 'rspec/autorun'
 require 'factory_girl_rails'
 require 'phony_rails'
 
+require "codeclimate-test-reporter"
+CodeClimate::TestReporter.start
+
 Rails.backtrace_cleaner.remove_silencers!
 
 # Load support files
