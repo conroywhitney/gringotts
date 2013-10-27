@@ -11,8 +11,8 @@ gemspec
 # your gem to rubygems.org.
 
 gem "devise"
+
 gem 'factory_girl_rails', :group => :test
-gem 'phony_rails', :group => [:development, :test]
 gem "codeclimate-test-reporter", group: :test, require: nil
 
 # To use debugger

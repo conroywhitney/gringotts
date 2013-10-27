@@ -1,3 +1,5 @@
+require 'phony_rails'
+
 module Gringotts
   class Settings < ActiveRecord::Base
     
