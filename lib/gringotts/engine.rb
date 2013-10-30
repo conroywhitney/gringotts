@@ -21,5 +21,16 @@ module Gringotts
       g.helper false
     end
     
+    # load config file
+    initializer :load_config_yml do |app|
+      config_path = app.root.join('config', "gringotts.yml")
+      if File.exists?(config_path)
+        config = YAML.load_file(config_path)
+        # load the informationz....
+      else
+        raise Exception.new("You must create the file #{config_path}. Please see documentation for more details: https://github.com/conroywhitney/gringotts")
+      end
+    end
+    
   end
 end
