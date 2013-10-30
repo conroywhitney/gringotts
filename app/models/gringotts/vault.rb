@@ -1,12 +1,17 @@
 module Gringotts
   class Vault < ActiveRecord::Base
 
-    belongs_to :user
-    validates  :user_id, presence: true, uniqueness: true
+    belongs_to :owner,      polymorphic: true
+    validates  :owner_id,   presence: true, uniqueness: true
+    validates  :owner_type, presence: true
     
     has_one    :settings
     has_many   :attempts
     has_many   :codes
+
+    def self.for_owner(obj)
+      return Gringotts::Vault.where(owner_id: obj.id, owner_type: obj.class.name).first_or_create
+    end
     
     def opted_in?
       return self.settings.present?

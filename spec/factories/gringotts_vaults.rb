@@ -3,19 +3,20 @@
 FactoryGirl.define do
   
   factory :base_gringotts_vault, class: Gringotts::Vault do
-    user_id FactoryGirl.create(:user).id
+    owner FactoryGirl.create(:user)
       
     # So we can re-use this factory across multiple associations
     # without receiving a duplicate validation error
     # Thanks to: http://stackoverflow.com/questions/7145256/find-or-create-record-through-factory-girl-association
-    initialize_with { Gringotts::Vault.where(user_id: user_id).first_or_create }
+    initialize_with { Gringotts::Vault.for_owner(owner) }
     
     factory :good_gringotts_vault do
       locked_at nil
     end
     
-    factory :bad_missing_user_gringotts_vault do
-      user_id nil
+    factory :bad_missing_owner_gringotts_vault do
+      owner_id nil
+      owner_type nil
     end
     
     factory :locked_gringotts_vault do

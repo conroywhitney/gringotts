@@ -10,12 +10,13 @@ module Gringotts
     end
 
     it "should be possible to 'find' by a given user object" do
-      gringotts = Gringotts::Vault.find_by(user_id: @main_app_user.id)
-      gringotts.user.email.should == @main_app_user.email
+      gringotts = Gringotts::Vault.for_owner(@main_app_user)
+      gringotts.owner.id.should == @main_app_user.id
+      gringotts.owner.class.name.should == @main_app_user.class.name
     end
     
     it "should require a user_id" do
-      @gringotts = FactoryGirl.build(:bad_missing_user_gringotts_vault)
+      @gringotts = FactoryGirl.build(:bad_missing_owner_gringotts_vault)
       @gringotts.valid?.should be_false
     end
 

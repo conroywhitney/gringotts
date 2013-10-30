@@ -12,7 +12,7 @@ Given(/^I am opted\-in$/) do
 end
 
 Given(/^I am not opted\-in$/) do
-  gringotts.should be_nil
+  gringotts.settings.should be_nil
 end
 
 Given(/^I am on the verification page$/) do
