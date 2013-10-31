@@ -1,0 +1,14 @@
+development: &non_production_settings
+  enabled: true
+  twilio:
+    account_sid: "PLACEHOLDER"
+    auth_token: "PLACEHOLDER"
+
+test:
+  <<: *non_production_settings
+
+production:
+  enabled: false
+  twilio:
+    account_sid: "PLACEHOLDER"
+    auth_token: "PLACEHOLDER"

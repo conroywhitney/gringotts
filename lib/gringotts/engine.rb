@@ -22,13 +22,17 @@ module Gringotts
     end
     
     # load config file
+    # thanks to: http://gregmoreno.wordpress.com/2012/05/29/create-your-own-rails-3-engine/
     initializer :load_config_yml do |app|
       config_path = app.root.join('config', "gringotts.yml")
       if File.exists?(config_path)
-        config = YAML.load_file(config_path)
-        # load the informationz....
+        if (raw_yaml = File.read(config_path))
+          Gringotts::Config.load(raw_yaml)
+        else
+          raise "Could not load config file [#{config_path}]. File is probably either not valid YAML or is empty."
+        end
       else
-        raise Exception.new("You must create the file #{config_path}. Please see documentation for more details: https://github.com/conroywhitney/gringotts")
+        raise Exception.new("You must create the file [#{config_path}]. Please see documentation for more details: https://github.com/conroywhitney/gringotts")
       end
     end
     
