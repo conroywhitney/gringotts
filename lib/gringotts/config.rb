@@ -2,9 +2,7 @@ module Gringotts
   
   class Config
     
-    @@enabled = false
-    
-    cattr_reader :enabled
+    cattr_reader :enabled, :twilio
     
     def self.load(raw_yaml)
       begin
@@ -14,6 +12,7 @@ module Gringotts
       end
       
       @@enabled = parse(yaml, "enabled")
+      @@twilio  = parse(yaml, "twilio", false)
     end
     
     def self.parse(yaml, node, required = true)
