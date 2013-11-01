@@ -16,6 +16,14 @@ module Gringotts
     def opted_in?
       return self.settings.present?
     end
+      
+    def show_prompt?
+      return self.prompt_seen_at.nil?
+    end
+    
+    def prompt_shown!
+      self.update_attributes!(prompt_seen_at: Time.now)
+    end
     
     def recent_code
       return self.recent_code_object.value

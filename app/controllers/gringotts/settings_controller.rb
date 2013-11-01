@@ -7,6 +7,18 @@ module Gringotts
     def index  
     end
     
+    def prompt
+      @next_url = flash[:next_url]
+      if @gringotts.show_prompt?
+        # going to show prompt
+        # need to remember that have shown, so not show twice
+        @gringotts.prompt_shown!
+      else
+        # should not see it twice
+        redirect_to @next_url
+      end
+    end
+    
     def update
       @settings.assign_attributes(settings_params)
       
