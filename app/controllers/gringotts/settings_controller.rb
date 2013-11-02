@@ -8,7 +8,9 @@ module Gringotts
     end
     
     def prompt
-      @next_url = flash[:next_url]
+      # see if we have a url saved (we should, but for safety, if missing, just redirect to root)
+      @next_url = gringotts_next_url || main_app.root_url
+      
       if @gringotts.show_prompt?
         # going to show prompt
         # need to remember that have shown, so not show twice

@@ -1,4 +1,7 @@
 class Gringotts::ApplicationController < ApplicationController
+  # our verification pages should not require verification! can anyone say infinite redirect?
+  skip_before_filter :gringotts_protego!
+  
   before_filter :load_gringotts
   before_filter :ensure_not_locked
 
