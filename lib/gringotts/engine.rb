@@ -1,7 +1,10 @@
 module Gringotts
   class Engine < ::Rails::Engine
     isolate_namespace Gringotts
-    
+
+    # add engine's migrations into application's migration path
+    # when we run rake db:migrate in main app, our engine's migrations will be run, too!
+    # thanks to: http://pivotallabs.com/leave-your-migrations-in-your-rails-engines/
     initializer :append_migrations do |app|
       unless app.root.to_s.match root.to_s
         config.paths["db/migrate"].expanded.each do |expanded_path|
@@ -10,18 +13,26 @@ module Gringotts
       end
     end
 
-    # Adding spec per article
-    # http://viget.com/extend/rails-engine-testing-with-rspec-capybara-and-factorygirl    
+    # hijack the main rails application controller
+    # does things like: include a helper, and add a before_filter
+    # thanks to: http://stackoverflow.com/questions/3468858/rails-3-0-engine-execute-code-in-actioncontroller
+    initializer :hijack_main_app_controller do |app|  
+      ActiveSupport.on_load(:action_controller) do  
+         include GringottsActionControllerExtension  
+      end
+    end
+
+    # Adding RSpec test configuration (don't create fixtures, use factory_girl, etc)
+    # thanks to: http://viget.com/extend/rails-engine-testing-with-rspec-capybara-and-factorygirl    
     config.generators do |g|
-      g.test_framework      :rspec,        :fixture => false,   :view_specs => false
-      
+      g.test_framework      :rspec,        :fixture => false,   :view_specs => false  
       g.fixture_replacement :factory_girl, :dir => 'spec/factories'
-      
       g.assets false
       g.helper false
     end
     
-    # load config file
+    # load config/gringotts.yml file from main rails app's config path
+    # give helpful warning messages if missing or invalid (e.g., after first installing gem)
     # thanks to: http://gregmoreno.wordpress.com/2012/05/29/create-your-own-rails-3-engine/
     initializer :load_config_yml do |app|
       config_path = app.root.join('config', "gringotts.yml")

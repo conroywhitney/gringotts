@@ -1,10 +1,6 @@
 class Gringotts::ApplicationController < ApplicationController
   before_filter :load_gringotts
   before_filter :ensure_not_locked
-  
-  def gringotts_owner
-    return current_user
-  end
 
 private
   
