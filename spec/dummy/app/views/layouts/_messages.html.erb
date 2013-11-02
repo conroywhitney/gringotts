@@ -1,5 +1,5 @@
 <% flash.each do |name, msg| %>
-  <% if msg.is_a?(String) %>
+  <% if msg.is_a?(String) && ![:gringotts_next_url].include?(name.to_sym) %>
     <%= content_tag :div, msg, :id => "flash_#{name}" %>
   <% end %>
 <% end %>
