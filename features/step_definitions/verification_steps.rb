@@ -7,6 +7,8 @@ def opt_in
 end
 
 Given(/^I am opted\-in$/) do
+  create_user
+  sign_in
   opt_in
   gringotts.settings.should_not be_nil
 end
