@@ -44,6 +44,10 @@ def sign_in
   click_button "Sign in"
 end
 
+def sign_out
+  visit '/users/sign_out'
+end
+
 ### GIVEN ###
 Given /^I am not logged in$/ do
   visit '/users/sign_out'
@@ -74,7 +78,7 @@ When /^I sign in with valid credentials$/ do
 end
 
 When /^I sign out$/ do
-  visit '/users/sign_out'
+  sign_out
 end
 
 When /^I sign up with valid user data$/ do

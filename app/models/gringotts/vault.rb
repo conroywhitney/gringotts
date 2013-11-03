@@ -60,6 +60,11 @@ module Gringotts
       return self.recent_code
     end
     
+    def should_lock?
+      return false unless self.confirmed?
+      self.attempts.unsuccessful.since(Time.now - Gringotts::AttemptValidator::LOCKOUT_PERIOD).count  >= Gringotts::AttemptValidator::MAX_UNSUCCESSFUL_ATTEMPTS
+    end
+      
     def lock!
       self.update_attributes(locked_at: Time.now)
     end
@@ -67,7 +72,7 @@ module Gringotts
     def locked?
       return self.locked_at.present? && self.locked_at > Gringotts::AttemptValidator::LOCKOUT_PERIOD.ago
     end
-    
+          
     def unlock!
       self.update_attributes(locked_at: nil)
     end

@@ -105,5 +105,33 @@ module Gringotts
       @gringotts.verified?(session).should be_false
     end
         
+    it "one less than maximum unsuccessful attempts should NOT lock vault" do
+      @gringotts.confirm!
+      
+      (Gringotts::AttemptValidator::MAX_UNSUCCESSFUL_ATTEMPTS - 1).times do
+        @attempt = FactoryGirl.create(:unsuccessful_gringotts_attempt)
+      end
+      
+      @gringotts.should_lock?.should be_false
+    end
+    
+    it "multiple unsuccessful attempts should lock vault" do
+      @gringotts.confirm!
+      
+      Gringotts::AttemptValidator::MAX_UNSUCCESSFUL_ATTEMPTS.times do
+        @attempt = FactoryGirl.create(:unsuccessful_gringotts_attempt)
+      end
+      
+      @gringotts.should_lock?.should be_true
+    end
+        
+    it "should not lock if not yet confirmed" do
+      (Gringotts::AttemptValidator::MAX_UNSUCCESSFUL_ATTEMPTS - 1).times do
+        @attempt = FactoryGirl.create(:unsuccessful_gringotts_attempt)
+      end
+      
+      @gringotts.should_lock?.should be_false      
+    end
+        
   end
 end

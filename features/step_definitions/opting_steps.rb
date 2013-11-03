@@ -11,8 +11,7 @@ Then(/^I see a link to edit my gringotts settings$/) do
 end  
 
 When(/^I go to the gringotts settings page$/) do                                                                                                                                                  
-  click_link "Edit account"
-  click_link "Add your mobile phone to this account now"  
+  visit gringotts_engine.verification_path  
 end                                                                                                                                                                  
                                                                                                                                                                                                   
 Then(/^I see an information message$/) do                                                                                                                                                         

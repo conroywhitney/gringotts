@@ -9,7 +9,6 @@ module Gringotts
     def index
       @code = @gringotts.new_code
       @show_nevermind = !@gringotts.opted_in?
-      @errors = []
     end
     
     def attempt
@@ -31,15 +30,18 @@ module Gringotts
         # remember that they are verified
         @gringotts.verify!(session)
         
+        # if was locked before, unlock!
+        @gringotts.unlock! if @gringotts.locked?
+        
         # kick them to a success page for now
         # TODO: in future, redirect them to wherever they were going before...
         redirect_to gringotts_engine.success_path
-      elsif @gringotts.reload.locked?
+      elsif @gringotts.should_lock?
+        @gringotts.lock!
         redirect_to gringotts_engine.locked_path
       else
-        @code = @gringotts.recent_code
-        @show_nevermind = !@gringotts.opted_in?
-        render :index
+        flash[:error] = "Code was incorrect. Please try again."
+        return redirect_to gringotts_engine.verification_path
       end
     end
     

@@ -29,6 +29,19 @@ Given(/^I am confirmed$/) do
   submit_code gringotts.recent_code
 end
 
+Given (/^I am locked out$/) do
+  create_user
+  sign_in
+  opt_in
+  submit_code gringotts.recent_code
+  sign_out  
+  sign_in
+  Gringotts::AttemptValidator::MAX_UNSUCCESSFUL_ATTEMPTS.times do
+    submit_code "F4!L"
+  end
+  gringotts.reload.locked_at.should_not be_nil
+end
+
 Given(/^I am on the verification page$/) do
   page.current_path.should == gringotts_engine.verification_path
 end
@@ -83,6 +96,14 @@ end
 
 Then(/^my valid attempt was logged$/) do
   gringotts.attempts.last.successful?.should be_true
+end
+
+Then (/^my account is locked$/) do
+  gringotts.locked_at.should_not be_nil
+end
+
+Then (/^my account is not locked$/) do
+  gringotts.locked_at.should be_nil
 end
 
 When(/^I enter the correct code after waiting too long$/) do

@@ -8,7 +8,7 @@ Feature: Unsuccessful Attempts
         And I am opted-in
         And I am on the verification page
       When I enter a blank code
-      Then I receive a message "Code received can't be blank"
+      Then I receive a message "Code was incorrect. Please try again."
         And my blank attempt was not logged
       
     Scenario: User submits an invalid code
@@ -16,7 +16,7 @@ Feature: Unsuccessful Attempts
         And I am opted-in
         And I am on the verification page
       When I enter the code "asdf"
-      Then I receive a message "Invalid code"
+      Then I receive a message "Code was incorrect. Please try again."
         And my invalid attempt was logged
         And (Temporarily) I see the expected verification code
         
@@ -25,7 +25,7 @@ Feature: Unsuccessful Attempts
         And I am opted-in
         And I am on the verification page
       When I enter the correct code after waiting too long
-      Then I receive a message "Code expired"
+      Then I receive a message "Code was incorrect. Please try again."
         And my invalid attempt was logged
         And (Temporarily) I see the expected verification code
 
@@ -34,6 +34,6 @@ Feature: Unsuccessful Attempts
         And I am opted-in
         And I am on the verification page
       When I enter the correct code but it has already been confirmed
-      Then I receive a message "Code already used"
+      Then I receive a message "Code was incorrect. Please try again."
         And my invalid attempt was logged
         And (Temporarily) I see the expected verification code
