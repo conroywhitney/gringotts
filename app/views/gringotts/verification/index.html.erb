@@ -25,3 +25,7 @@ Enter code:
   <%= f.submit "Verify" %>
 
 <% end %>
+
+<%- if @show_nevermind -%>
+  <%= link_to "Nevermind, I'll do this later", main_app.root_url %>
+<%- end -%>

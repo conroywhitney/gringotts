@@ -41,9 +41,9 @@ module Gringotts
         if @gringotts.show_prompt?
           # 1) owner is a first-timer, and not know about this 2FA -- show prompt
           gringotts_redirect_to gringotts_engine.prompt_path
-        elsif @gringotts.opted_in?
+        elsif @gringotts.confirmed?
           # 2) owner has opted-in -- require verification
-          if @gringotts.verified?
+          if @gringotts.verified?(session)
             # already verified -- do not do anything
           else
             # make them verify

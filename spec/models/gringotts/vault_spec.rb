@@ -88,5 +88,22 @@ module Gringotts
       @gringotts.confirmed_at.should == dt
     end
         
+    it "should modify session to include expires_at" do
+      session = {}
+      @gringotts.verify!(session)
+      session[Gringotts::Vault::SESSION_FRESHNESS_KEY].should_not be_nil
+    end
+    
+    it "should be verified for a fresh date" do
+      session = {}
+      @gringotts.verify!(session)
+      @gringotts.verified?(session).should be_true
+    end
+    
+    it "should not be verified for an old date" do
+      session = { Gringotts::Vault::SESSION_FRESHNESS_KEY => (Time.now - 1.seconds) }
+      @gringotts.verified?(session).should be_false
+    end
+        
   end
 end

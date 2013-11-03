@@ -8,6 +8,8 @@ module Gringotts
     has_one    :settings
     has_many   :attempts
     has_many   :codes
+    
+    SESSION_FRESHNESS_KEY = :gringotts_expires_at
 
     def self.for_owner(obj)
       return Gringotts::Vault.where(owner_id: obj.id, owner_type: obj.class.name).first_or_create
@@ -37,12 +39,12 @@ module Gringotts
       self.update_attributes!(confirmed_at: Time.now) unless self.confirmed?
     end
     
-    def verified?
-      return false
+    def verified?(session)
+      return session[SESSION_FRESHNESS_KEY].present? && session[SESSION_FRESHNESS_KEY] >= Time.now
     end
     
-    def verify!
-      # save something in the session... or something...
+    def verify!(session)
+      session[SESSION_FRESHNESS_KEY] = (Time.now + 30.days)
     end
       
     def recent_code

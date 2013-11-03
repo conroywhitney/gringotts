@@ -6,6 +6,11 @@ def opt_in
   click_button "Save and Continue"
 end
 
+def submit_code(code)
+  fill_in "attempt_code_received", with: code
+  click_button "Verify"
+end
+
 Given(/^I am opted\-in$/) do
   create_user
   sign_in
@@ -17,6 +22,13 @@ Given(/^I am not opted\-in$/) do
   gringotts.settings.should be_nil
 end
 
+Given(/^I am confirmed$/) do
+  create_user
+  sign_in
+  opt_in
+  submit_code gringotts.recent_code
+end
+
 Given(/^I am on the verification page$/) do
   page.current_path.should == gringotts_engine.verification_path
 end
@@ -26,19 +38,15 @@ Given(/^I go to the verification page$/) do
 end
 
 When(/^I enter a blank code$/) do
-  fill_in "attempt_code_received", with: ""
-end
-
-When(/^I press submit$/) do
-  click_button "Verify"
+  submit_code ""
 end
 
 When(/^I enter the code "(.*?)"$/) do |code|
-  fill_in "attempt_code_received", with: code
+  submit_code code
 end
 
 When(/^I enter the correct code$/) do
-  fill_in "attempt_code_received", with: gringotts.recent_code
+  submit_code gringotts.recent_code
 end
 
 Then(/^I am redirected to the settings page$/) do
@@ -58,8 +66,7 @@ Then(/^I see the verification form$/) do
 end
 
 Then(/^I do not see the verification form$/) do
-  page.should have_no_selector(:xpath, "//form and @name='#{name}']")
-  find("#new_attempt").should be_nil
+  page.should have_no_selector(:xpath, "//form[@id='new_attempt']")
 end
 
 Then(/^\(Temporarily\) I see the expected verification code$/) do
@@ -81,13 +88,13 @@ end
 When(/^I enter the correct code after waiting too long$/) do
   code = gringotts.recent_code_object
   code.update_attributes(expires_at: (Time.now - Gringotts::AttemptValidator::CODE_FRESHNESS_LIMIT))
-  fill_in "attempt_code_received", with: code.value
+  submit_code code.value
 end
 
 When(/^I enter the correct code but it has already been confirmed$/) do
   code = gringotts.recent_code_object
   Gringotts::Attempt.create!(vault_id: gringotts.id, code_received: code.value, successful: true)
-  fill_in "attempt_code_received", with: code.value
+  submit_code code.value
 end
 
 Given(/^I enter too many invalid codes$/) do
@@ -95,8 +102,3 @@ Given(/^I enter too many invalid codes$/) do
     submit_code "F4!L"
   end
 end 
-
-def submit_code(code)
-  fill_in "attempt_code_received", with: code
-  click_button "Verify"
-end

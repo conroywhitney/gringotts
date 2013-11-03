@@ -8,6 +8,7 @@ module Gringotts
     
     def index
       @code = @gringotts.new_code
+      @show_nevermind = !@gringotts.opted_in?
       @errors = []
     end
     
@@ -27,11 +28,17 @@ module Gringotts
         # therefore confirm the validity only if unconfirmed. ya dig?
         @gringotts.confirm! unless @gringotts.confirmed?
         
+        # remember that they are verified
+        @gringotts.verify!(session)
+        
+        # kick them to a success page for now
+        # TODO: in future, redirect them to wherever they were going before...
         redirect_to gringotts_engine.success_path
       elsif @gringotts.reload.locked?
         redirect_to gringotts_engine.locked_path
       else
         @code = @gringotts.recent_code
+        @show_nevermind = !@gringotts.opted_in?
         render :index
       end
     end

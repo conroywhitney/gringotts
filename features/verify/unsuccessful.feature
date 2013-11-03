@@ -8,7 +8,6 @@ Feature: Unsuccessful Attempts
         And I am opted-in
         And I am on the verification page
       When I enter a blank code
-        And I press submit
       Then I receive a message "Code received can't be blank"
         And my blank attempt was not logged
       
@@ -17,7 +16,6 @@ Feature: Unsuccessful Attempts
         And I am opted-in
         And I am on the verification page
       When I enter the code "asdf"
-        And I press submit
       Then I receive a message "Invalid code"
         And my invalid attempt was logged
         And (Temporarily) I see the expected verification code
@@ -27,7 +25,6 @@ Feature: Unsuccessful Attempts
         And I am opted-in
         And I am on the verification page
       When I enter the correct code after waiting too long
-        And I press submit
       Then I receive a message "Code expired"
         And my invalid attempt was logged
         And (Temporarily) I see the expected verification code
@@ -37,7 +34,6 @@ Feature: Unsuccessful Attempts
         And I am opted-in
         And I am on the verification page
       When I enter the correct code but it has already been confirmed
-        And I press submit
       Then I receive a message "Code already used"
         And my invalid attempt was logged
         And (Temporarily) I see the expected verification code
