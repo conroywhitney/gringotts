@@ -39,12 +39,18 @@ module Gringotts
         # what we do now is based on what the user has done before in the past...
         
         if @gringotts.show_prompt?
-          # 1) owner could be a first-timer, and not know about this 2FA -- show prompt
+          # 1) owner is a first-timer, and not know about this 2FA -- show prompt
           gringotts_redirect_to gringotts_engine.prompt_path
         elsif @gringotts.opted_in?
-          # 2) owner could have opted-in -- require verification
+          # 2) owner has opted-in -- require verification
+          if @gringotts.verified?
+            # already verified -- do not do anything
+          else
+            # make them verify
+            gringotts_redirect_to gringotts_engine.verification_path
+          end
         else
-          # 3) owner could have declined 2FA -- not do anything
+          # 3) owner has declined 2FA -- not do anything
         end
       else
         # if owner not currently defined, assume is an anonymous situation

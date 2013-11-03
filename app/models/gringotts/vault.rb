@@ -12,19 +12,39 @@ module Gringotts
     def self.for_owner(obj)
       return Gringotts::Vault.where(owner_id: obj.id, owner_type: obj.class.name).first_or_create
     end
-    
+
+    def signed_up?
+      return self.settings.present? && self.settings.phone_number.present?
+    end
+      
     def opted_in?
-      return self.settings.present?
+      return self.signed_up? && self.confirmed?
     end
       
     def show_prompt?
       return self.prompt_seen_at.nil?
     end
-    
+          
     def prompt_shown!
       self.update_attributes!(prompt_seen_at: Time.now)
     end
+      
+    def confirmed?
+      self.confirmed_at.present?
+    end
     
+    def confirm!
+      self.update_attributes!(confirmed_at: Time.now) unless self.confirmed?
+    end
+    
+    def verified?
+      return false
+    end
+    
+    def verify!
+      # save something in the session... or something...
+    end
+      
     def recent_code
       return self.recent_code_object.value
     end

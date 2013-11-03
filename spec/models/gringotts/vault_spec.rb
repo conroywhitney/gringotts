@@ -9,13 +9,13 @@ module Gringotts
       @settings      = FactoryGirl.create(:good_us_phone_number_settings)
     end
 
-    it "should be possible to 'find' by a given user object" do
+    it "should be possible to 'find' by a given owner object" do
       gringotts = Gringotts::Vault.for_owner(@main_app_user)
       gringotts.owner.id.should == @main_app_user.id
       gringotts.owner.class.name.should == @main_app_user.class.name
     end
     
-    it "should require a user_id" do
+    it "should require a owner_id" do
       @gringotts = FactoryGirl.build(:bad_missing_owner_gringotts_vault)
       @gringotts.valid?.should be_false
     end
@@ -28,14 +28,12 @@ module Gringotts
       @gringotts.settings.should_not be_nil
     end
     
-    it "should be considered 'opted-in' if have settings" do
-      @gringotts.settings.should_not be_nil
+    it "should be considered 'opted-in' if confirmed" do
+      @gringotts.confirm!
       @gringotts.opted_in?.should be_true
     end
     
-    it "should not be considered 'opted-in' if not have settings" do
-      @settings.destroy
-      @gringotts.settings.should be_nil
+    it "should not be considered 'opted-in' if not confirmed" do
       @gringotts.opted_in?.should be_false
     end
     
@@ -73,6 +71,22 @@ module Gringotts
       @gringotts.unlock!
       @gringotts.reload.locked?.should be_false
     end
+        
+    it "should by default have confirmed_at blank" do
+      @gringotts.confirmed_at.should be_nil
+    end
     
+    it "should set confirmed at correctly when confirming" do
+      @gringotts.confirm!
+      @gringotts.confirmed_at.should_not be_nil
+    end
+    
+    it "should not overwrite confirmed_at when re-confirming" do
+      @gringotts.confirm!
+      dt = @gringotts.confirmed_at
+      @gringotts.confirm!
+      @gringotts.confirmed_at.should == dt
+    end
+        
   end
 end

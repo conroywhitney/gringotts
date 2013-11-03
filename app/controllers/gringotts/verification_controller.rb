@@ -23,6 +23,10 @@ module Gringotts
       @attempt.save
       
       if @attempt.successful?
+        # this might be the first time they are validating their phone number
+        # therefore confirm the validity only if unconfirmed. ya dig?
+        @gringotts.confirm! unless @gringotts.confirmed?
+        
         redirect_to gringotts_engine.success_path
       elsif @gringotts.reload.locked?
         redirect_to gringotts_engine.locked_path
@@ -41,7 +45,7 @@ module Gringotts
 private
     
     def require_gringotts
-      redirect_to gringotts_engine.settings_path unless @gringotts.opted_in?
+      redirect_to gringotts_engine.settings_path unless @gringotts.signed_up?
     end
     
     def ensure_not_locked
