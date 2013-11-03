@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131103155001) do
+ActiveRecord::Schema.define(version: 20131103185014) do
 
   create_table "gringotts_attempts", force: true do |t|
     t.integer  "vault_id",                      null: false
@@ -32,6 +32,17 @@ ActiveRecord::Schema.define(version: 20131103155001) do
   end
 
   add_index "gringotts_codes", ["vault_id"], name: "index_gringotts_codes_on_vault_id"
+
+  create_table "gringotts_deliveries", force: true do |t|
+    t.integer  "vault_id",       null: false
+    t.integer  "code_id",        null: false
+    t.string   "strategy_class", null: false
+    t.string   "phone_number",   null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "gringotts_deliveries", ["vault_id"], name: "index_gringotts_deliveries_on_vault_id"
 
   create_table "gringotts_settings", force: true do |t|
     t.integer  "vault_id",                     null: false

@@ -8,6 +8,7 @@ module Gringotts
     has_one    :settings
     has_many   :attempts
     has_many   :codes
+    has_many   :deliveries
     
     SESSION_FRESHNESS_KEY = :gringotts_expires_at
 
@@ -59,7 +60,17 @@ module Gringotts
       self.codes << Gringotts::Code.create({vault: self})
       return self.recent_code
     end
-    
+
+#    def deliver_new_code!
+#      code = self.new_code
+#      Delivery.new(vault: self).deliver!
+#      return code.value
+#    end
+  
+    def phone_number
+      return self.settings.phone_number
+    end
+      
     def should_lock?
       return false unless self.confirmed?
       self.attempts.unsuccessful.since(Time.now - Gringotts::AttemptValidator::LOCKOUT_PERIOD).count  >= Gringotts::AttemptValidator::MAX_UNSUCCESSFUL_ATTEMPTS

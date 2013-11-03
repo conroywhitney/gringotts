@@ -2,6 +2,8 @@ module Gringotts
   class Code < ActiveRecord::Base
     
     belongs_to :vault
+    has_many   :deliveries
+    
     validates  :vault_id, presence: true, uniqueness: false
     validates  :value,    presence: true
     

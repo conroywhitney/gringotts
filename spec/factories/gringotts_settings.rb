@@ -3,7 +3,7 @@
 FactoryGirl.define do
 
   factory :base_gringotts_settings, aliases: [:default], class: Gringotts::Settings do
-    vault_id 1
+    vault_id { FactoryGirl.create(:good_gringotts_vault).id }
     
     factory :bad_phone_number_missing_settings do
       phone_number nil

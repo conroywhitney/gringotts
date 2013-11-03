@@ -14,6 +14,10 @@ FactoryGirl.define do
       locked_at nil
     end
     
+    factory :good_gringotts_vault_with_settings do
+      FactoryGirl.create(:good_us_phone_number_settings)
+    end
+    
     factory :bad_missing_owner_gringotts_vault do
       owner_id nil
       owner_type nil
