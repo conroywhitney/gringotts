@@ -42,7 +42,7 @@ module Gringotts
       
       before(:each) do
         @used_attempt = FactoryGirl.create(:used_gringotts_attempt)
-        @used_code    = @used_attempt.vault.recent_code_object
+        @used_code    = @used_attempt.vault.recent_code
       end
       
       it "used? should error for codes already used" do
@@ -72,7 +72,7 @@ module Gringotts
       
       before(:each) do
         @good_attempt = FactoryGirl.create(:good_gringotts_attempt)
-        @good_code    = @good_attempt.vault.recent_code_object
+        @good_code    = @good_attempt.vault.recent_code
         # since this is just a test, make sure they're matching, mkday ?
         @good_attempt.code_received = @good_code.value
       end

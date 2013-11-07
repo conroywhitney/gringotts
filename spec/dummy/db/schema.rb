@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131103185014) do
+ActiveRecord::Schema.define(version: 20131107005202) do
 
   create_table "gringotts_attempts", force: true do |t|
     t.integer  "vault_id",                      null: false
@@ -40,6 +40,8 @@ ActiveRecord::Schema.define(version: 20131103185014) do
     t.string   "phone_number",   null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "delivered_at"
+    t.string   "error_message"
   end
 
   add_index "gringotts_deliveries", ["vault_id"], name: "index_gringotts_deliveries_on_vault_id"

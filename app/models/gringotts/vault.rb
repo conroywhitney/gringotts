@@ -47,12 +47,8 @@ module Gringotts
     def verify!(session)
       session[SESSION_FRESHNESS_KEY] = (Time.now + 30.days)
     end
-      
-    def recent_code
-      return self.recent_code_object.value
-    end
     
-    def recent_code_object
+    def recent_code
       return self.codes.last
     end
     
@@ -61,11 +57,11 @@ module Gringotts
       return self.recent_code
     end
 
-#    def deliver_new_code!
-#      code = self.new_code
-#      Delivery.new(vault: self).deliver!
-#      return code.value
-#    end
+    def deliver_new_code!
+      code = self.new_code
+      Delivery.new(vault: self).deliver!
+      return code.value
+    end
   
     def phone_number
       return self.settings.phone_number

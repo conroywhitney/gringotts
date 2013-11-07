@@ -7,7 +7,7 @@ module Gringotts
     before_filter :initialize_attempt, :except => [:success]
     
     def index
-      @code = @gringotts.new_code
+      @code = @gringotts.new_code.value
       @show_nevermind = !@gringotts.opted_in?
     end
     

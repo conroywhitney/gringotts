@@ -21,3 +21,9 @@ Feature: Unsuccessful Setup
         And I click Continue
       Then I receive a message "Phone number is an invalid number"
         And no settings were created
+      
+  @wip
+  Scenario: New user gives already-used phone number and receives error
+  
+  @wip
+  Scenario: New user gives variation on already-used phone number and receives error

@@ -12,10 +12,13 @@ FactoryGirl.define do
     
     factory :good_gringotts_vault do
       locked_at nil
-    end
-    
-    factory :good_gringotts_vault_with_settings do
-      FactoryGirl.create(:good_us_phone_number_settings)
+      
+      factory :good_gringotts_vault_with_phone_number do
+        # thanks to: http://stackoverflow.com/questions/18292965/factorygirl-association-parent-cant-be-blank
+        after(:create) do |vault|
+          FactoryGirl.create(:good_us_phone_number_settings, vault: vault)
+        end
+      end
     end
     
     factory :bad_missing_owner_gringotts_vault do

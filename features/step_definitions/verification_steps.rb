@@ -26,14 +26,14 @@ Given(/^I am confirmed$/) do
   create_user
   sign_in
   opt_in
-  submit_code gringotts.recent_code
+  submit_code gringotts.recent_code.value
 end
 
 Given (/^I am locked out$/) do
   create_user
   sign_in
   opt_in
-  submit_code gringotts.recent_code
+  submit_code gringotts.recent_code.value
   sign_out  
   sign_in
   Gringotts::AttemptValidator::MAX_UNSUCCESSFUL_ATTEMPTS.times do
@@ -59,7 +59,7 @@ When(/^I enter the code "(.*?)"$/) do |code|
 end
 
 When(/^I enter the correct code$/) do
-  submit_code gringotts.recent_code
+  submit_code gringotts.recent_code.value
 end
 
 Then(/^I am redirected to the settings page$/) do
@@ -83,7 +83,7 @@ Then(/^I do not see the verification form$/) do
 end
 
 Then(/^\(Temporarily\) I see the expected verification code$/) do
-  page.should have_content "Expected Code [#{gringotts.recent_code}]"
+  page.should have_content "Expected Code [#{gringotts.recent_code.value}]"
 end
 
 Then(/^my blank attempt was not logged$/) do
@@ -107,13 +107,13 @@ Then (/^my account is not locked$/) do
 end
 
 When(/^I enter the correct code after waiting too long$/) do
-  code = gringotts.recent_code_object
+  code = gringotts.recent_code
   code.update_attributes(expires_at: (Time.now - Gringotts::AttemptValidator::CODE_FRESHNESS_LIMIT))
   submit_code code.value
 end
 
 When(/^I enter the correct code but it has already been confirmed$/) do
-  code = gringotts.recent_code_object
+  code = gringotts.recent_code
   Gringotts::Attempt.create!(vault_id: gringotts.id, code_received: code.value, successful: true)
   submit_code code.value
 end

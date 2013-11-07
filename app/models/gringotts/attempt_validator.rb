@@ -6,7 +6,7 @@ module Gringotts
     MAX_UNSUCCESSFUL_ATTEMPTS = 3
    
     def self.valid?(attempt)
-      return AttemptValidator.new(attempt, attempt.vault.recent_code_object).successful?
+      return AttemptValidator.new(attempt, attempt.vault.recent_code).successful?
     end
     
     def initialize(attempt, code)
