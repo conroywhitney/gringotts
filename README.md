@@ -120,3 +120,8 @@ Special Thanks To
 * [Nitrous.io](https://www.nitrous.io/join/012YtP048go) for the awesome web-based IDE that allows me to work from internet cafes. (disclaimer: referral link)
 
 * [Supertramp Hostel](http://www.supertramphostel.com/en) and Machu Picchu, Peru for 8 months of good times, food, accomodation, internet, and motivation to get the hell out of here and get on with my life. Thanks, I really needed this. =)
+
+
+Disclaimer
+-----
+Gringotts 2-Factor Authentication is not associated with Warner Bros. Entertainment Inc., J.K. Rowling, or any of the "Harry Potter" books or films. HARRY POTTER is a registered trade-mark of Warner Bros. Entertainment Inc.
