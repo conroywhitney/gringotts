@@ -13,15 +13,14 @@ module Gringotts::DeliveryStrategies
       end
     end
     
-    def deliver!
-      # don't send in test mode ... cuz ... that's a lot of SMSsss
-      unless Rails.env.test?
-        Twilio::SMS.create(
-          to:   @phone_number,
-          from: '+1-406-282-0474',
-          body: "Your validation code is [#{@code}]"
-        )
-      end
+    def deliver!     
+      @to   = @phone_number
+      @from = '+1-406-282-0474'
+      @body = "Your validation code is [#{@code}]"
+      
+      # finally, the moment we've all been waiting for!
+      # oh, but don't send in test mode ... cuz ... that's a lot of useless SMSsss
+      Twilio::SMS.create(to: @to, from: @from, body: @body) unless Rails.env.test?
     end
         
   end
