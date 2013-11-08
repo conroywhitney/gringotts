@@ -11,8 +11,10 @@ module Gringotts
     validates :strategy_class, presence: true, unique: false
     validates :phone_number,   presence: true, unique: false
 
-    before_validation :initialize_strategy
     before_validation :copy_delivery_details_from_vault
+    # note: I don't usually like dependencies like this, but...
+    # we can't initialize strategy until we have our defaults from above...
+    before_validation :initialize_strategy
         
     def copy_delivery_details_from_vault
       valid = true
@@ -34,12 +36,23 @@ module Gringotts
     def initialize_strategy
       # TODO: Make this an actual strategy that you can sub in and out based on the config file
       self.strategy_class ||= "Gringotts::DeliveryStrategies::TwilioSMSStrategy"
-      
+
+      # sigh -- another thing I'm not proud of...
+      # this begin-rescue-end hides errors sometimes
+      # but it's also necessary to validate invalid strategy initializations without bombing
+      # just note: if you need to dig further into strategy-related errors
+      # you might begin by commenting out exception handling here
       begin
-        @strategy = self.strategy_class.constantize.new(delivery: self.vault)
+        @strategy = self.strategy_class.constantize.new(delivery: self)
         valid = true
       rescue Exception => e
         self.error_message = e.message
+        self.errors[:base] << "Unable to figure out how to deliver validation code"
+        # rut roh
+        # tests seem to have acquired a measure of indeterminism somehow
+        # which is fun
+        # of course
+        # por que no ?
         valid = false
       end
       
@@ -52,10 +65,10 @@ module Gringotts
     
     def deliver!      
       begin        
-        # don't execute the strategy in test environment
-        # assuming in dev environment you're smart enough to use your own phone #
-        # which, might not be the case, so maybe this should be "if Rails.env.production?"
-        @strategy.deliver!# unless Rails.env.test?
+        # yes, this means that we will deliver texts in Rails.env.[dev|staging|production] modes
+        # for that reason, set the phone_number_override setting in config/gringotts.yml
+        # that way, you won't be sending codes to actual people!
+        @strategy.deliver!
         
         # only update delivered_at (success indicator) if we didn't bomb
         self.delivered_at = Time.now

@@ -59,8 +59,12 @@ module Gringotts
 
     def deliver_new_code!
       code = self.new_code
-      Delivery.new(vault: self).deliver!
-      return code.value
+      # I'm not proud of this but...
+      # You have to 'create' here, not 'new'
+      # Because delivery uses before_validation callbacks, instead of after_initialize
+      # That's a whole 'nother can of worms...
+      # ...just FYI
+      return Delivery.create(vault: self).deliver!
     end
   
     def phone_number

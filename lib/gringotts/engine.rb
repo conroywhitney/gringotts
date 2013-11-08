@@ -21,15 +21,6 @@ module Gringotts
          include GringottsActionControllerExtension  
       end
     end
-
-    # Adding RSpec test configuration (don't create fixtures, use factory_girl, etc)
-    # thanks to: http://viget.com/extend/rails-engine-testing-with-rspec-capybara-and-factorygirl    
-    config.generators do |g|
-      g.test_framework      :rspec,        :fixture => false,   :view_specs => false  
-      g.fixture_replacement :factory_girl, :dir => 'spec/factories'
-      g.assets false
-      g.helper false
-    end
     
     # load config/gringotts.yml file from main rails app's config path
     # give helpful warning messages if missing or invalid (e.g., after first installing gem)
@@ -45,6 +36,17 @@ module Gringotts
       else
         raise Exception.new("You must create the file [#{config_path}]. Please see documentation for more details: https://github.com/conroywhitney/gringotts")
       end
+    end
+    
+    # Adding RSpec test configuration (don't create fixtures, use factory_girl, etc)
+    # thanks to: http://viget.com/extend/rails-engine-testing-with-rspec-capybara-and-factorygirl    
+    # note: this may or may not need to be after :load_config_yml in order for factories to have config access
+    # this may also be related to an issue that cropped up regarding indetermanistic test passings
+    config.generators do |g|
+      g.test_framework      :rspec,        :fixture => false,   :view_specs => false  
+      g.fixture_replacement :factory_girl, :dir => 'spec/factories'
+      g.assets false
+      g.helper false
     end
     
   end
