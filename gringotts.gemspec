@@ -20,6 +20,9 @@ Gem::Specification.new do |s|
   # Phone number validator gem
   s.add_dependency "phony_rails"
 
+  # SMS-sending through twilio
+  s.add_dependency "twilio-rb"
+  
   s.add_development_dependency "sqlite3"
   
   # Adding spec per viget tutorial
