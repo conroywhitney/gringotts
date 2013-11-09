@@ -50,6 +50,10 @@ module Gringotts
     it "the last generated code should be the recent code" do
       @gringotts.new_code.should == @gringotts.recent_code
     end
+        
+    it "should generate a code if there is no recent code" do
+      @gringotts.recent_code.should_not be_nil
+    end
 
     it "should be lockable" do
       @gringotts.locked?.should be_false

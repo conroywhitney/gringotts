@@ -49,7 +49,9 @@ module Gringotts
     end
     
     def recent_code
-      return self.codes.last
+      # generate a new code if there is no previous code!
+      # aka, should never have a null code
+      return self.codes.last || self.new_code
     end
     
     def new_code
