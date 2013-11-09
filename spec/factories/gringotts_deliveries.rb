@@ -6,7 +6,7 @@ FactoryGirl.define do
     vault_id { FactoryGirl.create(:good_gringotts_vault_with_phone_number).id }
     
     factory :good_gringotts_delivery do   
-      
+      strategy_class "Gringotts::DeliveryStrategies::TestStubStrategy"
     end
     
     factory :error_raising_gringotts_delivery do
