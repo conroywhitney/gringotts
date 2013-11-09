@@ -10,15 +10,16 @@ module Gringotts
     # working on figuring out why ...
     initializer :load_config_yml do |app|
       config_path = app.root.join('config', "gringotts.yml")
-      if File.exists?(config_path)
-        if (raw_yaml = File.read(config_path))
-          Gringotts::Config.load(raw_yaml)
-        else
-          raise "Could not load config file [#{config_path}]. File is probably either not valid YAML or is empty."
-        end
-      else
-        raise Exception.new("You must create the file [#{config_path}]. Please see documentation for more details: https://github.com/conroywhitney/gringotts")
+
+      unless File.exists?(config_path)
+        raise "You must create the file [#{config_path}]. Please see documentation for more details: https://github.com/conroywhitney/gringotts"
       end
+      
+      unless (raw_yaml = File.read(config_path))
+        raise "Could not load config file [#{config_path}]. File is probably either not valid YAML or is empty."
+      end
+      
+      Gringotts::Config.load(raw_yaml)
     end
     
     # add engine's migrations into application's migration path
