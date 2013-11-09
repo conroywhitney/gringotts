@@ -49,7 +49,7 @@ module Gringotts
       begin
         @strategy = strategy_class.constantize.new(delivery: self)
       rescue Exception => e
-        self.errors[:delivery_strategy] = "Requires a valid Delivery Strategy"
+        self.errors[:delivery_strategy] = "Requires a valid Delivery Strategy [#{e.message}]"
         valid = false
       end
       
@@ -67,7 +67,7 @@ module Gringotts
         # set the phone_number_override setting in config/gringotts.yml
         # that way, you won't be sending codes to actual people!
         # note: spec tests use a stub class with an empty deliver method
-        @strategy.deliver!
+        @strategy.deliver! unless Gringotts::Config.delivery['enabled'] == false
         
         # only update delivered_at (success indicator) if we didn't bomb
         self.delivered_at = Time.now

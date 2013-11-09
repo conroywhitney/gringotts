@@ -1,19 +1,25 @@
 development: &non_production_settings
   enabled: true
-  phone_number_override: "1-406-555-1212"
+  delivery:
+    enabled: false
+    phone_number_override: "1-406-555-1212"
   twilio:
     account_sid: "account_sid"
     auth_token: "auth_token"
 
 test:
   enabled: true
-  phone_number_override: "1-406-555-1212"
+  delivery:
+    enabled: false
+    phone_number_override: "1-406-555-1212"
   twilio:
     account_sid: "account_sid"
     auth_token: "auth_token"
 
 production:
   enabled: false
+  delivery:
+    enabled: true
   twilio:
     account_sid: "account_sid"
     auth_token: "auth_token"
