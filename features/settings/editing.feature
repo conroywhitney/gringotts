@@ -7,12 +7,7 @@ Feature: Editing Settings
     Given I am confirmed
     When I go to the main gringotts page
     Then I am redirected to the success page
-  
-  Scenario: Confirmed user sees link to turn off authentication
-    Given I am confirmed
-    When I go to the main gringotts page
-    Then I receive a message "Turn off"
-  
+
   Scenario: Confirmed user sees link to change phone number
     Given I am confirmed
     When I go to the main gringotts page
