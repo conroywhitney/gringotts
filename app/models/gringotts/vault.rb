@@ -2,7 +2,7 @@ module Gringotts
   class Vault < ActiveRecord::Base
 
     belongs_to :owner,      polymorphic: true
-    validates  :owner_id,   presence: true, uniqueness: true
+    validates  :owner_id,   presence: true, uniqueness: {scope: :owner_type}
     validates  :owner_type, presence: true
     
     has_one    :settings

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131107005202) do
+ActiveRecord::Schema.define(version: 20131110120149) do
 
   create_table "gringotts_attempts", force: true do |t|
     t.integer  "vault_id",                      null: false
@@ -64,7 +64,7 @@ ActiveRecord::Schema.define(version: 20131107005202) do
     t.datetime "confirmed_at"
   end
 
-  add_index "gringotts_vaults", ["owner_id"], name: "index_gringotts_vaults_on_owner_id", unique: true
+  add_index "gringotts_vaults", ["owner_id", "owner_type"], name: "index_gringotts_vaults_on_owner_id_and_owner_type", unique: true
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
