@@ -67,7 +67,9 @@ module Gringotts
         # set the phone_number_override setting in config/gringotts.yml
         # that way, you won't be sending codes to actual people!
         # note: spec tests use a stub class with an empty deliver method
-        @strategy.deliver! unless Gringotts::Config.delivery['enabled'] == false
+        # other note: this line contributes to indetermanistic tests
+        # sometimes the Gringotts::Config is loaded before this line is called, sometimes not
+        @strategy.deliver! unless (Gringotts::Config.delivery && Gringotts::Config.delivery['enabled'] == false)
         
         # only update delivered_at (success indicator) if we didn't bomb
         self.delivered_at = Time.now

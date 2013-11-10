@@ -10,7 +10,7 @@ development: &non_production_settings
 test:
   enabled: true
   delivery:
-    enabled: false
+    enabled: true
     phone_number_override: "1-406-555-1212"
   twilio:
     account_sid: "account_sid"
