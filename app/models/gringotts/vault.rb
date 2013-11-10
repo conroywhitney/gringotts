@@ -70,7 +70,7 @@ module Gringotts
     end
   
     def phone_number
-      return self.settings.phone_number
+      return self.settings.present? ? self.settings.phone_number : nil
     end
       
     def should_lock?

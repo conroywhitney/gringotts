@@ -62,8 +62,8 @@ When(/^I enter the correct code$/) do
   submit_code gringotts.recent_code.value
 end
 
-Then(/^I am redirected to the settings page$/) do
-  page.current_path.should == gringotts_engine.settings_path
+Then(/^I am redirected to the setup page$/) do
+  page.current_path.should == gringotts_engine.setup_path
 end
 
 Then(/^I am redirected to the success page$/) do

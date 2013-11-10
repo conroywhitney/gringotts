@@ -7,7 +7,7 @@ Feature: Successful
       Given I am logged in
         But I am not opted-in
       When I go to the verification page
-      Then I am redirected to the settings page
+      Then I am redirected to the setup page
     
     Scenario: User sees verification form
       Given I am logged in

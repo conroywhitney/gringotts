@@ -1,5 +1,5 @@
-Given(/^I have gringotts settings$/) do                                                                                                                                                               
-  pending # express the regexp above with the code you wish you had                                                                                                                               
+Given(/^I go to the main gringotts page$/) do                                                                                                                                                               
+  visit gringotts_engine.root_url  
 end                                                                                                                                                                                               
                                                                                                                                                                                                   
 Given(/^I do not have any gringotts settings$/) do

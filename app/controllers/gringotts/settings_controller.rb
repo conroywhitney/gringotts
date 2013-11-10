@@ -3,9 +3,19 @@ require_dependency "gringotts/application_controller"
 module Gringotts
   class SettingsController < ApplicationController
     before_filter :load_gringotts_settings
-       
+    
     def index
-      redirect_to gringotts_engine.success_path if @gringotts.confirmed?
+      if @gringotts.confirmed? && @gringotts.verified?(session)
+        redirect_to gringotts_engine.success_path
+      elsif @gringotts.phone_number.present?
+        redirect_to gringotts_engine.verify_path
+      else
+        redirect_to gringotts_engine.setup_path
+      end
+      return true
+    end
+    
+    def setup
     end
     
     def prompt
@@ -28,7 +38,7 @@ module Gringotts
       if @settings.save
         redirect_to verification_url
       else
-        render :index
+        render :setup
       end
     end
     

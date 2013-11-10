@@ -10,8 +10,8 @@ Then(/^I see a link to edit my gringotts settings$/) do
   page.should have_content "Add your mobile phone to this account now"
 end  
 
-When(/^I go to the gringotts settings page$/) do                                                                                                                                                  
-  visit gringotts_engine.settings_path  
+When(/^I go to the gringotts setup page$/) do                                                                                                                                                  
+  visit gringotts_engine.setup_path  
 end                                                                                                                                                                  
                                                                                                                                                                                                   
 Then(/^I see an information message$/) do                                                                                                                                                         

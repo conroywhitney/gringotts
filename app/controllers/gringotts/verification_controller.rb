@@ -64,7 +64,7 @@ module Gringotts
 private
     
     def require_gringotts
-      redirect_to gringotts_engine.settings_path unless @gringotts.signed_up?
+      redirect_to gringotts_engine.setup_path unless @gringotts.signed_up?
     end
     
     def ensure_not_locked
