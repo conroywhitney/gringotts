@@ -2,13 +2,16 @@ require_dependency "gringotts/application_controller"
 
 module Gringotts
   class SettingsController < ApplicationController
+    # our verification pages should not require verification! can anyone say infinite redirect?
+    skip_before_filter :gringotts_protego!, :only => [:index, :setup, :prompt]
+    
     before_filter :load_gringotts_settings
     
     def index
       if @gringotts.confirmed? && @gringotts.verified?(session)
         redirect_to gringotts_engine.success_path
       elsif @gringotts.phone_number.present?
-        redirect_to gringotts_engine.verify_path
+        redirect_to gringotts_engine.verification_path
       else
         redirect_to gringotts_engine.setup_path
       end
@@ -16,6 +19,11 @@ module Gringotts
     end
     
     def setup
+      if @gringotts.confirmed? && !@gringotts.verified?(session)
+        # since this is not covered by gringotts_protego! we need to manually check some things
+        # namely, that if a user is supposed to be verifying, they can't edit their settings...
+        redirect_to gringotts_engine.verification_path
+      end  
     end
     
     def prompt

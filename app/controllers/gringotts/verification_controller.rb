@@ -2,6 +2,10 @@ require_dependency "gringotts/application_controller"
 
 module Gringotts
   class VerificationController < ApplicationController
+    
+    # our verification pages should not require verification! can anyone say infinite redirect?
+    skip_before_filter :gringotts_protego!, :only => [:index, :attempt, :locked] 
+    
     before_filter :require_gringotts
     before_filter :ensure_not_locked,  :except => [:locked]
     before_filter :initialize_attempt, :except => [:success]

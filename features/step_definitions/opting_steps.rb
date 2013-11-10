@@ -30,7 +30,11 @@ end
 When(/^I click Cancel$/) do                                                                                                                                                                       
   click_link "Cancel Phone Verification setup"                                                                                                                               
 end                                                                                                                                                                                               
-                                                                                                                                                                                                  
+
+When(/^I click Nevermind$/) do
+  click_link "Nevermind, I'll do this later"
+end
+
 Then(/^I am redirected to the root url$/) do                                                                                                                                                      
   page.current_path.should == main_app.root_path
 end                                                                                                                                                                                               
