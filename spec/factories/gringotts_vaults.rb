@@ -34,6 +34,10 @@ FactoryGirl.define do
       locked_at { Time.now - Gringotts::AttemptValidator::LOCKOUT_PERIOD }
     end
     
+    factory :confirmed_gringotts_vault do
+      confirmed_at { Time.now }
+    end
+    
   end
 end
     

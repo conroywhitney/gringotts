@@ -16,7 +16,14 @@ Feature: Opted-in User Needs to Verify
     Then I should see the verify page
     When I navigate to a protected page
     Then I should see the verify page
-  
+
+  Scenario: Confirmed but unverified user cannot see edit page
+    Given I am confirmed
+      But I am not logged in
+    When I sign in with valid credentials
+      And I go to the gringotts setup page
+    Then I should see the verify page
+      
   Scenario: Opted-in user tries to navigate away to an un-protected page is redirected back
     Given I am confirmed
       But I am not logged in

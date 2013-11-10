@@ -26,5 +26,13 @@ module Gringotts
       @settings.valid?.should be_true
     end
     
+    it "confirmed_at should be blank after editing phone number" do
+      @settings = FactoryGirl.create(:confirmed_settings)
+      @settings.vault.confirmed_at.should_not be_nil
+      
+      @settings.update_attributes!(phone_number: "555-555-5555")
+      @settings.vault.confirmed_at.should be_nil
+    end
+    
   end
 end

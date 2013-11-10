@@ -2,6 +2,26 @@ module Gringotts
   class Engine < ::Rails::Engine
     isolate_namespace Gringotts
 
+    # load config/gringotts.yml file from main rails app's config path
+    # give helpful warning messages if missing or invalid (e.g., after first installing gem)
+    # thanks to: http://gregmoreno.wordpress.com/2012/05/29/create-your-own-rails-3-engine/
+    # note: currently this is the cause of indetermanistic test behaviour
+    # sometimes the config file is being loaded before test fixtures, othertimes not
+    # working on figuring out why ...
+    initializer :load_config_yml do |app|
+      config_path = app.root.join('config', "gringotts.yml")
+
+      unless File.exists?(config_path)
+        raise "You must create the file [#{config_path}]. Please see documentation for more details: https://github.com/conroywhitney/gringotts"
+      end
+      
+      unless (raw_yaml = File.read(config_path))
+        raise "Could not load config file [#{config_path}]. File is probably either not valid YAML or is empty."
+      end
+      
+      Gringotts::Config.load(raw_yaml)
+    end
+    
     # add engine's migrations into application's migration path
     # when we run rake db:migrate in main app, our engine's migrations will be run, too!
     # thanks to: http://pivotallabs.com/leave-your-migrations-in-your-rails-engines/
@@ -22,26 +42,8 @@ module Gringotts
       end
     end
     
-    # load config/gringotts.yml file from main rails app's config path
-    # give helpful warning messages if missing or invalid (e.g., after first installing gem)
-    # thanks to: http://gregmoreno.wordpress.com/2012/05/29/create-your-own-rails-3-engine/
-    initializer :load_config_yml do |app|
-      config_path = app.root.join('config', "gringotts.yml")
-      if File.exists?(config_path)
-        if (raw_yaml = File.read(config_path))
-          Gringotts::Config.load(raw_yaml)
-        else
-          raise "Could not load config file [#{config_path}]. File is probably either not valid YAML or is empty."
-        end
-      else
-        raise Exception.new("You must create the file [#{config_path}]. Please see documentation for more details: https://github.com/conroywhitney/gringotts")
-      end
-    end
-    
     # Adding RSpec test configuration (don't create fixtures, use factory_girl, etc)
     # thanks to: http://viget.com/extend/rails-engine-testing-with-rspec-capybara-and-factorygirl    
-    # note: this may or may not need to be after :load_config_yml in order for factories to have config access
-    # this may also be related to an issue that cropped up regarding indetermanistic test passings
     config.generators do |g|
       g.test_framework      :rspec,        :fixture => false,   :view_specs => false  
       g.fixture_replacement :factory_girl, :dir => 'spec/factories'

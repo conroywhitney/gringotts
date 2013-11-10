@@ -40,6 +40,10 @@ module Gringotts
       self.update_attributes!(confirmed_at: Time.now) unless self.confirmed?
     end
     
+    def unconfirm!
+      self.update_attributes!(confirmed_at: nil)
+    end
+      
     def verified?(session)
       return session[SESSION_FRESHNESS_KEY].present? && session[SESSION_FRESHNESS_KEY] >= Time.now
     end
@@ -70,7 +74,11 @@ module Gringotts
     end
   
     def phone_number
-      return self.settings.phone_number
+      return self.settings.present? ? self.settings.phone_number : nil
+    end
+      
+    def last_4
+      self.phone_number.present? ? self.phone_number[-4..-1] : nil
     end
       
     def should_lock?

@@ -7,7 +7,7 @@ Feature: Successful
       Given I am logged in
         But I am not opted-in
       When I go to the verification page
-      Then I am redirected to the settings page
+      Then I am redirected to the setup page
     
     Scenario: User sees verification form
       Given I am logged in
@@ -29,7 +29,19 @@ Feature: Successful
       When I sign in with valid credentials
       Then I should see the verify page
        But I should not see "Nevermind, I'll do this later"     
+    
+    Scenario: User does not see full phone number
+      Given I am logged in
+        And I am opted-in
+      When I am on the verification page
+      Then I do not see my phone number
       
+    Scenario: User sees only last 4 digits of phone number
+      Given I am logged in
+        And I am opted-in
+      When I am on the verification page
+      Then I see the last 4 digits of my phone number
+
     Scenario: [Temporary] User sees a code to enter
       Given I am logged in
         And I am opted-in
@@ -43,4 +55,4 @@ Feature: Successful
       When I enter the correct code
       Then I am redirected to the success page
         And my valid attempt was logged
-        And I receive a message "Successfully Validated!"
+        And I receive a correct code message

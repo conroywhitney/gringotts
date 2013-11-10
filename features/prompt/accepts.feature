@@ -9,14 +9,13 @@ Feature: First-Time User Accepts
     When I sign in with valid credentials
       And I should see the opt-in prompt
 
-  Scenario: User who clicks continue goes on to settings page
+  Scenario: User who clicks continue goes on to setup page
     Given I exist as a user
       But I am not logged in
     When I sign in with valid credentials
     Then I should see the opt-in prompt
     When I click "Continue"
-    Then I am redirected to the Gringotts settings page
-
+    Then I am redirected to the setup page
 
   Scenario: Opted-in user should not see the prompt
     Given I am opted-in

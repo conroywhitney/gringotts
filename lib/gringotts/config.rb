@@ -2,7 +2,11 @@ module Gringotts
   
   class Config
     
-    cattr_reader :enabled, :twilio, :phone_number_override
+    cattr_reader :enabled, :twilio, :delivery
+ 
+    def self.loaded?
+      return (@@loaded == true)
+    end
     
     def self.load(raw_yaml)
       begin
@@ -13,7 +17,8 @@ module Gringotts
       
       @@enabled = parse(yaml, "enabled")
       @@twilio  = parse(yaml, "twilio", false)
-      @@phone_number_override = parse(yaml, "phone_number_override", false)
+      @@delivery = parse(yaml, "delivery", false)
+      @@loaded = true
     end
     
     def self.parse(yaml, node, required = true)

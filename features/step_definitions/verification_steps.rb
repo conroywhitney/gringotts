@@ -1,7 +1,6 @@
 def opt_in
   click_link "Edit account"
   click_link "Add your mobile phone to this account now"  
-  check("settings_active")
   fill_in "settings_phone_number", with: "(828) 555-1212"
   click_button "Save and Continue"
 end
@@ -27,6 +26,7 @@ Given(/^I am confirmed$/) do
   sign_in
   opt_in
   submit_code gringotts.recent_code.value
+  gringotts.confirmed?.should be_true
 end
 
 Given (/^I am locked out$/) do
@@ -62,8 +62,8 @@ When(/^I enter the correct code$/) do
   submit_code gringotts.recent_code.value
 end
 
-Then(/^I am redirected to the settings page$/) do
-  page.current_path.should == gringotts_engine.settings_path
+Then(/^I am redirected to the setup page$/) do
+  page.current_path.should == gringotts_engine.setup_path
 end
 
 Then(/^I am redirected to the success page$/) do
@@ -123,3 +123,11 @@ Given(/^I enter too many invalid codes$/) do
     submit_code "F4!L"
   end
 end 
+
+Then(/^I do not see my phone number$/) do
+  page.should_not have_content "444-444-4444"
+end
+
+Then(/^I see the last (\d+) digits of my phone number$/) do |num|
+  page.should_not have_content "(***) *** - 4444"
+end

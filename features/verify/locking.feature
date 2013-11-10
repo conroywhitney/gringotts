@@ -23,12 +23,24 @@ Feature: Locking
       And my account is locked
       And I receive a message "Too many invalid attempts. Your account has been locked."
 
-  Scenario: User is locked out and tries to go to the verify page
+  Scenario: User is locked out and tries to go to the main gringotts page
     Given I am locked out
-    When I go to the gringotts settings page
+    When I go to the main gringotts page
     Then I am redirected to the locked page
       And I receive a message "Too many invalid attempts. Your account has been locked."
 
+  Scenario: User is locked out and tries to go to the setup page
+    Given I am locked out
+    When I go to the gringotts setup page
+    Then I am redirected to the locked page
+      And I receive a message "Too many invalid attempts. Your account has been locked."
+      
+  Scenario: User is locked out and tries to go to the verify page
+    Given I am locked out
+    When I go to the verification page
+    Then I am redirected to the locked page
+      And I receive a message "Too many invalid attempts. Your account has been locked."
+      
   Scenario: User is locked out and tries to go to an un-protected page
     Given I am locked out
     When I navigate to an un-protected page

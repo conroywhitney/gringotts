@@ -8,23 +8,26 @@ Feature: Setting Up New Account
       When I got to my account details page
       Then I see a link to edit my gringotts settings
 
+    Scenario: First-time user goes to main gringotts page is directed to setup
+      Given I am logged in
+        And I do not have any gringotts settings
+      When I go to the main gringotts page
+      Then I am redirected to the setup page
+      
     Scenario: User goes to settings page for the first time
       Given I am logged in
         And I do not have any gringotts settings
-      When I go to the gringotts settings page
+      When I go to the gringotts setup page
       Then I see an information message
-        And phone verification should be turned off
         And my phone number should be blank
 
     Scenario: New user opts-in and gives correct phone number
       Given I am logged in
         And I do not have any gringotts settings
-      When I go to the gringotts settings page
-        And I check the opt-in box
+      When I go to the gringotts setup page
         And I enter the phone number "(406) 444-4444"
         And I click Continue
-      Then I receive a message "Successfully added phone number"
-        And my phone number was saved
+      Then my phone number was saved
         And I am opted-in
         And I am redirected to the challenge page
       

@@ -14,11 +14,6 @@
 
 <%= form_for @settings, url: {action: "update"}, method: :post do |f| %>
 
-<%= f.check_box :active %>
-<%= f.label :active, "Turn on phone verification" %>
-
-<br/><br/>
-
 <%= f.label :phone_number, "Add your mobile phone" %>
 <%= f.text_field :phone_number %>
 

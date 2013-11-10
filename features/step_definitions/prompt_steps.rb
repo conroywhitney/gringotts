@@ -13,7 +13,3 @@ end
 When(/^I click "(.*?)"$/) do |link_text|
   click_link link_text
 end
-
-Then(/^I am redirected to the Gringotts settings page$/) do
-  page.current_path.should == gringotts_engine.settings_path
-end
