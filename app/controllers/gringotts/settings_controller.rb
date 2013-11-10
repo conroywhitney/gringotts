@@ -4,7 +4,8 @@ module Gringotts
   class SettingsController < ApplicationController
     before_filter :load_gringotts_settings
        
-    def index  
+    def index
+      redirect_to gringotts_engine.success_path if @gringotts.confirmed?
     end
     
     def prompt

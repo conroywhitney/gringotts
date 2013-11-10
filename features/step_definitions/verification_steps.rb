@@ -26,6 +26,7 @@ Given(/^I am confirmed$/) do
   sign_in
   opt_in
   submit_code gringotts.recent_code.value
+  gringotts.confirmed?.should be_true
 end
 
 Given (/^I am locked out$/) do

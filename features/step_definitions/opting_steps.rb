@@ -11,7 +11,7 @@ Then(/^I see a link to edit my gringotts settings$/) do
 end  
 
 When(/^I go to the gringotts settings page$/) do                                                                                                                                                  
-  visit gringotts_engine.verification_path  
+  visit gringotts_engine.settings_path  
 end                                                                                                                                                                  
                                                                                                                                                                                                   
 Then(/^I see an information message$/) do                                                                                                                                                         
