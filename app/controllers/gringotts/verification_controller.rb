@@ -24,24 +24,33 @@ module Gringotts
       @attempt.save
       
       if @attempt.successful?
-        # this might be the first time they are validating their phone number
-        # therefore confirm the validity only if unconfirmed. ya dig?
-        @gringotts.confirm! unless @gringotts.confirmed?
-        
-        # remember that they are verified
+        # remember that they have been verified
         @gringotts.verify!(session)
         
-        # if was locked before, unlock!
+        # if account was locked before, unlock!
         @gringotts.unlock! if @gringotts.locked?
         
-        # kick them to a success page for now
-        # TODO: in future, redirect them to wherever they were going before...
-        redirect_to gringotts_engine.success_path
+        # this might be the first time they are validating their phone number
+        # therefore confirm the validity only if unconfirmed. ya dig?
+        if @gringotts.confirmed?
+          # normal verification path
+          
+          # TODO: in future, redirect them to wherever they were going before...
+          redirect_to gringotts_engine.success_path
+        else
+          # first-time verification path
+          
+          # mark that their phone number has been confirmed so that 2FA can be used
+          @gringotts.confirm!
+          
+          # kick them to a success page letting them know that 2FA is set up
+          redirect_to gringotts_engine.success_path
+        end
       elsif @gringotts.should_lock?
         @gringotts.lock!
         redirect_to gringotts_engine.locked_path
       else
-        flash[:error] = "Code was incorrect. Please try again."
+        flash[:error] = "Code was incorrect. A new code has been sent to your phone. Please try again."
         return redirect_to gringotts_engine.verification_path
       end
     end

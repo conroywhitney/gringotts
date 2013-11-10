@@ -51,6 +51,14 @@ Then(/^I receive a message "(.*?)"$/) do |message|
   page.should have_content message
 end
 
+Then(/^I receive an incorrect code message$/) do
+  page.should have_content "Code was incorrect"
+end
+
+Then(/^I receive a correct code message$/) do
+  page.should have_content "Phone number verified"
+end
+
 Then(/^I am redirected to the challenge page$/) do
   page.current_path.should == gringotts_engine.verification_path
 end 

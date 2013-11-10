@@ -43,4 +43,4 @@ Feature: Successful
       When I enter the correct code
       Then I am redirected to the success page
         And my valid attempt was logged
-        And I receive a message "Successfully Validated!"
+        And I receive a correct code message

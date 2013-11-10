@@ -21,8 +21,7 @@ Feature: Setting Up New Account
       When I go to the gringotts settings page
         And I enter the phone number "(406) 444-4444"
         And I click Continue
-      Then I receive a message "Successfully added phone number"
-        And my phone number was saved
+      Then my phone number was saved
         And I am opted-in
         And I am redirected to the challenge page
       
