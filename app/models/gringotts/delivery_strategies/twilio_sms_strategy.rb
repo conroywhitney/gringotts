@@ -1,3 +1,5 @@
+require 'twilio-rb'
+
 module Gringotts::DeliveryStrategies
   class TwilioSMSStrategy < BaseDeliveryStrategy
 
