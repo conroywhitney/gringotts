@@ -123,3 +123,11 @@ Given(/^I enter too many invalid codes$/) do
     submit_code "F4!L"
   end
 end 
+
+Then(/^I do not see my phone number$/) do
+  page.should_not have_content "444-444-4444"
+end
+
+Then(/^I see the last (\d+) digits of my phone number$/) do |num|
+  page.should_not have_content "(***) *** - 4444"
+end

@@ -136,6 +136,10 @@ module Gringotts
       
       @gringotts.should_lock?.should be_false      
     end
+
+    it "should return the last 4 digits of phone number" do
+      @gringotts.last_4.should == "4444"
+    end
         
   end
 end

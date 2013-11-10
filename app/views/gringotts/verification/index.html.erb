@@ -1,6 +1,10 @@
 <h1>Verification</h1>
 
-<h2>Expected Code [<%= @code %>]</h2>
+<h2>Your code has been sent to your phone number: (***) *** - <%= @gringotts.last_4 %></h2>
+
+<%- unless Rails.env.production? -%>
+<h2>DEBUG: Expected Code [<%= @code %>]</h2>
+<%- end -%>
   
 Enter code:
 

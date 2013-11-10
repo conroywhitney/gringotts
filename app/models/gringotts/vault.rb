@@ -77,6 +77,10 @@ module Gringotts
       return self.settings.present? ? self.settings.phone_number : nil
     end
       
+    def last_4
+      self.phone_number.present? ? self.phone_number[-4..-1] : nil
+    end
+      
     def should_lock?
       return false unless self.confirmed?
       self.attempts.unsuccessful.since(Time.now - Gringotts::AttemptValidator::LOCKOUT_PERIOD).count  >= Gringotts::AttemptValidator::MAX_UNSUCCESSFUL_ATTEMPTS
