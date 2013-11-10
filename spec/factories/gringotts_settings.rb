@@ -15,11 +15,16 @@ FactoryGirl.define do
       
     factory :good_us_phone_number_settings do
       phone_number "(444) 444-4444"
+    
+      factory :confirmed_settings do
+        vault_id { FactoryGirl.create(:confirmed_gringotts_vault).id }
+      end
     end
       
     factory :good_pe_phone_number_settings do
       phone_number "(084) 791224"
     end
+    
   end
   
 end

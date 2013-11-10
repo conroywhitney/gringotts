@@ -22,8 +22,11 @@ Feature: Editing Settings
   Scenario: User who edits their phone number is no longer opted-in
     Given I am confirmed
     When I go to the gringotts setup page
-      And I edit my phone number
-    Then I am no longer confirmed
+      And I enter the phone number "(406) 555-5555"
+      And I click Continue
+    Then I should see the verify page
+    When I navigate to a protected page
+    Then I should see the verify page
 
   @wip
   Scenario: User who edits phone number and re-confirms is confirmed

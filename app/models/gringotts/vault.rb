@@ -40,6 +40,10 @@ module Gringotts
       self.update_attributes!(confirmed_at: Time.now) unless self.confirmed?
     end
     
+    def unconfirm!
+      self.update_attributes!(confirmed_at: nil)
+    end
+      
     def verified?(session)
       return session[SESSION_FRESHNESS_KEY].present? && session[SESSION_FRESHNESS_KEY] >= Time.now
     end
