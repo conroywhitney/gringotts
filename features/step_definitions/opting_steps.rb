@@ -17,20 +17,11 @@ end
 Then(/^I see an information message$/) do                                                                                                                                                         
   page.should have_content "Phone Verification"                                                                                                                               
 end                
-
-Then(/^phone verification should be turned off$/) do                                                                                                                                              
-  find_field('settings[active]').should_not be_checked
-end  
                                                                                                                                                                                                   
 Then(/^my phone number should be blank$/) do                                                                                                                                                      
   find_field("settings[phone_number]").value == nil
 end    
-
-When(/^I check the opt\-in box$/) do                                                                                                                                                              
-  check("settings_active")
-  find_field('settings[active]').should be_checked
-end                                                                                                                                                                                               
-                   
+      
 When(/^I enter the phone number "(.*?)"$/) do |phone_number|
   fill_in "settings_phone_number", with: phone_number
   find_field("settings[phone_number]").value == phone_number

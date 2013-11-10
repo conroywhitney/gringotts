@@ -1,7 +1,6 @@
 def opt_in
   click_link "Edit account"
   click_link "Add your mobile phone to this account now"  
-  check("settings_active")
   fill_in "settings_phone_number", with: "(828) 555-1212"
   click_button "Save and Continue"
 end

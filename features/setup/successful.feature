@@ -13,14 +13,12 @@ Feature: Setting Up New Account
         And I do not have any gringotts settings
       When I go to the gringotts settings page
       Then I see an information message
-        And phone verification should be turned off
         And my phone number should be blank
 
     Scenario: New user opts-in and gives correct phone number
       Given I am logged in
         And I do not have any gringotts settings
       When I go to the gringotts settings page
-        And I check the opt-in box
         And I enter the phone number "(406) 444-4444"
         And I click Continue
       Then I receive a message "Successfully added phone number"
