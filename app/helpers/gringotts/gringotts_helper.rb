@@ -32,7 +32,7 @@ module Gringotts
       # if the object designated as the "owner" of this Gringotts vault is defined
       # then we need to make sure that they are verified on every single page load
       # otherwise, the user could simply navigate away from the verify page
-      if gringotts_owner.present?
+      if Gringotts::Config.enabled && gringotts_owner.present?
         # find or create a vault for this owner
         @gringotts = Gringotts::Vault.for_owner(gringotts_owner)
         
