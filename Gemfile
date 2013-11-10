@@ -11,7 +11,6 @@ gemspec
 # your gem to rubygems.org.
 
 gem "devise"
-gem "twilio-rb"
 
 gem 'factory_girl_rails', :group => :test
 gem "codeclimate-test-reporter", group: :test, require: nil
