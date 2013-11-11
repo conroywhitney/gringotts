@@ -26,13 +26,23 @@ module Gringotts
       redirect_to url
     end
     
+    def gringotts_protego?
+              # config/gringotts.yml can disable Gringotts entirely
+      return  Gringotts::Config.enabled &&
+              # fine-grain control over ignoring certain paths, like a .gitignore
+              !(Gringotts::Config.ignore_paths && Gringotts::Config.ignore_paths.include?(request.original_fullpath)) &&
+              # if the object designated as the "owner" of this Gringotts vault is defined
+              # then we need to make sure that they are verified on every single page load
+              # otherwise, the user could simply navigate away from the verify page
+              gringotts_owner.present?
+    end
+    
     # The before_filter that checks to ensure an authenticated user has been verified
     # Keeps users from accessing pages inbetween authentication and verification
     def gringotts_protego!
-      # if the object designated as the "owner" of this Gringotts vault is defined
-      # then we need to make sure that they are verified on every single page load
-      # otherwise, the user could simply navigate away from the verify page
-      if Gringotts::Config.enabled && gringotts_owner.present?
+      # check to see if we should be protecting in the first place
+      # maybe not, depending on config/gringotts.yml and user status
+      if gringotts_protego?
         # find or create a vault for this owner
         @gringotts = Gringotts::Vault.for_owner(gringotts_owner)
         

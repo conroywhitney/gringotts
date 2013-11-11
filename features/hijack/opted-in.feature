@@ -31,7 +31,15 @@ Feature: Opted-in User Needs to Verify
     Then I should see the verify page
     When I navigate to an un-protected page
     Then I should see the verify page
-  
+
+  Scenario: Opted-in user can still sign out
+    Given I am confirmed
+      But I am not logged in
+    When I sign in with valid credentials
+    Then I should see the verify page
+    When I sign out
+    Then I should be signed out
+
   @wip  
   Scenario: Opted-in user logging in from known device is not required to verify
     Given I am confirmed

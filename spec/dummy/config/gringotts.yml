@@ -6,6 +6,9 @@ development: &non_production_settings
   twilio:
     account_sid: "account_sid"
     auth_token: "auth_token"
+  ignore_paths:
+    - /users/sign_out
+    - /users/sign_in
 
 test:
   enabled: true
@@ -15,7 +18,10 @@ test:
   twilio:
     account_sid: "account_sid"
     auth_token: "auth_token"
-
+  ignore_paths:
+    - /users/sign_out
+    - /users/sign_in
+    
 production:
   enabled: false
   delivery:
@@ -23,3 +29,6 @@ production:
   twilio:
     account_sid: "account_sid"
     auth_token: "auth_token"
+  ignore_paths:
+    - /users/sign_out
+    - /users/sign_in
