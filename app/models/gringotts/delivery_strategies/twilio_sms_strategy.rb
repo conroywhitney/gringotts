@@ -17,7 +17,7 @@ module Gringotts::DeliveryStrategies
     
     def deliver!     
       @to   = @phone_number
-      @from = '+1-406-282-0474'
+      @from = Gringotts::Config.twilio.present? ? Gringotts::Config.twilio["from_number"] : nil
       @body = "Your validation code is [#{@code}]"
       
       # finally, the moment we've all been waiting for!

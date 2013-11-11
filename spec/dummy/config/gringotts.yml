@@ -1,34 +1,31 @@
-development: &non_production_settings
+twilio_settings: &twilio_settings
+  from_number: "1-###-###-####"
+  account_sid: "**********************************"
+  auth_token:  "********************************"
+  
+delivery_settings: &delivery_settings
+  enabled: true
+  phone_number_override: "1-###-###-####"
+  
+defaults: &defaults
   enabled: true
   delivery:
-    enabled: false
-    phone_number_override: "1-406-555-1212"
+    <<: *delivery_settings
   twilio:
-    account_sid: "account_sid"
-    auth_token: "auth_token"
+    <<: *twilio_settings
   ignore_paths:
     - /users/sign_out
     - /users/sign_in
 
-test:
-  enabled: true
+development:
+  <<: *defaults
   delivery:
-    enabled: true
-    phone_number_override: "1-406-555-1212"
-  twilio:
-    account_sid: "account_sid"
-    auth_token: "auth_token"
-  ignore_paths:
-    - /users/sign_out
-    - /users/sign_in
+    <<: *delivery_settings
+    enabled: false
+
+test:
+  <<: *defaults
     
 production:
+  <<: *defaults
   enabled: false
-  delivery:
-    enabled: true
-  twilio:
-    account_sid: "account_sid"
-    auth_token: "auth_token"
-  ignore_paths:
-    - /users/sign_out
-    - /users/sign_in
