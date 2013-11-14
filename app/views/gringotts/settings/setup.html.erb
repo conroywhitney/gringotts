@@ -2,33 +2,40 @@
   <div class="wrapper">
 
     <div class="header">
-      <h1>Phone Verification When Signing In</h1>
-      <p>Phone Verification makes your account extra secure. When you sign in, we’ll send a message to your mobile phone to make sure it’s really you. Ready to get started?</p>
+      <h1>
+        Phone Verification When Signing In
+      </h1>
+      <p>
+        Phone Verification makes your account extra secure. When you sign in, we’ll send a message to your mobile phone to make sure it’s really you. Ready to get started?
+      </p>
     </div>
-    
-<% if @settings.errors.any? %>  
-<div id="errorExplanation">  
-  <ul>  
-  <% @settings.errors.full_messages.each do |msg| %>  
-    <li><%= msg %></li>  
-  <% end %>  
-  </ul>  
-</div>  
-<% end %>
 
-    <div class="step">
-      <%= form_for @settings, url: {action: "update"}, method: :post do |f| %>
-      
+    <div class="content">
+      <div class="step">
         <h2>
-          <%= f.label :phone_number, "Add your mobile phone" %>
-          <span class="number">1</span>
+          Add your mobile phone
+          <span class="step-number">1</span>
         </h2>
-          
+      </div>
+     
+      <%= form_for @settings, url: {action: "update"}, method: :post do |f| %>
+        
         <%= f.text_field :phone_number %>
   
-        <%= f.submit "Save and Continue" %>
+        <%= f.submit "Save and continue" %>
         or
-        <%= link_to "Cancel Phone Verification setup", main_app.root_url %>
+        <%= link_to "Cancel setup", main_app.root_url %>
         
       <% end %>
-    </div>
+  
+      <%- if @settings.errors.any? %>
+        <div class="error">
+          <%- @settings.errors.full_messages.each do |msg| %>                                                                                                                                             
+            <%= msg %>
+          <% end %>
+        </div>
+      <% end %>
+    
+    </div><!-- /content -->
+  </div><!-- /wrapper -->
+</div><!-- /gringotts setup -->

@@ -14,34 +14,7 @@ Feature: Successful
         And I am opted-in
         And I am on the verification page
       Then I see the verification form
-
-    Scenario: First-time user clicks on "nevermind" link and is still signed in
-      Given I am logged in
-        And I am opted-in
-        And I am on the verification page
-      When I click "Nevermind, I'll do this later"
-      Then I should be signed in
-        And I do not see the verification form
       
-    Scenario: Opted-in user does not see "nevermind" message because must verify
-      Given I am confirmed
-        But I am not logged in
-      When I sign in with valid credentials
-      Then I should see the verify page
-       But I should not see "Nevermind, I'll do this later"     
-    
-    Scenario: User does not see full phone number
-      Given I am logged in
-        And I am opted-in
-      When I am on the verification page
-      Then I do not see my phone number
-      
-    Scenario: User sees only last 4 digits of phone number
-      Given I am logged in
-        And I am opted-in
-      When I am on the verification page
-      Then I see the last 4 digits of my phone number
-
     Scenario: [Temporary] User sees a code to enter
       Given I am logged in
         And I am opted-in

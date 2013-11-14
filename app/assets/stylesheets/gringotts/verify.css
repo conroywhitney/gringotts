@@ -2,16 +2,20 @@
   margin-bottom: 15px;
 }
 
-#gringotts .verify input[type="text"] {
+#gringotts.confirm input[type="text"],
+#gringotts.verify input[type="text"] {
   letter-spacing: 10pt;
-  width: 250px;
+  font-size: 24pt;
   text-align: center;
-  font-size: 30pt;
-  margin: 15px auto;
+  width: 200px;
+  float: left;
+  margin: 15px 15px 15px 0px;
 }
 
-#gringotts .verify input[type="submit"] {
-  width: 250px;
-  height: 50px;
-  font-size: 16pt;
+#gringotts.confirm input[type="submit"],
+#gringotts.verify input[type="submit"] {
+  float: right;
+  font-size: 12pt;
+  margin: 18px 15px 15px 0px;
+  padding: 14px 22px;
 }

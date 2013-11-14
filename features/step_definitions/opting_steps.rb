@@ -48,7 +48,7 @@ Then(/^my phone number was saved$/) do
 end
 
 When(/^I click Continue$/) do                                                                                                                                                                     
-  click_button "Save and Continue"                                                                                                                               
+  click_button "Save and continue"                                                                                                                               
 end                                                                                                                                                                                               
                                                                                                                                                                                                   
 Then(/^I receive a message "(.*?)"$/) do |message|                                                                                                                                            
@@ -60,7 +60,7 @@ Then(/^I receive an incorrect code message$/) do
 end
 
 Then(/^I receive a correct code message$/) do
-  page.should have_content "Phone Authentication Mobile authentication is ON"
+  page.should have_content "Phone verification is ON for your account"
 end
 
 Then(/^I am redirected to the challenge page$/) do
