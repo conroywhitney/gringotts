@@ -29,3 +29,6 @@ Feature: Successful
       Then I am redirected to the success page
         And my valid attempt was logged
         And I receive a correct code message
+
+  @wip
+  Scenario: Valid verification sends user to next page
