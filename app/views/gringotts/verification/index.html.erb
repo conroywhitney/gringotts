@@ -1,25 +1,35 @@
-<h1>Verification</h1>
 
-<h2>Your code has been sent to your phone number: (***) *** - <%= @gringotts.last_4 %></h2>
-
-<%- unless Rails.env.production? -%>
-<h2>DEBUG: Expected Code [<%= @code %>]</h2>
-<%- end -%>
+<div id="gringotts">
   
-Enter code:
+  <div class="verify wrapper">
+    <h1>
+      Enter the code we sent to your mobile phone (***) *** <%= @gringotts.last_4 %>
+    </h1>
+    
+    <p>
+      To make sure it's you, please enter the 4-digit code in the text message.
+    </p>
+    
+    <%= form_for @attempt,
+                url: attempt_url,
+                method: :post do |f| %>
+    
+      <%= f.text_field :code_received %>
+    
+      <%= f.submit "Verify Code" %>
+    
+    <% end %>
+  </div><!-- /white wrapper -->
+  
+  <%- if @show_nevermind %>
+    <%= link_to "Nevermind, I'll do this later", main_app.root_url %>
+  <%- end %>
 
-<%= form_for @attempt,
-            url: attempt_url,
-            method: :post do |f| %>
-
-  <%= f.text_field :code_received %>
-
-  <br/><br/>
-
-  <%= f.submit "Verify" %>
-
-<% end %>
-
-<%- if @show_nevermind -%>
-  <%= link_to "Nevermind, I'll do this later", main_app.root_url %>
-<%- end -%>
+  
+  <%- unless Rails.env.production? %>
+    <div class="debug">
+      Expected Code [<%= @code %>]
+    </div>
+  <%- end %>
+  
+</div>

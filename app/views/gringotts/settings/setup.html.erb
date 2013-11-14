@@ -1,7 +1,11 @@
-<h2>Phone Verification When Signing In</h2>
+<div id="gringotts" class="setup">
+  <div class="wrapper">
 
-<p>Add another layer of security to your account by enabling phone verification. Every time you sign in, we'll send a text message to your mobile phone with a verification code.</p>
-
+    <div class="header">
+      <h1>Phone Verification When Signing In</h1>
+      <p>Phone Verification makes your account extra secure. When you sign in, we’ll send a message to your mobile phone to make sure it’s really you. Ready to get started?</p>
+    </div>
+    
 <% if @settings.errors.any? %>  
 <div id="errorExplanation">  
   <ul>  
@@ -12,15 +16,19 @@
 </div>  
 <% end %>
 
-<%= form_for @settings, url: {action: "update"}, method: :post do |f| %>
-
-<%= f.label :phone_number, "Add your mobile phone" %>
-<%= f.text_field :phone_number %>
-
-<br/><br/>
-
-<%= f.submit "Save and Continue" %>
-or
-<%= link_to "Cancel Phone Verification setup", main_app.root_url %>
-
-<% end %>
+    <div class="step">
+      <%= form_for @settings, url: {action: "update"}, method: :post do |f| %>
+      
+        <h2>
+          <%= f.label :phone_number, "Add your mobile phone" %>
+          <span class="number">1</span>
+        </h2>
+          
+        <%= f.text_field :phone_number %>
+  
+        <%= f.submit "Save and Continue" %>
+        or
+        <%= link_to "Cancel Phone Verification setup", main_app.root_url %>
+        
+      <% end %>
+    </div>

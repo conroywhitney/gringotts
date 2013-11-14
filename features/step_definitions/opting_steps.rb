@@ -60,7 +60,7 @@ Then(/^I receive an incorrect code message$/) do
 end
 
 Then(/^I receive a correct code message$/) do
-  page.should have_content "Phone number verified"
+  page.should have_content "Phone Authentication Mobile authentication is ON"
 end
 
 Then(/^I am redirected to the challenge page$/) do

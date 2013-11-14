@@ -1,9 +1,26 @@
-<h1>Phone number verified</h1>
+<div id="gringotts">
 
-<h2>2-Factor Authentication has been turned on for your account.</h2>
-
-<p>Next time that you log in, we will require that you enter your authentication code in order to access your account.</p>
-
-<%= button_to "Turn off mobile authentication", gringotts_engine.disable_path %>
-
-<%= link_to "Change phone number", gringotts_engine.setup_path %>
+  <div class="success wrapper">
+    
+    <div class="header">
+      Phone Verification
+    </div>
+    
+    <div class="status">
+      Phone authentication is <strong>ON</strong> for your account
+    </div>
+    
+    <div class="details">
+      Every time you log in, we will send you a text message with a code. You will need to enter that code in order to access your account.
+    </div>
+    
+    <div class="phone-number">
+      <%= @gringotts.phone_number %>
+    </div>
+    
+    <%= button_to "Turn off mobile authentication", gringotts_engine.disable_path, class: "disable button" %>
+    
+    <%= link_to "Change phone number", gringotts_engine.setup_path, class: "change button" %>
+    
+  </div><!-- /success wrapper-->
+</div><!-- /gringotts -->
