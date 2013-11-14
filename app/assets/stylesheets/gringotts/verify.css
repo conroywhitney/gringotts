@@ -1,0 +1,17 @@
+#gringotts .verify form {
+  margin-bottom: 15px;
+}
+
+#gringotts .verify input[type="text"] {
+  letter-spacing: 10pt;
+  width: 250px;
+  text-align: center;
+  font-size: 30pt;
+  margin: 15px auto;
+}
+
+#gringotts .verify input[type="submit"] {
+  width: 250px;
+  height: 50px;
+  font-size: 16pt;
+}
