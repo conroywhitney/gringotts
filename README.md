@@ -38,11 +38,14 @@ Configure Gringotts with your `gringotts.yml` file, adding your Twilio account c
     twilio:
       account_sid: *********************
       auth_token:  *********************
-      
-Ensure that Gringotts is correctly configured and ready by running the `rspec` and `cucumber` tests
 
-    rake
-    
+Add Gringotts stylesheets to `app/assets/javascripts/application.js` (recommened before your `*= require_tree .` so you can override certain styles if you want)
+
+    *= require_self
+    *= require gringotts
+    *= require_tree .
+
+And you should be all set. Fire up your application, log in, and you should see a prompt to turn on mobile phone authentication.
 
 Why Do I Need Two-Factor Authentication?
 -------
