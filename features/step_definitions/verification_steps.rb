@@ -1,8 +1,8 @@
 def opt_in
   click_link "Edit account"
   click_link "Add your mobile phone to this account now"  
-  fill_in "settings_phone_number", with: "(828) 555-1212"
-  click_button "Save and Continue"
+  fill_in "settings_phone_number", with: "444-444-4444"
+  click_button "Save and continue"
 end
 
 def submit_code(code)
@@ -27,6 +27,12 @@ Given(/^I am confirmed$/) do
   opt_in
   submit_code gringotts.recent_code.value
   gringotts.confirmed?.should be_true
+end
+
+When(/^I need to confirm my phone number$/) do
+  create_user
+  sign_in
+  opt_in
 end
 
 Given (/^I am locked out$/) do
@@ -126,6 +132,10 @@ end
 
 Then(/^I do not see my phone number$/) do
   page.should_not have_content "444-444-4444"
+end
+
+Then(/^I should see my phone number$/) do
+  page.should have_content "444-444-4444"
 end
 
 Then(/^I see the last (\d+) digits of my phone number$/) do |num|

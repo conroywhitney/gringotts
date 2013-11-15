@@ -1,0 +1,173 @@
+#gringotts {
+  width: 500px;
+  margin: 0px auto;
+  text-align: center;
+  font-family: helvetica, arial, sans-serif !important;
+}
+
+#gringotts p {
+  display: block;
+  -webkit-margin-before: 1em;
+  -webkit-margin-after: 1em;
+  -webkit-margin-start: 0px;
+  -webkit-margin-end: 0px;
+}
+
+#gringotts .wrapper {
+  width: 500px;
+  margin: 0 auto;
+  background: #fff;
+  border: 0px;
+  text-align: left;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  -webkit-box-shadow: 0 0 6px #999;
+  -moz-box-shadow: 0 0 6px #999;
+  box-shadow: 0 0 6px #999;
+  overflow: hidden;
+}
+
+#gringotts .header {
+  background-color: #F8F8FF;
+  padding: 15px 30px 10px;
+  margin: 0px;
+  border-bottom: 1px solid #ddd;
+  -webkit-border-top-left-radius: 10px;
+  -webkit-border-top-right-radius: 10px;
+  -moz-border-radius-topleft: 10px;
+  -moz-border-radius-topright: 10px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+#gringotts .content {
+  padding: 15px 60px;
+  overflow: hidden;
+}
+
+#gringotts .header h1 {
+  font-size: 20px;
+  margin: 15px 0px 10px 0px;
+}
+
+#gringotts .header p {
+  margin: 5px 0px 10px 0px;
+  font-size: 14px;
+  line-height: 18px;
+}
+
+#gringotts .debug {
+  padding: 10px;
+  background-color: pink;
+  margin: 25px;
+  font-weight: bold;
+  font-size: 20pt;
+}
+
+#gringotts .phone-number {
+  margin-bottom: 15px;
+  text-align: center;
+  background-color: #DDFCD5;
+  font-size: 16pt;
+  padding: 10px;
+  width: 350px; 
+}
+
+#gringotts form {
+  overflow: hidden;
+  display: block;
+  margin-bottom: 25px;
+}
+
+#gringotts form.button_to {
+  float: left;  
+}
+
+#gringotts form.button_to div {
+  padding: 1px; 
+}
+
+#gringotts input[type="text"] {
+  text-align: left;
+  width: 290px;
+  padding: 8px 12px;
+  margin: 0px 0px 15px 0px;
+  font-size: 20px;
+  display: block;
+  border: 1px solid #555;
+  -webkit-appearance: none;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  -webkit-box-shadow: inset 0 2px 2px #ddd;
+  -moz-box-shadow: inset 0 2px 2px #ddd;
+  box-shadow: inset 0 2px 2px #ddd;
+  box-sizing: border-box;
+}
+
+#gringotts .button,
+#gringotts input[type="submit"] {
+  display: inline-block;
+  width: auto;
+  
+  padding: 8px 16px;
+  margin: 0px; 
+  
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #3d94f6), color-stop(1, #1e62d0) );
+	background:-moz-linear-gradient( center top, #3d94f6 5%, #1e62d0 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#3d94f6', endColorstr='#1e62d0');
+	background-color:#3d94f6;
+	
+  border:1px solid #337fed;
+  
+  -webkit-border-top-left-radius: 0px;
+	-moz-border-radius-topleft:15px;
+	border-top-left-radius: 0px;
+	-webkit-border-top-right-radius: 0px;
+	-moz-border-radius-topright:15px;
+	border-top-right-radius: 0px;
+	-webkit-border-bottom-right-radius: 0px;
+	-moz-border-radius-bottomright:15px;
+	border-bottom-right-radius: 0px;
+	-webkit-border-bottom-left-radius: 0px;
+	-moz-border-radius-bottomleft:15px;
+	border-bottom-left-radius: 0px;
+	
+  -moz-box-shadow:inset 0px 1px 0px 0px #97c4fe;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #97c4fe;
+	box-shadow:inset 0px 1px 0px 0px #97c4fe;
+
+	color:#ffffff;
+  text-indent:0;
+  font-size: 16px;
+	font-weight:bold;
+	font-style:normal;
+	text-decoration:none;
+	text-align:center;
+	text-shadow:1px 1px 0px #1570cd;
+  
+  cursor: pointer;
+}
+
+#gringotts .button:hover,
+#gringotts input[type="submit"]:hover {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #1e62d0), color-stop(1, #3d94f6) );
+	background:-moz-linear-gradient( center top, #1e62d0 5%, #3d94f6 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#1e62d0', endColorstr='#3d94f6');
+	background-color:#1e62d0;
+}
+
+#gringotts .button:active,
+#gringotts input[type="submit"]:active {
+	position:relative;
+	top:1px;
+}
+
+#gringotts .error {
+  width: 350px;
+  background-color: #FFF;
+  font-weight: bold;
+  margin: 0px auto 15px 0px;
+  color: red;
+}

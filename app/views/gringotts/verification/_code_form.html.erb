@@ -1,0 +1,18 @@
+<div class="code">
+  <%= form_for @attempt,
+              url: attempt_url,
+              method: :post do |f| %>
+  
+    <%= f.text_field :code_received %>
+  
+    <%= f.submit "Verify Code" %>
+  
+  <% end %>
+  
+  <%- if flash[:gringotts_error] %>
+    <div class="error">
+      Code was incorrect. A new code has been sent to your phone. Please try again.  
+    </div>
+  <%- end %>
+  
+</div><!-- /code -->

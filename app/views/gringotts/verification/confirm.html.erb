@@ -1,0 +1,47 @@
+<div id="gringotts" class="confirm">
+  
+  <div class="wrapper">
+    
+    <div class="header">
+      <h1>
+        Setup Phone Verification
+      </h1>
+      <p>
+        You should be receiving a text message containing a <%= @code.length %>-digit number. Enter that number here to verify your phone number.
+      </p>
+    </div>
+    
+    <div class="content">
+    
+      <div class="step">
+        <h2>
+          Enter the code we sent to your mobile phone
+          <span class="step-number">2</span>
+        </h2>
+      </div><!-- /step -->
+
+      <div class="phone-number">
+        <%= @gringotts.phone_number %>
+      </div>
+      
+      <%= render :partial => "code_form" %>
+
+      <%= link_to "Nevermind, I'll do this later", main_app.root_url %>
+
+      <br /><br />
+      
+      <%= link_to "Oops, wrong phone number.", gringotts_engine.setup_path %>
+      
+      <div><!-- /something? -->
+      </div><!-- /something else? -->
+    </div>
+
+  </div><!-- /wrapper -->
+      
+  <%- unless Rails.env.production? %>
+    <div class="debug">
+      Expected Code [<%= @code %>]
+    </div>
+  <%- end %>
+  
+</div>
