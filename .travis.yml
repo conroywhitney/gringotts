@@ -1,9 +1,36 @@
 language: ruby
+
 rvm:
-  - "1.9.3"
-  - "2.0.0"
+  - 1.9.2
+  - 1.9.3
+  - jruby-19mode
+  - rbx-19mode
+  - 2.0.0
+
+install:
+  - "bundle install"
+  
+before_script: "sudo ntpdate -ub ntp.ubuntu.com pool.ntp.org; true"
+script: "bundle exec rake clean test cucumber"
+
+gemfile:
+  - gemfiles/3.0.gemfile
+  - gemfiles/3.1.gemfile
+  - gemfiles/3.2.gemfile
+  - gemfiles/4.0.gemfile
+
+matrix:
+  allow_failures:
+    - rvm: jruby-19mode
+    - rvm: rbx-19mode
+
+  exclude:
+      - rvm: 1.9.2
+        gemfile: gemfiles/4.0.gemfile
+        
 addons:
     code_climate:
         repo_token: c6d8503090d42afad99391e18e71017d9592cdb4cc099db90fc4f45ef0da37c8
+
 # uncomment this line if your project needs to run something other than `rake`:
 # script: bundle exec rspec spec
