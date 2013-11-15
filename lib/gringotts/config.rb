@@ -2,7 +2,7 @@ module Gringotts
   
   class Config
     
-    cattr_reader :enabled, :twilio, :delivery
+    cattr_reader :enabled, :twilio, :delivery, :ignore_paths
  
     def self.loaded?
       return (@@loaded == true)
@@ -18,6 +18,7 @@ module Gringotts
       @@enabled = parse(yaml, "enabled")
       @@twilio  = parse(yaml, "twilio", false)
       @@delivery = parse(yaml, "delivery", false)
+      @@ignore_paths = parse(yaml, "ignore_paths", false)
       @@loaded = true
     end
     

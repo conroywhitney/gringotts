@@ -1,0 +1,47 @@
+#gringotts .step {
+  position: relative;
+  text-align: left;
+  font-size: 10pt;
+}
+
+#gringotts .step h2 {
+  margin: 25px 0 5px;
+  vertical-align: middle;
+  display: block;
+  font-size: 1.25em;
+  -webkit-margin-before: 0.83em;
+  -webkit-margin-after: 0.83em;
+  -webkit-margin-start: 0px;
+  -webkit-margin-end: 0px;
+  font-weight: bold;
+}
+
+#gringotts .step .step-number {
+  left: -40px;
+  top: -4px;
+  position: absolute;
+  background-color: #38A52C;
+  color: white;
+  width: 26px;
+  height: 26px;
+  line-height: 28px;
+  text-align: center;
+  overflow: hidden;
+  vertical-align: middle;
+  display: inline-block;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-radius: 20px;
+}
+
+#gringotts .step p {
+  font-size: 14px;
+  line-height: 18px;
+  margin: 5px 0 15px;
+}
+
+#gringotts .setup input[type="text"] {
+  width: 290px;
+  margin: 0px 0px 15px 0px;
+}
+

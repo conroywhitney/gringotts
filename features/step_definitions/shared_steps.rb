@@ -13,3 +13,8 @@ end
 Then(/^I should see button "(.*?)"$/) do |content|
   page.should have_selector(:xpath, "//input[@value='#{content}']")
 end
+
+When(/^I go to verify$/) do
+  sign_out
+  sign_in
+end

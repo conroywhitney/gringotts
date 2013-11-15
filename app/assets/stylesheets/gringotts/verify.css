@@ -1,0 +1,21 @@
+#gringotts .verify form {
+  margin-bottom: 15px;
+}
+
+#gringotts.confirm input[type="text"],
+#gringotts.verify input[type="text"] {
+  letter-spacing: 10pt;
+  font-size: 24pt;
+  text-align: center;
+  width: 200px;
+  float: left;
+  margin: 15px 15px 15px 0px;
+}
+
+#gringotts.confirm input[type="submit"],
+#gringotts.verify input[type="submit"] {
+  float: right;
+  font-size: 12pt;
+  margin: 18px 15px 15px 0px;
+  padding: 14px 22px;
+}

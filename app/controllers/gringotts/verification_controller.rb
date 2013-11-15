@@ -13,7 +13,12 @@ module Gringotts
     def index
       @gringotts.deliver_new_code!
       @code = @gringotts.recent_code.value
-      @show_nevermind = !@gringotts.opted_in?
+      
+      if @gringotts.opted_in?
+        return render :verify
+      else
+        return render :confirm
+      end
     end
     
     def attempt
@@ -54,7 +59,7 @@ module Gringotts
         @gringotts.lock!
         redirect_to gringotts_engine.locked_path
       else
-        flash[:error] = "Code was incorrect. A new code has been sent to your phone. Please try again."
+        flash[:gringotts_error] = "Code was incorrect. A new code has been sent to your phone. Please try again."
         return redirect_to gringotts_engine.verification_path
       end
     end
