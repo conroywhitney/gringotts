@@ -46,19 +46,28 @@ See the entire changeset that took that demo app from being a regular rails app 
 Installation
 -------
 
-Add the Gringotts gem to your bundler Gemfile
+**1. Add the Gringotts gem** to your bundler Gemfile
 
     gem "gringotts"
     
-Mount the Gringotts engine in your `config/routes.rb` file for whatever virtual path you want to use (e.g., `/authentication`, `/phone`, up to you). *Note: please do not change the `:as => :gringotts_engine`*
+
+**2. Mount the Gringotts engine** in your `config/routes.rb` file for whatever virtual path you want to use (e.g., `/authentication`, `/phone`, `/omg-so-secure`, whatever you want).
+
+*Note: please do not change the `:as => :gringotts_engine`. That part is important.*
 
     mount Gringotts::Engine => "/authentication", :as => :gringotts_engine
 
-Add Gringotts' tables to your database (note: this only creates *new* tables; it does *not* modify any of your existing tables. y4y!)
+
+**3. Add Gringotts' tables** to your database
+
+*Note: this only creates new tables; it does not modify any of your existing tables. y4y!*
 
     bundle exec rake db:migrate
     
-Configure Gringotts with your `gringotts.yml` file, adding your Twilio account credentials, and optionally altering other default behaviour
+
+**4. Configure Gringotts** with your `gringotts.yml` file, adding your Twilio account credentials, and optionally altering other default behaviour
+
+*Note: `from_number` is what Twilio gives you; `phone_number_override` is for testing in development.*
 
     twilio_settings: &twilio_settings
       from_number: "1-###-###-####"
@@ -92,19 +101,23 @@ Configure Gringotts with your `gringotts.yml` file, adding your Twilio account c
       <<: *defaults
       enabled: false
 
-Add Gringotts stylesheets to `app/assets/javascripts/application.js` (recommened before your `*= require_tree .` so you can override certain styles if you want)
+
+**5. Add Gringotts stylesheets** to `app/assets/javascripts/application.js`
+
+*Note: recommened before your `*= require_tree .` so you can override certain styles if you want*
 
     *= require_self
     *= require gringotts
     *= require_tree .
 
-And you should be all set. Fire up your application, log in, and you should see a prompt to turn on mobile phone authentication.
+
+**6. Fire up your application**, log in, and you should see a prompt to turn on mobile phone authentication.
 
 
 Is Gringotts Secure?
 -------------
 
-As a gem whose main purpose is to provide additional security to your rails application, it is obviously important to address in what areas this gem is secure and how it can be improved. This will be an ongoing area of focus. By all means, don't take my word for this. Check out the code yourself. Join the conversation if you see an area for improvement.
+As a gem whose main purpose is to provide additional security to your rails application, it is obviously important to address in what areas this gem is secure and how it can be improved. This will be an ongoing area of focus. By all means, don't take my word for this. Check out the code yourself. Join the conversation if you see an area for improvement. Suggest a "what if?" test case. Point out how something could be abused. Be paranoid! There are no dumb scenarios.
 
 ##Current Security Measures
 
@@ -114,7 +127,7 @@ As a gem whose main purpose is to provide additional security to your rails appl
 
  * **Lock Out:** A user can only attempt to enter a maximum number of codes within a given period of time. This protects against [brute-force attacks]( http://en.wikipedia.org/wiki/Brute-force_attack)
  
- * **Forward Secrecy:** Unlike other OTP systems (like Google Authenticator), even if one code is compromised, that does not affect future verifications.
+ * **Forward Secrecy:** Unlike other OTP systems (like Google Authenticator) that rely on a shared secret, even if one Gringotts code is compromised, future verifications will still be secure.
 
 ##Roadmap of Improvements
 
@@ -127,25 +140,26 @@ Why Bother with 2-Factor Authentication?
 -------
 
 Having 2-factor authentication adds one more layer of security to your users’ accounts. As they say, it’s “something you know, and something you have”. The combination of those two ensures that when your users log in, you know that it’s them, not somebody else who has their password. But, again, don’t take my word for it. Check out what these other talking heads have to say:
+<br>
 
 > No matter how complex, no matter how unique, your passwords can no longer protect you... [H]ackers [are regularly] breaking into computer systems and releasing lists of usernames and passwords on the open web.
 <br>
  
  \- Matt Honan, Wired.com, *[Kill the Password: Why a String of Characters Can't Protect Us Anymore](http://www.wired.com/gadgetlab/2012/11/ff-mat-honan-password-hacker/all/)*
 
-<br>
+
 > 2-step verification drastically reduces the chances of having the personal information in your Google account stolen by someone else. Why? Because hackers would have to not only get your password and your username, they'd have to get a hold of your phone.
 <br>
 
  \- *[Google 2-Step Verification Home](https://support.google.com/a/answer/175197)*
 
-<br>
+
 > If [two-step verification], were used on all limited-access Web sites, the passwords wouldn't have to be long and complex. But many Web users have easy-to-guess passwords in just one-step verification, which is highly imprudent.
 <br>
  
  \- Randall Stross, New York Times, *[Doing the Two-Step, Beyond the A.T.M.](http://www.nytimes.com/2012/10/14/technology/two-step-verification-is-inconvenient-but-more-secure.html)*
 
-<br>
+
 > With [single-factor authentication] becoming increasingly unreliable as a security measure, two-factor authentication is rapidly gaining importance for logging into online accounts.
 <br>
  
@@ -192,6 +206,19 @@ Special Thanks To
 * All the other blogs, tutorials, websites, and gems that have influenced and acted as a model for this gem. Open Source Software FTW!
 
 
+License
+-------
+Copyright 2013 Conroy Whitney
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
 Disclaimer
 -----
 Gringotts 2-Factor Authentication is not associated with Warner Bros. Entertainment Inc., J.K. Rowling, or any of the "Harry Potter" books or films. HARRY POTTER is a registered trade-mark of Warner Bros. Entertainment Inc.
+
+*Note: I never thought I would ever have a reason to need to use a disclaimer like this... fun!*
