@@ -1,4 +1,5 @@
 require "rubygems"
+require "appraisal"
 
 begin
   require 'bundler/setup'

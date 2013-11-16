@@ -12,7 +12,6 @@ before_script: "bundle exec rake db:migrate"
 script:        "bundle exec rake"
 
 gemfile:
-#  - gemfiles/rails_3.0.gemfile  # ignore rails-3.0 for now
   - gemfiles/rails_3.1.gemfile
   - gemfiles/rails_3.2.gemfile
   - gemfiles/rails_4.0.gemfile

@@ -8,6 +8,9 @@ module Gringotts
     before_filter :load_gringotts_settings
     
     def index
+      # since we always redirect from here, keep the flash (rails-3.2 bug fix'd!)
+      flash.keep
+
       if @gringotts.confirmed? && @gringotts.verified?(session)
         redirect_to gringotts_engine.success_path
       elsif @gringotts.phone_number.present?
