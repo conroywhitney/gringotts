@@ -4,7 +4,7 @@ module Gringotts
     belongs_to :vault
     has_many   :deliveries
     
-    validates  :vault_id, presence: true, uniqueness: false
+    validates  :vault_id, presence: true
     validates  :value,    presence: true
     
     before_validation :generate_value, :set_expires_at
