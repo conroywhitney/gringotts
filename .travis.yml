@@ -1,7 +1,6 @@
 language: ruby
 
 rvm:
-  - 1.9.2
   - 1.9.3
   - 2.0.0
 
@@ -18,7 +17,6 @@ gemfile:
 
 matrix:
   allow_failures:
-    - rvm: 1.9.2
     - rvm: 1.9.3
     - rvm: 2.0.0
       gemfile: gemfiles/rails_3.1.gemfile
@@ -26,8 +24,6 @@ matrix:
       gemfile: gemfiles/rails_3.2.gemfile
       
   exclude:
-    - rvm: 1.9.2 # rails-4 not support ruby-1.9.2
-      gemfile: gemfiles/rails_4.0.gemfile
     - rvm: 2.0.0  # bug w/ ruby-2.0.0@rails-3.1 https://github.com/rails/rails/issues/9417
       gemfile: gemfiles/rails_3.1.gemfile
       
