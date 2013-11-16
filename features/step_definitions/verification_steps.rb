@@ -49,11 +49,11 @@ Given (/^I am locked out$/) do
 end
 
 Given(/^I am on the verification page$/) do
-  page.current_path.should == gringotts_engine.verification_path
+  page.current_path.should == verification_path
 end
 
 Given(/^I go to the verification page$/) do
-  visit gringotts_engine.verification_path
+  visit verification_path
 end
 
 When(/^I enter a blank code$/) do
@@ -69,15 +69,15 @@ When(/^I enter the correct code$/) do
 end
 
 Then(/^I am redirected to the setup page$/) do
-  page.current_path.should == gringotts_engine.setup_path
+  page.current_path.should == setup_path
 end
 
 Then(/^I am redirected to the success page$/) do
-  page.current_path.should == gringotts_engine.success_path
+  page.current_path.should == success_path
 end
 
 Then(/^I am redirected to the locked page$/) do
-  page.current_path.should == gringotts_engine.locked_path
+  page.current_path.should == locked_path
 end
 
 Then(/^I see the verification form$/) do

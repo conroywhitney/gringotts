@@ -64,6 +64,7 @@ Cucumber::Rails::Database.javascript_strategy = :truncation
 
 
 # include Engine routes in Cucumber world
+# thanks to: http://blog.crowdint.com/2012/03/20/mountable-rails-engines.html
 module EngineRoutesHelper
   include Gringotts::Engine.routes.url_helpers
 end

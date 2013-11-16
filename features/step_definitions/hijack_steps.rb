@@ -11,9 +11,9 @@ Then(/^I should be asked to sign in$/) do
 end
 
 Then(/^I should see the verify page$/) do
-  page.current_path.should == gringotts_engine.verification_path
+  page.current_path.should == verification_path
 end
 
 Then(/^I should not see the verify page$/) do
-  page.current_path.should_not == gringotts_engine.verification_path
+  page.current_path.should_not == verification_path
 end
