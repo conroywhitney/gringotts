@@ -7,6 +7,9 @@ rvm:
 
 install:
   - "bundle install"
+  
+before_script: "bundle exec rake db:migrate"
+script:        "bundle exec rake"
 
 gemfile:
   - gemfiles/rails_3.0.gemfile
