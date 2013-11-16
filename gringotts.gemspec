@@ -30,7 +30,7 @@ Gem::Specification.new do |s|
   s.test_files = Dir["spec/**/*"]
   s.add_development_dependency 'rspec-rails', "~> 2.14.0"
   # Ruby version < 1.9.3 can't install capybara > 2.0.3.
-  s.add_development_dependency('capybara', '= 2.0.3')
+  s.add_development_dependency('capybara', '>= 2.0.3')
   s.add_development_dependency "factory_girl_rails", "~> 4.2.1"
 
   # Adding cucumber per crowdint tutorial
