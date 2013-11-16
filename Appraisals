@@ -1,15 +1,18 @@
 appraise "rails-3.0" do
   gem "rails", "~> 3.0.20"
+  gem "devise", "~> 1.5.4"
   gem "gringotts", :path => "../"
 end
 
 appraise "rails-3.1" do
   gem "rails", "~> 3.1.12"
+  gem "devise", "~> 2.2.8"
   gem "gringotts", :path => "../"
 end
 
 appraise "rails-3.2" do
   gem "rails", "~> 3.2.15"
+  gem "devise", "~> 3.1.2"
   gem "gringotts", :path => "../"
 end
 
