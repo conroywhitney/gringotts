@@ -6,8 +6,6 @@ Devise.setup do |config|
   # confirmation, reset password and unlock tokens in the database.
   if config.respond_to?(:secret_key)
     config.secret_key = '8d76547af6d22fb4f61db3ad55f29597d4f2bc3b0409bc6b73c1a8a70bdeca51766674b6c5a692c95305156c92504b9e7a001c543e44061bd7aaf3ba236ae3b1'
-  elsif config.respond_to?(:secret_token)
-    config.secret_token = '8d76547af6d22fb4f61db3ad55f29597d4f2bc3b0409bc6b73c1a8a70bdeca51766674b6c5a692c95305156c92504b9e7a001c543e44061bd7aaf3ba236ae3b1'
   end
   
   # ==> Mailer Configuration
