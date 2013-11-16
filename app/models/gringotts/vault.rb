@@ -13,7 +13,9 @@ module Gringotts
     SESSION_FRESHNESS_KEY = :gringotts_expires_at
 
     def self.for_owner(obj)
-      return Gringotts::Vault.where(owner_id: obj.id, owner_type: obj.class.name).first_or_create
+      # this is not quite as pretty as the new rails4 way, but we want it to be backwards compatible without a separate branch
+      conditions = { owner_id: obj.id, owner_type: obj.class.name }
+      return Gringotts::Vault.where(conditions).first || Gringotts::Vault.create(conditions)
     end
 
     def signed_up?
