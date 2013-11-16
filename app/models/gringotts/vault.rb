@@ -13,7 +13,7 @@ module Gringotts
     SESSION_FRESHNESS_KEY = :gringotts_expires_at
 
     def self.for_owner(obj)
-      return Gringotts::Vault.where(owner_id: obj.id, owner_type: obj.class.name).first_or_create
+      return Gringotts::Vault.find_or_create_by(owner_id: obj.id, owner_type: obj.class.name)
     end
 
     def signed_up?
