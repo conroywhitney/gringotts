@@ -81,7 +81,7 @@ Then(/^I am redirected to the locked page$/) do
 end
 
 Then(/^I see the verification form$/) do
-  find("#new_attempt").should_not be_nil
+  page.should have_selector(:xpath, "//form[@id='new_attempt']")
 end
 
 Then(/^I do not see the verification form$/) do
