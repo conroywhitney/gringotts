@@ -1,7 +1,8 @@
 <div class="code">
   <%= form_for @attempt,
               url: attempt_url,
-              method: :post do |f| %>
+              method: :post,
+              :html=> {:id => 'new_attempt'} do |f| %>
   
     <%= f.text_field :code_received %>
   

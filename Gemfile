@@ -15,5 +15,7 @@ gem "devise"
 gem 'factory_girl_rails', :group => :test
 gem "codeclimate-test-reporter", group: :test, require: nil
 
+gem "appraisal", "0.5.2"
+
 # To use debugger
 # gem 'debugger'

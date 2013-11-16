@@ -168,11 +168,11 @@ Then /^I should see a missing password message$/ do
 end
 
 Then /^I should see a missing password confirmation message$/ do
-  page.should have_content "Password confirmation doesn't match Password"
+  page.should have_content "doesn't match"
 end
 
 Then /^I should see a mismatched password message$/ do
-  page.should have_content "Password confirmation doesn't match Password"
+  page.should have_content "doesn't match"
 end
 
 Then /^I should see a signed out message$/ do
