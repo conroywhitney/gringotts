@@ -51,15 +51,12 @@ module Gringotts
     end
     
     def disable
-      #begin
       flash[:notice] = "Phone Verification is OFF"
+      flash.keep   # rails 3.2 otherwise killz it
+      
       @gringotts.update_attributes!(confirmed_at: nil)
       @gringotts.settings.destroy
-        
-      #rescue Exception => e
-      #  flash[:error] = "Error disabling Phone Verification"
-      #end
-      
+
       redirect_to gringotts_engine.root_path
       return true
     end
