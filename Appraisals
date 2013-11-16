@@ -1,9 +1,3 @@
-appraise "rails-3.0" do
-  gem "rails", "~> 3.0.20"
-  gem "devise", "~> 1.5.4"
-  gem "gringotts", :path => "../"
-end
-
 appraise "rails-3.1" do
   gem "rails", "~> 3.1.12"
   gem "devise", "~> 2.2.8"
