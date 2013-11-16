@@ -6,10 +6,10 @@ module Gringotts
 
     attr_reader :strategy
     
-    validates :vault_id,       presence: true, uniqueness: false
-    validates :code_id,        presence: true, uniqueness: false
-    validates :strategy_class, presence: true, uniqueness: false
-    validates :phone_number,   presence: true, uniqueness: false
+    validates :vault_id,       presence: true
+    validates :code_id,        presence: true
+    validates :strategy_class, presence: true
+    validates :phone_number,   presence: true
 
     # bear in mind that order matters with these validators...
     before_validation :verify_vault

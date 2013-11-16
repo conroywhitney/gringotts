@@ -11,7 +11,7 @@ Then(/^I see a link to edit my gringotts settings$/) do
 end  
 
 When(/^I go to the gringotts setup page$/) do                                                                                                                                                  
-  visit gringotts_engine.setup_path  
+  visit setup_path  
 end                                                                                                                                                                  
                                                                                                                                                                                                   
 Then(/^I see an information message$/) do                                                                                                                                                         
@@ -64,5 +64,5 @@ Then(/^I receive a correct code message$/) do
 end
 
 Then(/^I am redirected to the challenge page$/) do
-  page.current_path.should == gringotts_engine.verification_path
+  page.current_path.should == verification_path
 end 

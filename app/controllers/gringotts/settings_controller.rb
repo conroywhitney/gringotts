@@ -8,6 +8,9 @@ module Gringotts
     before_filter :load_gringotts_settings
     
     def index
+      # since we always redirect from here, keep the flash (rails-3.2 bug fix'd!)
+      flash.keep
+
       if @gringotts.confirmed? && @gringotts.verified?(session)
         redirect_to gringotts_engine.success_path
       elsif @gringotts.phone_number.present?
@@ -51,15 +54,10 @@ module Gringotts
     end
     
     def disable
-      begin
-        @gringotts.update_attributes!(confirmed_at: nil)
-        @gringotts.settings.destroy!
-        flash[:notice] = "Phone Verification is OFF"
-      rescue Exception => e
-        flash[:error] = "Error disabling Phone Verification"
-      end
-      
-      redirect_to gringotts_engine.root_path
+      @gringotts.update_attributes!(confirmed_at: nil)
+      @gringotts.settings.destroy
+
+      redirect_to gringotts_engine.root_path, notice: "Phone Verification is OFF"
       return true
     end
     

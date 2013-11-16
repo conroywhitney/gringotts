@@ -15,8 +15,8 @@ Gem::Specification.new do |s|
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
 
-  s.required_ruby_version = ">= 1.9.2"
-  s.add_dependency "rails", ">= 3.0.0"
+  s.required_ruby_version = ">= 1.9.1"
+  s.add_dependency "rails", ">= 3.1.0"
   
   # Phone number validator gem
   s.add_dependency "phony_rails"
@@ -30,10 +30,7 @@ Gem::Specification.new do |s|
   # http://viget.com/extend/rails-engine-testing-with-rspec-capybara-and-factorygirl
   s.test_files = Dir["spec/**/*"]
   s.add_development_dependency 'rspec-rails', "~> 2.14.0"
-  # Ruby version < 1.9.3 can't install capybara > 2.0.3.
-  s.add_development_dependency('capybara', '~> 2.0.3')
-  s.add_development_dependency('bundler')
-  s.add_development_dependency('mime-types')
+  s.add_development_dependency "capybara", "~> 2.1.0"
   s.add_development_dependency "factory_girl_rails", "~> 4.2.1"
 
   # Adding cucumber per crowdint tutorial
