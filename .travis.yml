@@ -22,16 +22,20 @@ matrix:
     - rvm: 1.9.2
     - rvm: 1.9.3
     - rvm: 2.0.0
-      gemfile: gemfiles/rails_3.0.gemfile
-    - rvm: 2.0.0
       gemfile: gemfiles/rails_3.1.gemfile
     - rvm: 2.0.0
       gemfile: gemfiles/rails_3.2.gemfile
       
   exclude:
     - rvm: 1.9.2
+      gemfile: gemfiles/rails_3.0.gemfile
+    - rvm: 1.9.2
       gemfile: gemfiles/rails_4.0.gemfile
-        
+    - rvm: 1.9.3
+      gemfile: gemfiles/rails_3.0.gemfile
+    - rvm: 2.0.0
+      gemfile: gemfiles/rails_3.0.gemfile
+      
 addons:
     code_climate:
         repo_token: c6d8503090d42afad99391e18e71017d9592cdb4cc099db90fc4f45ef0da37c8
