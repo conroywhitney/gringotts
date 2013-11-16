@@ -64,5 +64,5 @@ Then(/^I receive a correct code message$/) do
 end
 
 Then(/^I am redirected to the challenge page$/) do
-  page.current_path.should == gringotts_engine.verification_path
+  page.current_path.should == verification_path
 end 
