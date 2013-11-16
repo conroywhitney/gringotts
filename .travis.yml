@@ -3,15 +3,10 @@ language: ruby
 rvm:
   - 1.9.2
   - 1.9.3
-  - jruby-19mode
-  - rbx-19mode
   - 2.0.0
 
 install:
   - "bundle install"
-  
-before_script: "sudo ntpdate -ub ntp.ubuntu.com pool.ntp.org; true"
-script: "bundle exec rake clean test cucumber"
 
 gemfile:
   - gemfiles/rails_3.0.gemfile
@@ -21,12 +16,18 @@ gemfile:
 
 matrix:
   allow_failures:
-    - rvm: jruby-19mode
-    - rvm: rbx-19mode
-
+    - rvm: 1.9.2
+    - rvm: 1.9.3
+    - rvm: 2.0.0
+      gemfile: gemfiles/rails_3.0.gemfile
+    - rvm: 2.0.0
+      gemfile: gemfiles/rails_3.1.gemfile
+    - rvm: 2.0.0
+      gemfile: gemfiles/rails_3.2.gemfile
+      
   exclude:
-      - rvm: 1.9.2
-        gemfile: gemfiles/rails_4.0.gemfile
+    - rvm: 1.9.2
+      gemfile: gemfiles/rails_4.0.gemfile
         
 addons:
     code_climate:
