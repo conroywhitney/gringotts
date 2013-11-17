@@ -22,7 +22,11 @@ module Gringotts
     end
     
     def attempt
-      @attempt.assign_attributes(attempt_params)
+      if accepts_strong_params?
+        @attempt.assign_attributes(attempt_params)
+      else
+        @attempt.update_attributes(code_received: params[:attempt][:code_received])
+      end
       
       @attempt.validate(@gringotts.recent_code)
       
