@@ -15,11 +15,15 @@ module Gringotts
         raise "You must create the file [#{config_path}]. Please see documentation for more details: https://github.com/conroywhitney/gringotts"
       end
       
-      unless (raw_yaml = File.read(config_path))
+      unless (file_yaml = File.new(config_path).read)
         raise "Could not load config file [#{config_path}]. File is probably either not valid YAML or is empty."
       end
       
-      Gringotts::Config.load(raw_yaml)
+      unless (erb_yaml = ERB.new(file_yaml).result)
+        raise "Could not parse file [#{config_path}] with ERB."
+      end
+      
+      Gringotts::Config.load(erb_yaml)
     end
     
     # add engine's migrations into application's migration path
