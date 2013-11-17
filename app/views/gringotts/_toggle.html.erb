@@ -1,0 +1,18 @@
+<%- if @gringotts && @gringotts.opted_in? %>
+  <p>
+    Every time you sign-in, we will send a text message to your mobile phone <strong>(&bull;&bull;&bull;) &bull;&bull;&bull; <%= @gringotts.last_4 %></strong> to make sure it's really you.
+  </p>
+  <p>
+    <%= link_to "Change this phone number", gringotts_engine.setup_path %>
+  </p>
+  <p>
+    <%= link_to "Turn-off phone verification", gringotts_engine.disable_path, data: { method: :post } %>
+  </p>
+<%- else %>
+  <p>
+    Make your account extra secure using your mobile phone. Each time you sign-in, we'll send a text to make sure it's really you.
+  </p>
+  <p>
+    <%= link_to "Add your mobile phone to this account now", gringotts_engine.root_url %>
+  </p>  
+<%- end -%>
