@@ -44,7 +44,11 @@ module Gringotts
     end
     
     def update
-      @settings.assign_attributes(settings_params)
+      if accepts_strong_params?
+        @settings.assign_attributes(settings_params)
+      else
+        @settings.update_attributes(phone_number: params[:settings][:phone_number])
+      end
       
       if @settings.save
         redirect_to verification_url

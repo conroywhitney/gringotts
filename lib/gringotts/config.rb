@@ -10,9 +10,9 @@ module Gringotts
     
     def self.load(raw_yaml)
       begin
-        yaml = YAML.load(raw_yaml)
+        yaml = YAML.load(raw_yaml)[Rails.env]
       rescue Exception => e
-        raise "Unable to load YAML."
+        raise "Unable to load YAML [#{e.message}]"
       end
       
       @@enabled = parse(yaml, "enabled")
@@ -23,7 +23,7 @@ module Gringotts
     end
     
     def self.parse(yaml, node, required = true)
-      value = yaml[Rails.env][node.to_s]
+      value = yaml[node.to_s]
       raise "Missing required value for [#{node}] in config/gringotts.yml" if required && value.nil?
       return value
     end

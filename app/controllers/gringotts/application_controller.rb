@@ -13,4 +13,8 @@ private
     redirect_to gringotts_engine.locked_path if @gringotts.locked?
   end
   
+  def accepts_strong_params?
+    params.respond_to?(:require) && params.respond_to?(:permit)
+  end
+  
 end

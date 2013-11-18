@@ -10,12 +10,14 @@ gemspec
 # Git. Remember to move these dependencies to your gemspec before releasing
 # your gem to rubygems.org.
 
-gem "devise"
+  gem "devise"
 
-gem 'factory_girl_rails', :group => :test
-gem "codeclimate-test-reporter", group: :test, require: nil
+  gem 'factory_girl_rails', group: [:development, :test]
+  
+  gem "codeclimate-test-reporter", group: [:test], require: nil
 
-gem "appraisal", "0.5.2"
-
-# To use debugger
-# gem 'debugger'
+  # set up local ENV variables without checking in to git
+  gem "figaro", group: [:development, :test]
+  
+  # set up different bundles based on ruby/rails appraisals
+  gem "appraisal", "0.5.2", group: [:development, :test]
