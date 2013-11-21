@@ -35,12 +35,12 @@ Give It a Test Drive
 
 Sound too good to be true? Don't take my word for it, check it out for yourself:
 
-[http://gringotts-example.herokuapp.com](http://gringotts-example.herokuapp.com)
+[http://gringotts.herokuapp.com](http://gringotts.herokuapp.com)
 
 
 See the entire changeset that took that demo app from being a regular rails app to having 2FA:
 
-[https://github.com/conroywhitney/gringotts-client/](https://github.com/conroywhitney/gringotts-client/)
+[https://github.com/conroywhitney/gringotts-client/compare/master...installed](https://github.com/conroywhitney/gringotts-client/compare/master...installed)
 
 
 Installation
