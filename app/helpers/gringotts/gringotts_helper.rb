@@ -1,6 +1,8 @@
 module Gringotts
   module GringottsHelper
     
+    COOKIE_KEY = "gringotts_recognized"
+    
     # Overridable by application controller
     # Definse whoever is the owner of the Gringotts vault
     # defaults to current_user for simplicity
@@ -24,6 +26,14 @@ module Gringotts
       
       # last but not least ... redirect
       redirect_to url
+    end
+    
+    def gringotts_recognized?
+      return cookies[COOKIE_KEY] == "1"
+    end
+    
+    def gringotts_recognize!
+      cookies[COOKIE_KEY] = 1
     end
     
     def gringotts_protego?

@@ -21,3 +21,6 @@ gemspec
   
   # set up different bundles based on ruby/rails appraisals
   gem "appraisal", "0.5.2", group: [:development, :test]
+
+  # debugging cookies in tests
+  gem "show_me_the_cookies", group: [:development, :test]

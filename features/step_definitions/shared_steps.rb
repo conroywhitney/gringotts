@@ -18,3 +18,7 @@ When(/^I go to verify$/) do
   sign_out
   sign_in
 end
+
+When(/^I sign in$/) do
+  sign_in  
+end
