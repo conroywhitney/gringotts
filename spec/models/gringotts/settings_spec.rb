@@ -30,7 +30,7 @@ module Gringotts
       @settings = FactoryGirl.create(:confirmed_settings)
       @settings.vault.confirmed_at.should_not be_nil
       
-      @settings.update_attributes!(phone_number: "+1 555-555-5555")
+      @settings.update_attributes!(phone_number: "555-555-5555")
       @settings.vault.confirmed_at.should be_nil
     end
     
