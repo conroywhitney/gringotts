@@ -40,7 +40,7 @@ module Gringotts
     it "should always have a reference to the most-recent settings" do
       new_phone_number = "(800) 555-1212"
       @settings.update_attributes(phone_number: new_phone_number)
-      @gringotts.settings.phone_number.should == new_phone_number
+      @gringotts.settings.phone_number.should == '18005551212'
     end
     
     it "should be able to generate new codes" do
