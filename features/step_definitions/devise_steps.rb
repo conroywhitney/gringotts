@@ -41,7 +41,7 @@ def sign_in
   visit '/users/sign_in'
   fill_in "user_email", :with => @visitor[:email]
   fill_in "user_password", :with => @visitor[:password]
-  click_button "Log in"
+  find('input[type="submit"]').click
 end
 
 def sign_out
