@@ -7,8 +7,8 @@
     <%= f.text_field :code_received %>
   
     <%= f.submit "Verify Code" %>
-  
-  <% end %>
+    <%= check_box_tag :remember_me %> <%= label_tag :remember_me,'Remember me on this device' %>
+   <% end %>
   
   <%- if flash[:gringotts_error] %>
     <div class="error">

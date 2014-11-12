@@ -39,8 +39,8 @@ module Gringotts
       if @attempt.successful?
         # remember that they have been verified
         @gringotts.verify!(session)
-        gringotts_recognize!
-        
+        gringotts_recognize! if params[:remember_me].present?
+
         # if account was locked before, unlock!
         @gringotts.unlock! if @gringotts.locked?
         

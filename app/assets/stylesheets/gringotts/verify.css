@@ -19,3 +19,8 @@
   margin: 18px 15px 15px 0px;
   padding: 14px 22px;
 }
+
+#gringotts.confirm input[type="checkbox"],
+#gringotts.verify input[type="checkbox"], label {
+  font-size: 14px;
+}
