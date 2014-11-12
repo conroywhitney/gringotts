@@ -29,11 +29,18 @@ module Gringotts
     end
     
     def gringotts_recognized?
-      return cookies[COOKIE_KEY] == "1"
+      cookie_hash = JSON.parse(cookies.signed[COOKIE_KEY], {:symbolize_names => true}) unless cookies[COOKIE_KEY].nil?
+      puts "Checking cookie hash: #{cookie_hash}"
+      if cookie_hash.nil? || gringotts_owner.nil?
+        false
+      else
+        (cookie_hash[:user_id] == gringotts_owner.id) && (cookie_hash[:valid_until] > Time.now)
+      end
     end
     
     def gringotts_recognize!
-      cookies[COOKIE_KEY] = 1
+      cookie_hash = {user_id: gringotts_owner.id, valid_until: 30.days.from_now}
+      cookies.signed[COOKIE_KEY] = {value: cookie_hash.to_json, expires: 30.days.from_now}
     end
     
     def gringotts_protego?
@@ -63,7 +70,7 @@ module Gringotts
           gringotts_redirect_to gringotts_engine.prompt_path
         elsif @gringotts.confirmed?
           # 2) owner has opted-in -- require verification
-          if @gringotts.verified?(session)
+          if @gringotts.verified?(session) || gringotts_recognized?
             # already verified -- do not do anything
           else
             # make them verify
