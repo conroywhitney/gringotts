@@ -33,7 +33,7 @@ module Gringotts
       if cookie_hash.nil? || gringotts_owner.nil?
         false
       else
-        (cookie_hash[:user_id] == gringotts_owner.id) && (cookie_hash[:valid_until] > Time.now)
+        (cookie_hash[:user_id] == gringotts_owner.id) && (Time.parse(cookie_hash[:valid_until]) > Time.now)
       end
     end
     
