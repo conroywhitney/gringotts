@@ -29,6 +29,15 @@ Given(/^I am confirmed$/) do
   gringotts.confirmed?.should be_true
 end
 
+Given(/^I am confirmed with remember me$/) do
+  create_user
+  sign_in
+  opt_in
+  check 'remember_me'
+  submit_code gringotts.recent_code.value
+  gringotts.confirmed?.should be_true
+end
+
 When(/^I need to confirm my phone number$/) do
   create_user
   sign_in
@@ -56,6 +65,10 @@ Given(/^I go to the verification page$/) do
   visit verification_path
 end
 
+Given(/^I am on the prompt page$/) do
+  page.current_path.should == prompt_path
+end
+
 When(/^I enter a blank code$/) do
   submit_code ""
 end
@@ -65,6 +78,11 @@ When(/^I enter the code "(.*?)"$/) do |code|
 end
 
 When(/^I enter the correct code$/) do
+  submit_code gringotts.recent_code.value
+end
+
+When(/^I enter the correct code and check remember me$/) do
+  check 'remember_me'
   submit_code gringotts.recent_code.value
 end
 

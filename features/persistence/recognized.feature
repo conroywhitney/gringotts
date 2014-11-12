@@ -32,18 +32,61 @@ Feature: Recognizing devices
     When I sign out
     Then I am not recognized
 
-  Scenario: Confirmed user recognized after confirming
+  Scenario: Confirmed user not recognized after confirming without checking remember me
     Given I am confirmed
     When I return to the site
-    Then I am recognized
+    Then I am not recognized
   
-  Scenario: Confirmed user recognized even after signing out
+  Scenario: Confirmed user not recognized even after signing out without checking remember me
     Given I am confirmed
     When I sign out
-    Then I am recognized
+    Then I am not recognized
     
-  Scenario: Confirmed user recognized even after logging back in
+  Scenario: Confirmed user not recognized even after logging back in without checking remember me
     Given I am confirmed
     When I sign out
       And I sign in with valid credentials
+    Then I am not recognized
+
+  Scenario: Confirmed user recognized after confirming and checking remember me
+    Given I am confirmed with remember me
+    When I return to the site
     Then I am recognized
+
+  Scenario: Confirmed user recognized even after signing out and checking remember me
+    Given I am confirmed with remember me
+    When I sign out
+    Then I am recognized
+
+  Scenario: Confirmed user recognized even after logging back in and checking remember me
+    Given I am confirmed with remember me
+    When I sign out
+      And I sign in with valid credentials
+    Then I am recognized
+
+
+  Scenario: User not recognized after logging back in after successful verification but not checking remember me
+    Given I am logged in
+      And I am opted-in
+      And I am on the verification page
+    When I enter the correct code
+      And I receive a correct code message
+      And I sign out
+      And I am logged in
+    Then I am not recognized
+      And I am on the prompt page
+
+
+  Scenario: User recognized after logging back in after successful verification and checking remember me
+    Given I am logged in
+      And I am opted-in
+      And I am on the verification page
+    When I enter the correct code and check remember me
+      And I receive a correct code message
+      And I sign out
+      And I am logged in
+    Then I am recognized
+      And I see a successful sign in message
+
+@wip
+Scenario: User verifies with "remember me" but a different user logging in needing 2FA will still be prompted
