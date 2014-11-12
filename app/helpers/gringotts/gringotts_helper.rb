@@ -30,7 +30,6 @@ module Gringotts
     
     def gringotts_recognized?
       cookie_hash = JSON.parse(cookies.signed[COOKIE_KEY], {:symbolize_names => true}) unless cookies[COOKIE_KEY].nil?
-      puts "Checking cookie hash: #{cookie_hash}"
       if cookie_hash.nil? || gringotts_owner.nil?
         false
       else
