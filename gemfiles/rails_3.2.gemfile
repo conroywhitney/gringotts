@@ -6,6 +6,7 @@ gem "factory_girl_rails", :group=>[:development, :test]
 gem "codeclimate-test-reporter", :group=>[:test], :require=>nil
 gem "figaro", :group=>[:development, :test]
 gem "appraisal", "0.5.2", :group=>[:development, :test]
+gem "show_me_the_cookies", :group=>[:development, :test]
 gem "rails", "~> 3.2.15"
 gem "devise", "~> 3.1.2"
 gem "gringotts", :path=>"../"
