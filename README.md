@@ -3,7 +3,10 @@ Gringotts: 2FA Phone Verification Engine for Rails
 
 **Note:** This project is still pre-release (version < 1.0). Definitely *not* ready for production use and *will* change significantly in the near future. However, please *do* test it out on an experimental branch of your application and give your feedback!
 
-<img src="http://images2.wikia.nocookie.net/__cb20120724185750/harrypotter/images/2/25/Gringotts_New_Logo.jpg" width="50"> [![Build Status](https://travis-ci.org/conroywhitney/gringotts.png?branch=master)](https://travis-ci.org/conroywhitney/gringotts)  [![Code Climate](https://codeclimate.com/github/conroywhitney/gringotts.png)](https://codeclimate.com/github/conroywhitney/gringotts)
+[![Gem Version](https://badge.fury.io/rb/gringotts.svg)](http://badge.fury.io/rb/gringotts)
+[![Build Status](https://travis-ci.org/conroywhitney/gringotts.svg?branch=master)](https://travis-ci.org/conroywhitney/gringotts)
+[![Dependency Status](https://gemnasium.com/conroywhitney/gringotts.svg)](https://gemnasium.com/conroywhitney/gringotts)
+[![Code Climate](https://codeclimate.com/github/conroywhitney/gringotts.png)](https://codeclimate.com/github/conroywhitney/gringotts)
 
 
 What is Gringotts?
