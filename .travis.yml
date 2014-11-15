@@ -3,10 +3,11 @@ language: ruby
 rvm:
   - 1.9.3
   - 2.0.0
+  - 2.1.5
 
 install:
   - "bundle install"
-  
+
 before_script: "bundle exec rake db:migrate"
 script:        "bundle exec rake"
 
@@ -14,19 +15,19 @@ gemfile:
   - gemfiles/rails_3.1.gemfile
   - gemfiles/rails_3.2.gemfile
   - gemfiles/rails_4.0.gemfile
+  - gemfiles/rails_4.1.gemfile
+  - gemfiles/rails_4.2.gemfile
 
 matrix:
   allow_failures:
-    - rvm: 1.9.3
-    - rvm: 2.0.0
-      gemfile: gemfiles/rails_3.1.gemfile
-    - rvm: 2.0.0
-      gemfile: gemfiles/rails_3.2.gemfile
-      
+    # don't allow failures -- everything should build unless it's excluded
+
   exclude:
     - rvm: 2.0.0  # bug w/ ruby-2.0.0@rails-3.1 https://github.com/rails/rails/issues/9417
       gemfile: gemfiles/rails_3.1.gemfile
-      
+    - rvm: 2.1.5  # same bug as 2.0.0
+      gemfile: gemfiles/rails_3.1.gemfile
+
 addons:
     code_climate:
         repo_token: c6d8503090d42afad99391e18e71017d9592cdb4cc099db90fc4f45ef0da37c8
