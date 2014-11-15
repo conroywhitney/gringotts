@@ -20,7 +20,7 @@ gemfile:
 
 matrix:
   allow_failures:
-    - rvm: 1.9.3 # for some reason, this does not always build correctly on travis...
+    # don't allow failures -- everything should build unless it's excluded
 
   exclude:
     - rvm: 2.0.0  # bug w/ ruby-2.0.0@rails-3.1 https://github.com/rails/rails/issues/9417
