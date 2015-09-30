@@ -204,7 +204,7 @@ Special Thanks To
 
 * [Nitrous.io](https://www.nitrous.io/join/012YtP048go) for the awesome web-based IDE that allows me to work from internet cafes. (disclaimer: referral link)
 
-* [Supertramp Hostel](http://www.supertramphostel.com/en) and Machu Picchu, Peru for 8 months of good times, food, accomodation, internet, and motivation to get the hell out of here and get on with my life. Thanks, I really needed this. =)
+* [Supertramp Hostel](http://www.supertramphostel.com/en) and Machu Picchu, Peru for 8 months of good times, food, accommodation, internet, and motivation to get the hell out of here and get on with my life. Thanks, I really needed this. =)
 
 * All the other blogs, tutorials, websites, and gems that have influenced and acted as a model for this gem. Open Source Software FTW!
 
