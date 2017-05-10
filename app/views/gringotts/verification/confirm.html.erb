@@ -21,7 +21,7 @@
       </div><!-- /step -->
 
       <div class="phone-number">
-        <%= @gringotts.phone_number %>
+        <%= @gringotts.phone_number.phony_formatted(:format => :international, :spaces => '-') %>
       </div>
       
       <%= render :partial => "code_form" %>

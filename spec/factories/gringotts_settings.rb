@@ -22,7 +22,7 @@ FactoryGirl.define do
     end
       
     factory :good_pe_phone_number_settings do
-      phone_number "(084) 791224"
+      phone_number "+41 44 111 22 33"
     end
     
   end

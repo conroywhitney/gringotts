@@ -7,6 +7,7 @@ require "gringotts/version"
 Gem::Specification.new do |s|
   s.name        = "gringotts"
   s.version     = Gringotts::VERSION
+  s.license     = 'MIT'
   s.authors     = ["Conroy Whitney"]
   s.email       = ["conroy.whitney@gmail.com"]
   s.homepage    = "https://github.com/conroywhitney/gringotts"

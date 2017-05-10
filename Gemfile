@@ -20,4 +20,4 @@ gemspec
   gem "figaro", group: [:development, :test]
   
   # set up different bundles based on ruby/rails appraisals
-  gem "appraisal", "0.5.2", group: [:development, :test]
+  gem "appraisal", "1.0.2", group: [:development, :test]
